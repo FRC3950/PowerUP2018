@@ -89,14 +89,14 @@ public class Robot extends TimedRobot {
 		oi = new OI();
 		
 		//String str = DriverStation.getInstance().getGameSpecificMessage();
-		switchClosePosition = DriverStation.getInstance().getGameSpecificMessage().substring(0, 1);//DSSimulation.getSide(sides);//str.substring(0,1);
-		System.out.println(switchClosePosition);
-		scalePosition = DriverStation.getInstance().getGameSpecificMessage().substring(1, 2);//str.substring(1,2);
-		System.out.println(scalePosition);
-		switchFarPosition = DriverStation.getInstance().getGameSpecificMessage().substring(2, 3);//str.substring(2,3);
-		System.out.println(switchFarPosition);
-		
-		ourFieldPosition = DriverStation.getInstance().getLocation();
+//		switchClosePosition = DriverStation.getInstance().getGameSpecificMessage().substring(0, 1);//DSSimulation.getSide(sides);//str.substring(0,1);
+//		System.out.println(switchClosePosition);
+//		scalePosition = DriverStation.getInstance().getGameSpecificMessage().substring(1, 2);//str.substring(1,2);
+//		System.out.println(scalePosition);
+//		switchFarPosition = DriverStation.getInstance().getGameSpecificMessage().substring(2, 3);//str.substring(2,3);
+//		System.out.println(switchFarPosition);
+//		
+//		ourFieldPosition = DriverStation.getInstance().getLocation();
 		
 		teamScaleAuto = new SendableChooser();
 		teamScaleAuto.addDefault("Yes", true);
@@ -271,6 +271,17 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		//fieldPositionAnalysis();
+		
+		switchClosePosition = DriverStation.getInstance().getGameSpecificMessage().substring(0, 1);//DSSimulation.getSide(sides);//str.substring(0,1);
+		System.out.println(switchClosePosition);
+		scalePosition = DriverStation.getInstance().getGameSpecificMessage().substring(1, 2);//str.substring(1,2);
+		System.out.println(scalePosition);
+		switchFarPosition = DriverStation.getInstance().getGameSpecificMessage().substring(2, 3);//str.substring(2,3);
+		System.out.println(switchFarPosition);
+		
+		ourFieldPosition = DriverStation.getInstance().getLocation();
+		
+		
 		m_autonomousCommand = typeChooser.getSelected();//new ScaleAutoCommand();//m_chooser.getSelected();
 		
 		System.out.println(teamScale);
