@@ -3,9 +3,10 @@ package org.usfirst.frc.team3950.robot.subsystems;
 import org.usfirst.frc.team3950.robot.RobotMap;
 import org.usfirst.frc.team3950.robot.commands.DriveCommand;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.*;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
@@ -19,10 +20,10 @@ public class DrivetrainSubsystem extends Subsystem {
 	
 	double output = 0;
 	
-	TalonSRX frontLeft;
-	TalonSRX backLeft;
-	TalonSRX frontRight;
-	TalonSRX backRight;
+	WPI_TalonSRX frontLeft;
+	WPI_VictorSPX backLeft;
+	WPI_TalonSRX frontRight;
+	WPI_VictorSPX backRight;
 	AHRS navx;
 	
 	DifferentialDrive drivetrain;
@@ -35,7 +36,9 @@ public class DrivetrainSubsystem extends Subsystem {
     	backLeft = RobotMap.backLeft;
     	frontRight = RobotMap.frontRight;
     	backRight = RobotMap.backRight;
-    	
+    	SpeedControllerGroup left = new SpeedControllerGroup(frontLeft,backLeft);
+    	SpeedControllerGroup right = new SpeedControllerGroup(frontRight,backRight);
+    	drivetrain = new DifferentialDrive(left, right);
     	navx = RobotMap.ahrs;
     	
     	setDefaultCommand(new DriveCommand());

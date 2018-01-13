@@ -7,7 +7,7 @@
 
 package org.usfirst.frc.team3950.robot;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.*;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SerialPort;
@@ -29,10 +29,10 @@ public class RobotMap {
 	// public static int rangefinderPort = 1;
 	// public static int rangefinderModule = 1;
 	
-	public static TalonSRX frontLeft = new TalonSRX(0); 
-	public static TalonSRX backLeft = new TalonSRX(1);
-	public static TalonSRX frontRight = new TalonSRX(2);
-	public static TalonSRX backRight = new TalonSRX(3);
+	public static WPI_TalonSRX frontLeft = new WPI_TalonSRX(0); 
+	public static WPI_VictorSPX backLeft = new WPI_VictorSPX(1);
+	public static WPI_TalonSRX frontRight = new WPI_TalonSRX(2);
+	public static WPI_VictorSPX backRight = new WPI_VictorSPX(3);
 	
 	public static AHRS ahrs = new AHRS(SerialPort.Port.kMXP);
 	
