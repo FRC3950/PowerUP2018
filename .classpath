@@ -14,5 +14,10 @@
 	<classpathentry kind="var" path="USERLIBS_DIR/navx_frc.jar"/>
 	<classpathentry kind="var" path="USERLIBS_DIR/slf4j-api-1.7.23.jar"/>
 	<classpathentry kind="var" path="USERLIBS_DIR/slf4j-simple-1.7.23.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nukey/wpilib/java/current/lib/CTRE_Phoenix.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nukey/wpilib/java/current/lib/CTRE_Phoenix-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Kauai Labs/navX-MXP/navXUI/lib/navx.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -7,13 +7,26 @@
 
 package org.usfirst.frc.team3950.robot;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.wpilibj.SerialPort;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
  */
-public class RobotMap {
+public class RobotMap 
+{
+		public static AHRS ahrs = new AHRS(SerialPort.Port.kMXP)
+	    public static TalonSRX leftFrontDriveMotor = new TalonSRX(0);
+	    public static TalonSRX leftBackDriveMotor = new TalonSRX(1);
+	    public static TalonSRX rightFrontDriveMotor = new TalonSRX(2);
+	    public static TalonSRX rightBackDriveMotor = new TalonSRX(3);
+	
+	
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
 	// public static int leftMotor = 1;
