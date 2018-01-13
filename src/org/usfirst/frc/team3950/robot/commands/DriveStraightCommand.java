@@ -8,6 +8,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -18,6 +19,11 @@ public class DriveStraightCommand extends Command {
 	PIDController pid;
 	double output = 0;
 	PIDSourceYaw yaw;
+	
+	double P = SmartDashboard.getNumber("P (drive straight)", 1);
+	double I = SmartDashboard.getNumber("I (drive straight)", 0);
+	double D = SmartDashboard.getNumber("D (drive straight)", 0);
+	double F = SmartDashboard.getNumber("F (drive straight)", 0);
 
     public DriveStraightCommand() {
         // Use requires() here to declare subsystem dependencies
@@ -28,7 +34,7 @@ public class DriveStraightCommand extends Command {
     protected void initialize() {
     	yaw = new PIDSourceYaw();
 ;    	navx.zeroYaw();
-    	pid = new PIDController(1, 0, 0, 0, yaw, new PIDOutput() {
+    	pid = new PIDController(P, I, D, F, yaw, new PIDOutput() {
 			@Override
 			public void pidWrite(double out) {
 				output = out;	
@@ -43,7 +49,7 @@ public class DriveStraightCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrainSubsystem.Drive(/*some number*/ 1, output);
+    	Robot.drivetrainSubsystem.Drive(/*some number*/ .1, output);
     }
 
     // Make this return true when this Command no longer needs to run execute()

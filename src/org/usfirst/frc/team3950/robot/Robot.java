@@ -44,6 +44,12 @@ public class Robot extends TimedRobot {
 		m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
+		
+		SmartDashboard.putNumber("P (drive straight)", 1);
+		SmartDashboard.putNumber("I (drive straight)", 0);
+		SmartDashboard.putNumber("D (drive straight)", 0);
+		SmartDashboard.putNumber("F (drive straight)", 0);
+		
 	}
 
 	/**
