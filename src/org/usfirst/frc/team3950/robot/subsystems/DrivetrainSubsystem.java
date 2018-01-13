@@ -48,9 +48,9 @@ public class DrivetrainSubsystem extends Subsystem {
     	drivetrain.arcadeDrive(-y, -twist);
     }
     
-    public void driveStraight(double speed) {
-    	Drive(speed, output);
-    }
+//    public void driveStraight(double speed) {
+//    	Drive(speed, output);
+//    }
     
 }
 
