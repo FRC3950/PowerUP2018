@@ -21,9 +21,9 @@ public class DrivetrainSubsystem extends Subsystem {
 	double output = 0;
 	
 	WPI_TalonSRX frontLeft;
-	WPI_VictorSPX backLeft;
+	WPI_TalonSRX backLeft;
 	WPI_TalonSRX frontRight;
-	WPI_VictorSPX backRight;
+	WPI_TalonSRX backRight;
 	AHRS navx;
 	
 	DifferentialDrive drivetrain;
