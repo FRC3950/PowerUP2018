@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.SerialPort;
  */
 public class RobotMap 
 {
-		public static AHRS ahrs = new AHRS(SerialPort.Port.kMXP)
+		public static AHRS ahrs = new AHRS(SerialPort.Port.kMXP);
 	    public static TalonSRX leftFrontDriveMotor = new TalonSRX(0);
 	    public static TalonSRX leftBackDriveMotor = new TalonSRX(1);
 	    public static TalonSRX rightFrontDriveMotor = new TalonSRX(2);
