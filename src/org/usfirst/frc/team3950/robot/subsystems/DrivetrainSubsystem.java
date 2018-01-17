@@ -41,6 +41,12 @@ public class DrivetrainSubsystem extends Subsystem {
     	drivetrain = new DifferentialDrive(left, right);
     	navx = RobotMap.ahrs;
     	
+    	frontLeft.setSafetyEnabled(false);
+    	backLeft.setSafetyEnabled(false);
+    	frontRight.setSafetyEnabled(false);
+    	backRight.setSafetyEnabled(false);
+    	drivetrain.setSafetyEnabled(false);
+    	
     	setDefaultCommand(new DriveCommand());
     }
     

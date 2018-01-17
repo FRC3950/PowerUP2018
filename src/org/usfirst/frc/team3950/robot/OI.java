@@ -8,7 +8,7 @@
 //Fedex packages
 package org.usfirst.frc.team3950.robot;
 
-import org.usfirst.frc.team3950.robot.commands.DriveStraightCommand;
+//import org.usfirst.frc.team3950.robot.commands.DriveStraightCommand;
 
 //Control packages 
 import edu.wpi.first.wpilibj.Joystick;
@@ -50,7 +50,7 @@ public class OI
 	    	System.out.println("Button assignment initialized.");
 	    	
 	    	//Joystick assignment
-	    	driveStick3Button.whenPressed(new DriveStraightCommand());
+	    	//driveStick3Button.whenPressed(new DriveStraightCommand());
 //	    	driveStick4Button.whenPressed(new   );
 //	    	driveStick1Button.whenPressed(new   );
 //	    	driveStick2Button.whenPressed(new   );
