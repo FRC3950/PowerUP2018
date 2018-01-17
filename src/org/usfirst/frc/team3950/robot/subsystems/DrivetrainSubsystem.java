@@ -21,9 +21,9 @@ public class DrivetrainSubsystem extends Subsystem {
 	double output = 0;
 	
 	WPI_TalonSRX frontLeft;
-	WPI_VictorSPX backLeft;
+	WPI_TalonSRX backLeft;
 	WPI_TalonSRX frontRight;
-	WPI_VictorSPX backRight;
+	WPI_TalonSRX backRight;
 	AHRS navx;
 	
 	DifferentialDrive drivetrain;
@@ -40,7 +40,8 @@ public class DrivetrainSubsystem extends Subsystem {
     	SpeedControllerGroup right = new SpeedControllerGroup(frontRight,backRight);
     	drivetrain = new DifferentialDrive(left, right);
     	navx = RobotMap.ahrs;
-    	
+    	backLeft.setInverted(true);
+    	backRight.setInverted(true);
     	setDefaultCommand(new DriveCommand());
     }
     
