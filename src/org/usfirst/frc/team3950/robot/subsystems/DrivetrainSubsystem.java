@@ -40,8 +40,13 @@ public class DrivetrainSubsystem extends Subsystem {
     	SpeedControllerGroup right = new SpeedControllerGroup(frontRight,backRight);
     	drivetrain = new DifferentialDrive(left, right);
     	navx = RobotMap.ahrs;
-    	backLeft.setInverted(true);
-    	backRight.setInverted(true);
+    	
+    	frontLeft.setSafetyEnabled(false);
+    	backLeft.setSafetyEnabled(false);
+    	frontRight.setSafetyEnabled(false);
+    	backRight.setSafetyEnabled(false);
+    	drivetrain.setSafetyEnabled(false);
+    	
     	setDefaultCommand(new DriveCommand());
     }
     

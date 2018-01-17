@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import org.usfirst.frc.team3950.robot.commands.DriveStraightCommand;
 import org.usfirst.frc.team3950.robot.commands.ExampleCommand;
 import org.usfirst.frc.team3950.robot.subsystems.DrivetrainSubsystem;
 import org.usfirst.frc.team3950.robot.subsystems.ExampleSubsystem;
@@ -50,6 +52,8 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("D (drive straight)", 0);
 		SmartDashboard.putNumber("F (drive straight)", 0);
 		
+		m_autonomousCommand = new DriveStraightCommand();
+		
 	}
 
 	/**
@@ -80,7 +84,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = m_chooser.getSelected();
+		//m_autonomousCommand = m_chooser.getSelected();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
