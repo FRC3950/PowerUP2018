@@ -37,6 +37,7 @@ public class DriveStraightCommand extends Command {
     	navx = RobotMap.ahrs;
     	yaw = new PIDSourceYaw();
     	navx.zeroYaw();
+    	
     	pid = new PIDController(P, I, D, F, yaw, new PIDOutput() {
 			@Override
 			public void pidWrite(double out) {
@@ -47,12 +48,12 @@ public class DriveStraightCommand extends Command {
     	pid.enable();
     	pid.setOutputRange(-1, 1);
     	pid.setSetpoint(0);
-    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrainSubsystem.Drive(/*some number*/ .2, output);
+		SmartDashboard.putNumber("Angle", navx.getYaw());
+    	Robot.drivetrainSubsystem.Drive(/*some number*/ .5, /*output*/ 0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
