@@ -20,10 +20,11 @@ public class DriveStraightCommand extends Command {
 	PIDController pid;
 	double output = 0;
 	PIDSourceYaw yaw;
+	PIDOutput out;
 	
-	double P = SmartDashboard.getNumber("P (drive straight)", 1);
-	double I = SmartDashboard.getNumber("I (drive straight)", 0);
-	double D = SmartDashboard.getNumber("D (drive straight)", 0);
+	double P = SmartDashboard.getNumber("P (drive straight)", .95);
+	double I = SmartDashboard.getNumber("I (drive straight)", 0.128);
+	double D = SmartDashboard.getNumber("D (drive straight)", 0.075);
 	double F = SmartDashboard.getNumber("F (drive straight)", 0);
 
     public DriveStraightCommand() {
@@ -36,24 +37,33 @@ public class DriveStraightCommand extends Command {
     protected void initialize() {
     	navx = RobotMap.ahrs;
     	yaw = new PIDSourceYaw();
+    	navx.reset();
     	navx.zeroYaw();
-    	
-    	pid = new PIDController(P, I, D, F, yaw, new PIDOutput() {
+    	out = new PIDOutput() {
 			@Override
 			public void pidWrite(double out) {
 				output = out;	
+				
 			}
-    	});
+    	};
+    	pid = new PIDController(P, I, D, yaw, out);
     	
-    	pid.enable();
-    	pid.setOutputRange(-1, 1);
+    	
+    	pid.setOutputRange(-1.0, 1.0);
+    	pid.setAbsoluteTolerance(0.2);
+    	pid.setContinuous(false);
     	pid.setSetpoint(0);
+    	//pid.enable();
     }
 
-    // Called repeatedly when this Command is scheduled to run
+    // Called repeatedly when the command scheduled to run
     protected void execute() {
-		SmartDashboard.putNumber("Angle", navx.getYaw());
-    	Robot.drivetrainSubsystem.Drive(/*some number*/ .5, /*output*/ 0);
+    	pid.enable();
+		SmartDashboard.putNumber("YAW", yaw.pidGet());
+		SmartDashboard.putBoolean("on target", pid.onTarget());
+		SmartDashboard.putNumber("Output", pid.get());
+		pid.setSetpoint(0);
+    	Robot.drivetrainSubsystem.Drive(/*some number*/ .5, pid.get());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -63,12 +73,14 @@ public class DriveStraightCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.drivetrainSubsystem.Drive(0,0);
     	pid.disable();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.drivetrainSubsystem.Drive(0,0);
     	pid.disable();
     }
 }
