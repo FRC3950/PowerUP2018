@@ -41,7 +41,7 @@ public class DriveStraightCommand extends Command implements PIDOutput {
     	yaw.reset();
     	yaw.setPIDSourceType(PIDSourceType.kDisplacement);
     	pid.setInputRange(-20.0f,  20.0f);
-    	pid.setOutputRange(.5, -.5);
+    	pid.setOutputRange(-.5, .5);
     	pid.setAbsoluteTolerance(0.2);
     	pid.setContinuous(false);
     	pid.setPID(P, I, D);
