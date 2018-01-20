@@ -33,6 +33,12 @@ public class RobotMap {
 	public static WPI_VictorSPX backLeft = new WPI_VictorSPX(1);
 	public static WPI_TalonSRX frontRight = new WPI_TalonSRX(2);
 	public static WPI_VictorSPX backRight = new WPI_VictorSPX(3);
+	public static WPI_TalonSRX elevatorMotor = new WPI_TalonSRX(4);
+	public static WPI_VictorSPX elevatorMotorFollower = new WPI_VictorSPX (5);
+	public static WPI_TalonSRX intakeLeftMotor = new WPI_TalonSRX(6);
+	public static WPI_TalonSRX intakeRightMotor = new WPI_TalonSRX(7);
+	
+	
 	
 	public static AHRS ahrs = new AHRS(SerialPort.Port.kMXP);
 	

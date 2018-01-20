@@ -42,8 +42,17 @@ public class OI
 	    public Button driveStick10Button = new JoystickButton(driveStick, 10);
 	    public Button driveStick11Button = new JoystickButton(driveStick, 11);
 	    public Button driveStick12Button = new JoystickButton(driveStick, 12);	
+	    // Xbox controls
+	    public Button xboxControllerAButton = new JoystickButton(xboxcontroller, 1);
+	    public Button xboxControllerBButton = new JoystickButton(xboxcontroller, 2);
+	    public Button xboxControllerXButton = new JoystickButton(xboxcontroller, 3);
+	    public Button xboxControllerYButton = new JoystickButton(xboxcontroller, 4);
+	    public Button xboxControllerLBButton = new JoystickButton(xboxcontroller, 5);
+	    public Button xboxControllerRBButton = new JoystickButton(xboxcontroller, 6);
 	//End button assignment import
-	
+	   // public Button xboxControllerLTButton = new JoystickButton(xboxcontroller, 7);
+	   // public Button xboxControllerRTButton = new JoystickButton(xboxcontroller, 8);
+	    
 	    
 	    //Begin 2017 steamwork control import, removed xbox controller input
 	    public OI() 
@@ -60,6 +69,18 @@ public class OI
 //	    	driveStick11Button.whenPressed(new   );
 //	    	driveStick12Button.whenPressed(new   );
 	    	//Joystick assignment end
+	    	
+	    	//Xbox assignment start
+	    	//  xboxControllerBButton.whenPressed(new BallIntakeCommand());
+	        //	xboxControllerBButton.whenPressed(new BallOuttakeCommand());
+	        //	xboxControllerYButton.whenPressed(new ShooterIndexerCommand());
+	        //	xboxControllerLBButton.whileHeld(new ClimberDoCommand());
+	        //	xboxControllerXButton.whenPressed(new GearDistanceCommand());
+	      	//  xboxControllerRBButton.whenPressed(new StraightenShootCommandGroup());
+	        // 	xboxControllerYButton.whenPressed(new GearIntakeStartCommand());
+	        //	xboxControllerXButton.whenPressed(new GearIntakeGearCommand());
+	        //	xboxControllerAButton.whenPressed(new GearIntakeFloorCommand());
+	        //  Xbox end
 	    }
 	    //End 2017 control import
 } // End OI master class

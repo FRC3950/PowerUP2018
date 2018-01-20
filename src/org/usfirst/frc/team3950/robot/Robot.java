@@ -13,8 +13,10 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3950.robot.commands.ExampleCommand;
+import org.usfirst.frc.team3950.robot.commands.IntakeCommand;
 import org.usfirst.frc.team3950.robot.subsystems.DrivetrainSubsystem;
 import org.usfirst.frc.team3950.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team3950.robot.subsystems.IntakeSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -32,7 +34,7 @@ public class Robot extends TimedRobot {
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 	
 	public static DrivetrainSubsystem drivetrainSubsystem = new DrivetrainSubsystem();
-	
+	public static IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 
 	/**
 	 * This function is run when the robot is first started up and should be
