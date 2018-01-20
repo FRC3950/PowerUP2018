@@ -3,6 +3,7 @@ package org.usfirst.frc.team3950.robot.commands;
 import org.usfirst.frc.team3950.robot.PIDSourceYaw;
 import org.usfirst.frc.team3950.robot.Robot;
 import org.usfirst.frc.team3950.robot.RobotMap;
+import org.slf4j.Logger;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -16,11 +17,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class DriveStraightCommand extends Command implements PIDOutput {
 	
-	AHRS navx;
 	PIDController pid;
 	double output = .5;
 	PIDSourceYaw yaw;
-	PIDOutput out;
 	
 	double P = SmartDashboard.getNumber("P (drive straight)", .95);
 	double I = SmartDashboard.getNumber("I (drive straight)", 0.128);
@@ -32,39 +31,29 @@ public class DriveStraightCommand extends Command implements PIDOutput {
     public DriveStraightCommand() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.drivetrainSubsystem);
+        yaw = new PIDSourceYaw();
+    	pid = new PIDController(P, I, D, F, yaw, this);
         
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	navx = RobotMap.ahrs;
-    	yaw = new PIDSourceYaw();
-    	navx.reset();
-    	navx.zeroYaw();
-    	out = new PIDOutput() {
-			public void pidWrite(double out) {
-				output = out;
-				
-			}
-    	};
-    	pid = new PIDController(P, I, D, F, yaw, out);
-    	
-    	
-    	pid.setOutputRange(-1.0, 1.0);
+    	yaw.reset();
+    	pid.setInputRange(-20.0f,  20.0f);
+    	pid.setOutputRange(-.5, .5);
     	pid.setAbsoluteTolerance(0.2);
     	pid.setContinuous(false);
     	pid.setPID(P, I, D, F);
     	pid.setSetpoint(0);
+    	pid.enable();
     }
 
     // Called repeatedly when the command scheduled to run
     protected void execute() {
-    	pid.enable();
 		SmartDashboard.putNumber("YAW", yaw.pidGet());
 		SmartDashboard.putBoolean("On target", pid.onTarget());
 		SmartDashboard.putNumber("Output", pid.get());
-		pid.setSetpoint(0);
-    	Robot.drivetrainSubsystem.Drive(/*some number*/ .5, pid.get());
+
     	
 //    	if(!pid.onTarget()) {
 //    		RobotMap.right.set(speed + 0.000001);
@@ -95,6 +84,7 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 	@Override
 	public void pidWrite(double output) {
 		// TODO Auto-generated method stub
-		
+		Robot.robotLogger.debug("Output = " + output);
+    	Robot.drivetrainSubsystem.Drive(.5, output);
 	}
 }
