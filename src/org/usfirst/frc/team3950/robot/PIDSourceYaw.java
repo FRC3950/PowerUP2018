@@ -25,7 +25,7 @@ public class PIDSourceYaw implements PIDSource {
 
 	@Override
 	public double pidGet() {
-		return navx.getAngle();
+		return navx.getYaw();
 	}
 	
 }

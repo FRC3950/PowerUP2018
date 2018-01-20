@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.can.*;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -39,6 +40,8 @@ public class RobotMap
 	
 	public static AHRS ahrs = new AHRS(SerialPort.Port.kMXP);
 	
+	public static SpeedControllerGroup left = new SpeedControllerGroup(frontLeft,backLeft);
+	public static SpeedControllerGroup right = new SpeedControllerGroup(frontRight,backRight);
 	
 	
 }
