@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class DriveStraightCommand extends Command {
+public class DriveStraightCommand extends Command implements PIDOutput {
 	
 	AHRS navx;
 	PIDController pid;
@@ -91,4 +91,10 @@ public class DriveStraightCommand extends Command {
     	Robot.drivetrainSubsystem.Drive(0,0);
     	pid.disable();
     }
+
+	@Override
+	public void pidWrite(double output) {
+		// TODO Auto-generated method stub
+		
+	}
 }
