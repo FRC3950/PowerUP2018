@@ -5,10 +5,10 @@ import org.usfirst.frc.team3950.robot.Robot;
 import org.usfirst.frc.team3950.robot.RobotMap;
 import org.slf4j.Logger;
 
-import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -32,20 +32,23 @@ public class DriveStraightCommand extends Command implements PIDOutput {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.drivetrainSubsystem);
         yaw = new PIDSourceYaw();
-    	pid = new PIDController(P, I, D, F, yaw, this);
+    	pid = new PIDController(P, I, D, yaw, this);
         
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	yaw.reset();
+    	yaw.setPIDSourceType(PIDSourceType.kDisplacement);
     	pid.setInputRange(-20.0f,  20.0f);
-    	pid.setOutputRange(-.5, .5);
+    	pid.setOutputRange(.5, -.5);
     	pid.setAbsoluteTolerance(0.2);
     	pid.setContinuous(false);
     	pid.setPID(P, I, D, F);
     	pid.setSetpoint(0);
+    	Robot.robotLogger.info("This logger comes BEFORE PID Enable.");
     	pid.enable();
+    	Robot.robotLogger.info("This logger comes AFTER PID Enable.");
     }
 
     // Called repeatedly when the command scheduled to run
@@ -53,8 +56,8 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 		SmartDashboard.putNumber("YAW", yaw.pidGet());
 		SmartDashboard.putBoolean("On target", pid.onTarget());
 		SmartDashboard.putNumber("Output", pid.get());
-
-    	
+		pid.setSetpoint(0);
+    	Robot.robotLogger.info("I am in DriveStraightCommand Execute!");
 //    	if(!pid.onTarget()) {
 //    		RobotMap.right.set(speed + 0.000001);
 //    	}

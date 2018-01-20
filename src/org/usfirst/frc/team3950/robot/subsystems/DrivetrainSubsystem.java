@@ -1,5 +1,8 @@
 package org.usfirst.frc.team3950.robot.subsystems;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.usfirst.frc.team3950.robot.Robot;
 import org.usfirst.frc.team3950.robot.RobotMap;
 import org.usfirst.frc.team3950.robot.commands.DriveCommand;
 
@@ -27,6 +30,8 @@ public class DrivetrainSubsystem extends Subsystem {
 	AHRS navx;
 	
 	DifferentialDrive drivetrain;
+	
+	private static Logger logger = LoggerFactory.getLogger(DrivetrainSubsystem.class);
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -54,6 +59,7 @@ public class DrivetrainSubsystem extends Subsystem {
     
     public void Drive(double y, double twist){
     	drivetrain.arcadeDrive(-y, -twist);
+    	logger.info("Twist value is" + -twist);
     }
     
 //    public void driveStraight(double output) {

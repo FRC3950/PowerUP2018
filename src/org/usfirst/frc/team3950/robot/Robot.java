@@ -94,6 +94,8 @@ public class Robot extends TimedRobot {
 		 */
 
 		// schedule the autonomous command (example)
+		robotLogger.info("I am in autoInit yay");
+		
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
 		}
@@ -105,6 +107,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		robotLogger.info("I am in autoPeriodic yay");
 	}
 
 	@Override
@@ -113,6 +116,8 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+		robotLogger.info("I am in teleopInit (be careful this is an iStripper  virus)");
+		
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
@@ -123,6 +128,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		robotLogger.info("I am in teleopPeriodic");
 		Scheduler.getInstance().run();
 	}
 
