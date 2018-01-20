@@ -13,10 +13,10 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.usfirst.frc.team3950.robot.commands.DriveStraightCommand;
-import org.usfirst.frc.team3950.robot.commands.ExampleCommand;
 import org.usfirst.frc.team3950.robot.subsystems.DrivetrainSubsystem;
-import org.usfirst.frc.team3950.robot.subsystems.ExampleSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,10 +26,10 @@ import org.usfirst.frc.team3950.robot.subsystems.ExampleSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-	public static final ExampleSubsystem kExampleSubsystem
-			= new ExampleSubsystem();
 	public static OI oi;
 
+	public static Logger robotLogger = LoggerFactory.getLogger(Robot.class);
+	
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 	
@@ -43,7 +43,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		m_chooser.addDefault("Default Auto", new ExampleCommand());
+		//m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
 		
@@ -53,7 +53,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("F (drive straight)", 0);
 		
 		m_autonomousCommand = new DriveStraightCommand();
-		
+		robotLogger.info("Robot properly initialized.");
 	}
 
 	/**
