@@ -18,13 +18,16 @@ public class DriveStraightCommand extends Command {
 	
 	AHRS navx;
 	PIDController pid;
-	double output = 0;
+	double output = .5;
 	PIDSourceYaw yaw;
+	PIDOutput out;
 	
-	double P = SmartDashboard.getNumber("P (drive straight)", 1);
-	double I = SmartDashboard.getNumber("I (drive straight)", 0);
-	double D = SmartDashboard.getNumber("D (drive straight)", 0);
+	double P = SmartDashboard.getNumber("P (drive straight)", .95);
+	double I = SmartDashboard.getNumber("I (drive straight)", 0.128);
+	double D = SmartDashboard.getNumber("D (drive straight)", 0.075);
 	double F = SmartDashboard.getNumber("F (drive straight)", 0);
+	
+	double speed = 0.5;
 
     public DriveStraightCommand() {
         // Use requires() here to declare subsystem dependencies
@@ -36,24 +39,39 @@ public class DriveStraightCommand extends Command {
     protected void initialize() {
     	navx = RobotMap.ahrs;
     	yaw = new PIDSourceYaw();
+    	navx.reset();
     	navx.zeroYaw();
-    	
-    	pid = new PIDController(P, I, D, F, yaw, new PIDOutput() {
-			@Override
+    	out = new PIDOutput() {
 			public void pidWrite(double out) {
-				output = out;	
+				output = out;
+				
 			}
-    	});
+    	};
+    	pid = new PIDController(P, I, D, F, yaw, out);
     	
-    	pid.enable();
-    	pid.setOutputRange(-1, 1);
+    	
+    	pid.setOutputRange(-1.0, 1.0);
+    	pid.setAbsoluteTolerance(0.2);
+    	pid.setContinuous(false);
+    	pid.setPID(P, I, D, F);
     	pid.setSetpoint(0);
     }
 
-    // Called repeatedly when this Command is scheduled to run
+    // Called repeatedly when the command scheduled to run
     protected void execute() {
-		SmartDashboard.putNumber("Angle", navx.getYaw());
-    	Robot.drivetrainSubsystem.Drive(/*some number*/ .5, /*output*/ 0);
+    	pid.enable();
+		SmartDashboard.putNumber("YAW", yaw.pidGet());
+		SmartDashboard.putBoolean("On target", pid.onTarget());
+		SmartDashboard.putNumber("Output", pid.get());
+		pid.setSetpoint(0);
+    	Robot.drivetrainSubsystem.Drive(/*some number*/ .5, pid.get());
+    	
+//    	if(!pid.onTarget()) {
+//    		RobotMap.right.set(speed + 0.000001);
+//    	}
+//    
+		
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -63,12 +81,14 @@ public class DriveStraightCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.drivetrainSubsystem.Drive(0,0);
     	pid.disable();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.drivetrainSubsystem.Drive(0,0);
     	pid.disable();
     }
 }

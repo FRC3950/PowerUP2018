@@ -8,10 +8,13 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 public class PIDSourceYaw implements PIDSource {
 	PIDSourceType type;
 	AHRS navx;
-	
+	public PIDSourceYaw() {
+		navx = RobotMap.ahrs;
+	}
 	@Override
 	public void setPIDSourceType(PIDSourceType pidSource) {
-		type = pidSource;		
+		type = pidSource;
+		
 	}
 
 	@Override

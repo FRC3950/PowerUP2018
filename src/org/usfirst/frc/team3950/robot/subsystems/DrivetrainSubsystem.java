@@ -18,7 +18,7 @@ public class DrivetrainSubsystem extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands
 	
-	double output = 0;
+	double output;
 	
 	WPI_TalonSRX frontLeft;
 	WPI_TalonSRX backLeft;
@@ -36,8 +36,10 @@ public class DrivetrainSubsystem extends Subsystem {
     	backLeft = RobotMap.backLeft;
     	frontRight = RobotMap.frontRight;
     	backRight = RobotMap.backRight;
+    	
     	SpeedControllerGroup left = new SpeedControllerGroup(frontLeft,backLeft);
     	SpeedControllerGroup right = new SpeedControllerGroup(frontRight,backRight);
+    	
     	drivetrain = new DifferentialDrive(left, right);
     	navx = RobotMap.ahrs;
     	
@@ -54,8 +56,8 @@ public class DrivetrainSubsystem extends Subsystem {
     	drivetrain.arcadeDrive(-y, -twist);
     }
     
-//    public void driveStraight(double speed) {
-//    	Drive(speed, output);
+//    public void driveStraight(double output) {
+//    	
 //    }
     
 }
