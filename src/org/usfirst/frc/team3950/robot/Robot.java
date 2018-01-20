@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.usfirst.frc.team3950.robot.commands.DriveCommand;
 import org.usfirst.frc.team3950.robot.commands.DriveStraightCommand;
 import org.usfirst.frc.team3950.robot.subsystems.DrivetrainSubsystem;
 
@@ -53,7 +54,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("F (drive straight)", 0);
 		
 		m_autonomousCommand = new DriveStraightCommand();
-		robotLogger.info("Robot properly initialized.");
+		//robotLogger.info("Robot properly initialized.");
 	}
 
 	/**
@@ -94,7 +95,7 @@ public class Robot extends TimedRobot {
 		 */
 
 		// schedule the autonomous command (example)
-		robotLogger.info("I am in autoInit yay");
+		//robotLogger.info("I am in autoInit yay");
 		
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
@@ -121,6 +122,7 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
+		new DriveCommand().start();
 	}
 
 	/**
@@ -128,7 +130,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		robotLogger.info("I am in teleopPeriodic");
+	//	robotLogger.info("I am in teleopPeriodic");
 		Scheduler.getInstance().run();
 	}
 

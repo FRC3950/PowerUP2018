@@ -44,11 +44,11 @@ public class DriveStraightCommand extends Command implements PIDOutput {
     	pid.setOutputRange(.5, -.5);
     	pid.setAbsoluteTolerance(0.2);
     	pid.setContinuous(false);
-    	pid.setPID(P, I, D, F);
+    	pid.setPID(P, I, D);
     	pid.setSetpoint(0);
-    	Robot.robotLogger.info("This logger comes BEFORE PID Enable.");
+    	//Robot.robotLogger.info("This logger comes BEFORE PID Enable.");
     	pid.enable();
-    	Robot.robotLogger.info("This logger comes AFTER PID Enable.");
+    	//Robot.robotLogger.info("This logger comes AFTER PID Enable.");
     }
 
     // Called repeatedly when the command scheduled to run
@@ -57,7 +57,7 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 		SmartDashboard.putBoolean("On target", pid.onTarget());
 		SmartDashboard.putNumber("Output", pid.get());
 		pid.setSetpoint(0);
-    	Robot.robotLogger.info("I am in DriveStraightCommand Execute!");
+    	//Robot.robotLogger.info("I am in DriveStraightCommand Execute!");
 //    	if(!pid.onTarget()) {
 //    		RobotMap.right.set(speed + 0.000001);
 //    	}
@@ -68,7 +68,7 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return isCanceled();
     }
 
     // Called once after isFinished returns true
@@ -87,7 +87,7 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 	@Override
 	public void pidWrite(double output) {
 		// TODO Auto-generated method stub
-		Robot.robotLogger.debug("Output = " + output);
-    	Robot.drivetrainSubsystem.Drive(.5, output);
+		//Robot.robotLogger.debug("Output = " + output);
+    	Robot.drivetrainSubsystem.Drive(-.5, output);
 	}
 }

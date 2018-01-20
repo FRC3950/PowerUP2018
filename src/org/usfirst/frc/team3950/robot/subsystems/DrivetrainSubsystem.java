@@ -58,8 +58,8 @@ public class DrivetrainSubsystem extends Subsystem {
     }
     
     public void Drive(double y, double twist){
-    	drivetrain.arcadeDrive(-y, -twist);
-    	logger.info("Twist value is" + -twist);
+    	drivetrain.arcadeDrive(-y, twist);
+    	//logger.info("Twist value is" + Double.toString(-twist));
     }
     
 //    public void driveStraight(double output) {
