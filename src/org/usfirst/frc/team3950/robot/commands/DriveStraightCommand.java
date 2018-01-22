@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -18,21 +19,22 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class DriveStraightCommand extends Command implements PIDOutput {
 	
 	PIDController pid;
-	double output = .5;
+	double output = 1;
 	PIDSourceYaw yaw;
+	Timer timer = new Timer();
 	
 	double P = SmartDashboard.getNumber("P (drive straight)", .95);
 	double I = SmartDashboard.getNumber("I (drive straight)", 0.128);
 	double D = SmartDashboard.getNumber("D (drive straight)", 0.075);
 	double F = SmartDashboard.getNumber("F (drive straight)", 0);
+
 	
-	double speed = 0.5;
 
     public DriveStraightCommand() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.drivetrainSubsystem);
         yaw = new PIDSourceYaw();
-    	pid = new PIDController(P, I, D, yaw, this);
+    	pid = new PIDController(P, I, D, F, yaw, this);
         
     }
 
@@ -40,15 +42,17 @@ public class DriveStraightCommand extends Command implements PIDOutput {
     protected void initialize() {
     	yaw.reset();
     	yaw.setPIDSourceType(PIDSourceType.kDisplacement);
-    	pid.setInputRange(-20.0f,  20.0f);
-    	pid.setOutputRange(-.5, .5);
-    	pid.setAbsoluteTolerance(0.2);
+    	pid.setInputRange(-5.0f,  5.0f);
+    	pid.setOutputRange(-.1, .1);
+    	pid.setAbsoluteTolerance(0.1);
     	pid.setContinuous(false);
-    	pid.setPID(P, I, D);
+    	pid.setPID(P, I, D, F);
     	pid.setSetpoint(0);
     	//Robot.robotLogger.info("This logger comes BEFORE PID Enable.");
     	pid.enable();
     	//Robot.robotLogger.info("This logger comes AFTER PID Enable.");
+    	
+//    	timer.start();
     }
 
     // Called repeatedly when the command scheduled to run
@@ -57,13 +61,13 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 		SmartDashboard.putBoolean("On target", pid.onTarget());
 		SmartDashboard.putNumber("Output", pid.get());
 		pid.setSetpoint(0);
-    	//Robot.robotLogger.info("I am in DriveStraightCommand Execute!");
-//    	if(!pid.onTarget()) {
-//    		RobotMap.right.set(speed + 0.000001);
-//    	}
-//    
 		
-    	
+		
+		
+//		if (timer.get() == 2) {
+//			timer.stop();
+//			pid.setSetpoint(90);
+//		}    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -88,6 +92,6 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 	public void pidWrite(double output) {
 		// TODO Auto-generated method stub
 		//Robot.robotLogger.debug("Output = " + output);
-    	Robot.drivetrainSubsystem.Drive(-.5, output);
+    	Robot.drivetrainSubsystem.Drive(SmartDashboard.getNumber("Speed", -0.5), output);
 	}
 }
