@@ -9,6 +9,7 @@ import org.usfirst.frc.team3950.robot.commands.DriveCommand;
 import com.ctre.phoenix.motorcontrol.can.*;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -20,6 +21,7 @@ public class DrivetrainSubsystem extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands
+	
 	
 	double output;
 	
@@ -48,6 +50,12 @@ public class DrivetrainSubsystem extends Subsystem {
     	drivetrain = new DifferentialDrive(left, right);
     	navx = RobotMap.ahrs;
     	
+    	byte[] buffer = new byte[6];
+    	
+    	
+    	System.out.println("I am in drivetrainSubsystem initDefaultCommand");
+
+    	
     	frontLeft.setSafetyEnabled(false);
     	backLeft.setSafetyEnabled(false);
     	frontRight.setSafetyEnabled(false);
@@ -61,10 +69,6 @@ public class DrivetrainSubsystem extends Subsystem {
     	drivetrain.arcadeDrive(-y, twist);
     	//logger.info("Twist value is" + Double.toString(-twist));
     }
-    
-//    public void driveStraight(double output) {
-//    	
-//    }
-    
+       
 }
 

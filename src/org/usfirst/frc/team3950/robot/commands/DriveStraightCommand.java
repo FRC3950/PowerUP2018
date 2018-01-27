@@ -33,6 +33,7 @@ public class DriveStraightCommand extends Command implements PIDOutput {
     public DriveStraightCommand() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.drivetrainSubsystem);
+        requires(Robot.RGBSensorSubsystem);
         yaw = new PIDSourceYaw();
     	pid = new PIDController(P, I, D, F, yaw, this);
         
@@ -40,10 +41,16 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.robotLogger.info("DriveStraightCommand.initialize");
+    	double P = SmartDashboard.getNumber("P (drive straight)", .95);
+    	double I = SmartDashboard.getNumber("I (drive straight)", 0.128);
+    	double D = SmartDashboard.getNumber("D (drive straight)", 0.075);
+    	double F = SmartDashboard.getNumber("F (drive straight)", 0);
+
     	yaw.reset();
     	yaw.setPIDSourceType(PIDSourceType.kDisplacement);
     	pid.setInputRange(-5.0f,  5.0f);
-    	pid.setOutputRange(-.1, .1);
+    	pid.setOutputRange(-.5, .5);
     	pid.setAbsoluteTolerance(0.1);
     	pid.setContinuous(false);
     	pid.setPID(P, I, D, F);
@@ -57,10 +64,10 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 
     // Called repeatedly when the command scheduled to run
     protected void execute() {
-		SmartDashboard.putNumber("YAW", yaw.pidGet());
+//		SmartDashboard.putNumber("YAW", yaw.pidGet());
 		SmartDashboard.putBoolean("On target", pid.onTarget());
-		SmartDashboard.putNumber("Output", pid.get());
-		pid.setSetpoint(0);
+//		SmartDashboard.putNumber("Output", pid.get());
+//		pid.setSetpoint(0);
 		
 		
 		
@@ -88,8 +95,12 @@ public class DriveStraightCommand extends Command implements PIDOutput {
     	pid.disable();
     }
 
+	byte[] i2cBuffer = new byte[6];
 	@Override
 	public void pidWrite(double output) {
+		SmartDashboard.putNumber("YAW", yaw.pidGet());
+		SmartDashboard.putNumber("Output", pid.get());
+		Robot.RGBSensorSubsystem.readColor(i2cBuffer);
 		// TODO Auto-generated method stub
 		//Robot.robotLogger.debug("Output = " + output);
     	Robot.drivetrainSubsystem.Drive(SmartDashboard.getNumber("Speed", -0.5), output);

@@ -15,9 +15,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.usfirst.frc.team3950.robot.commands.DriveCommand;
-import org.usfirst.frc.team3950.robot.commands.DriveStraightCommand;
-import org.usfirst.frc.team3950.robot.subsystems.DrivetrainSubsystem;
+import org.usfirst.frc.team3950.robot.commands.*;
+import org.usfirst.frc.team3950.robot.subsystems.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -35,6 +34,7 @@ public class Robot extends TimedRobot {
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 	
 	public static DrivetrainSubsystem drivetrainSubsystem = new DrivetrainSubsystem();
+	public static RGBSensorSubsystem RGBSensorSubsystem = new RGBSensorSubsystem();
 	
 
 	/**
@@ -52,7 +52,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("I (drive straight)", 0);
 		SmartDashboard.putNumber("D (drive straight)", 0);
 		SmartDashboard.putNumber("F (drive straight)", 0);
-		SmartDashboard.putNumber("Speed", -0.5);
+		SmartDashboard.putNumber("Speed", -0.75);
 		
 		m_autonomousCommand = new DriveStraightCommand();
 		//robotLogger.info("Robot properly initialized.");
@@ -109,7 +109,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
-		robotLogger.info("I am in autoPeriodic yay");
+//		robotLogger.info("I am in autoPeriodic yay");
 	}
 
 	@Override
