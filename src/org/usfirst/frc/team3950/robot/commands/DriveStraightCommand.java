@@ -23,7 +23,9 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 	PIDSourceYaw yaw;
 	Timer timer = new Timer();
 	
-	double P = SmartDashboard.getNumber("P (drive straight)", .95);
+
+			
+	double P = SmartDashboard.getNumber("P (drive straight)", .45);
 	double I = SmartDashboard.getNumber("I (drive straight)", 0.128);
 	double D = SmartDashboard.getNumber("D (drive straight)", 0.075);
 	double F = SmartDashboard.getNumber("F (drive straight)", 0);
@@ -50,7 +52,7 @@ public class DriveStraightCommand extends Command implements PIDOutput {
     	yaw.reset();
     	yaw.setPIDSourceType(PIDSourceType.kDisplacement);
     	pid.setInputRange(-5.0f,  5.0f);
-    	pid.setOutputRange(-.5, .5);
+    	pid.setOutputRange(-.5,.5);
     	pid.setAbsoluteTolerance(0.1);
     	pid.setContinuous(false);
     	pid.setPID(P, I, D, F);
@@ -100,9 +102,8 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 	public void pidWrite(double output) {
 		SmartDashboard.putNumber("YAW", yaw.pidGet());
 		SmartDashboard.putNumber("Output", pid.get());
-		Robot.RGBSensorSubsystem.readColor(i2cBuffer);
 		// TODO Auto-generated method stub
 		//Robot.robotLogger.debug("Output = " + output);
-    	Robot.drivetrainSubsystem.Drive(SmartDashboard.getNumber("Speed", -0.5), output);
+    	Robot.drivetrainSubsystem.Drive(SmartDashboard.getNumber("Speed", -.5), output);
 	}
 }

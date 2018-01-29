@@ -24,6 +24,7 @@ public class DrivetrainSubsystem extends Subsystem {
 	
 	
 	double output;
+	double wheelDiameter;
 	
 	WPI_TalonSRX frontLeft;
 	WPI_TalonSRX backLeft;
@@ -57,6 +58,9 @@ public class DrivetrainSubsystem extends Subsystem {
     	
     	byte[] buffer = new byte[6];
     	
+    	//diameter in feet
+    	wheelDiameter = (1/3);
+    	
     	
     	System.out.println("I am in drivetrainSubsystem initDefaultCommand");
 
@@ -88,6 +92,10 @@ public class DrivetrainSubsystem extends Subsystem {
     public void resetEncoders() {
     	backLeft.setSelectedSensorPosition(0, 0, 0);
     	backRight.setSelectedSensorPosition(0, 0, 0);
+    }
+    
+    public double getCountDistanceFeet() {
+    	return (getAverageEncoder()/4096)*wheelDiameter*Math.PI;
     }
     
 }

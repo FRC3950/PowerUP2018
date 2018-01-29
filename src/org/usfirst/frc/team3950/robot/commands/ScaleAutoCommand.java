@@ -20,6 +20,10 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
 	I2C i2cBus;
 	PIDSourceDistance source;
 	
+	//constants
+	double speed = 1;
+	double setpoint = 8f;
+	
 	
 	double P = SmartDashboard.getNumber("P (distance)", .95);
 	double I = SmartDashboard.getNumber("I (distance)", 0.128);
@@ -39,12 +43,12 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
     protected void initialize() {
     	source.reset();
     	source.setPIDSourceType(PIDSourceType.kDisplacement);
-    	pid.setInputRange(-5.0f,  5.0f);
-    	pid.setOutputRange(-.5, .5);
+    	pid.setInputRange(0f,  30f);
+    	pid.setOutputRange(0f, speed);
     	pid.setAbsoluteTolerance(0.1);
     	pid.setContinuous(false);
     	pid.setPID(P, I, D, F);
-    	pid.setSetpoint(4096);
+    	pid.setSetpoint(setpoint);
     	//Robot.robotLogger.info("This logger comes BEFORE PID Enable.");
     	pid.enable();
     	//Robot.robotLogger.info("This logger comes AFTER PID Enable.");
@@ -80,6 +84,7 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
 		// TODO Auto-generated method stub
     	SmartDashboard.putNumber("Left Encoder Distance", Robot.drivetrainSubsystem.getLeftEncoder());
     	SmartDashboard.putNumber("Right Encoder Distance", Robot.drivetrainSubsystem.getRightEncoder());
+    	SmartDashboard.putNumber("Total Distance Travelled", Robot.drivetrainSubsystem.getCountDistanceFeet());
 		SmartDashboard.putNumber("Output", pid.get());
     	Robot.drivetrainSubsystem.Drive(-output, 0);
 	}

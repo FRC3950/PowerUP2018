@@ -20,7 +20,7 @@ public class PIDSourceDistance implements PIDSource {
 	@Override
 	public double pidGet() {
 		// TODO Auto-generated method stub
-		return Robot.drivetrainSubsystem.getAverageEncoder();
+		return Robot.drivetrainSubsystem.getCountDistanceFeet();
 	}
 	
 	public void reset() {
