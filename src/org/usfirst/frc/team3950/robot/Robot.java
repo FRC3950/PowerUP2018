@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3950.robot.commands.ExampleCommand;
 import org.usfirst.frc.team3950.robot.commands.IntakeCommand;
 import org.usfirst.frc.team3950.robot.subsystems.DrivetrainSubsystem;
+import org.usfirst.frc.team3950.robot.subsystems.ElevatorSubsystem;
 import org.usfirst.frc.team3950.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team3950.robot.subsystems.IntakeSubsystem;
 
@@ -35,6 +36,7 @@ public class Robot extends TimedRobot {
 	
 	public static DrivetrainSubsystem drivetrainSubsystem = new DrivetrainSubsystem();
 	public static IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+	public static ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
 
 	/**
 	 * This function is run when the robot is first started up and should be
