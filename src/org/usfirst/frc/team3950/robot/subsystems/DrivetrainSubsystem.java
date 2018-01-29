@@ -47,6 +47,11 @@ public class DrivetrainSubsystem extends Subsystem {
     	SpeedControllerGroup left = new SpeedControllerGroup(frontLeft,backLeft);
     	SpeedControllerGroup right = new SpeedControllerGroup(frontRight,backRight);
     	
+    	backLeft.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder, 0, 0);
+    	backLeft.setSensorPhase(false);
+    	backRight.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder, 0, 0);
+    	backRight.setSensorPhase(false);
+    	
     	drivetrain = new DifferentialDrive(left, right);
     	navx = RobotMap.ahrs;
     	
@@ -69,6 +74,20 @@ public class DrivetrainSubsystem extends Subsystem {
     	drivetrain.arcadeDrive(-y, twist);
     	//logger.info("Twist value is" + Double.toString(-twist));
     }
-       
+    
+    public int getLeftEncoder() {
+    	return backLeft.getSelectedSensorPosition(0);
+    }
+    public int getRightEncoder() {
+    	return backRight.getSelectedSensorPosition(0);
+    }
+    public int getAverageEncoder() {
+     return (int)(backLeft.getSelectedSensorPosition(0) + backRight.getSelectedSensorPosition(0))/2;
+    }
+ 
+    public void resetEncoders() {
+    	backLeft.setSelectedSensorPosition(0, 0, 0);
+    	backRight.setSelectedSensorPosition(0, 0, 0);
+    }
+    
 }
-
