@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
+
 public class RGBSensorSubsystem extends Subsystem {
 
     // Put methods for controlling this subsystem
