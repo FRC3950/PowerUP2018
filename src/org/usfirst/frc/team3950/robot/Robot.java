@@ -12,12 +12,13 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team3950.robot.commands.ExampleCommand;
+//import org.usfirst.frc.team3950.robot.commands.ExampleCommand;
 import org.usfirst.frc.team3950.robot.commands.IntakeCommand;
 import org.usfirst.frc.team3950.robot.subsystems.DrivetrainSubsystem;
 import org.usfirst.frc.team3950.robot.subsystems.ElevatorSubsystem;
-import org.usfirst.frc.team3950.robot.subsystems.ExampleSubsystem;
+//import org.usfirst.frc.team3950.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team3950.robot.subsystems.IntakeSubsystem;
+import org.usfirst.frc.team3950.robot.subsystems.RampSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -27,8 +28,8 @@ import org.usfirst.frc.team3950.robot.subsystems.IntakeSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-	public static final ExampleSubsystem kExampleSubsystem
-			= new ExampleSubsystem();
+//	public static final ExampleSubsystem kExampleSubsystem
+//			= new ExampleSubsystem();
 	public static OI oi;
 
 	Command m_autonomousCommand;
@@ -37,6 +38,7 @@ public class Robot extends TimedRobot {
 	public static DrivetrainSubsystem drivetrainSubsystem = new DrivetrainSubsystem();
 	public static IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 	public static ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
+	public static RampSubsystem rampSubsystem = new RampSubsystem();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -45,7 +47,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		m_chooser.addDefault("Default Auto", new ExampleCommand());
+		//m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
 		

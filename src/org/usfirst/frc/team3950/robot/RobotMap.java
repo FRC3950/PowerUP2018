@@ -38,7 +38,10 @@ public class RobotMap {
 	public static WPI_VictorSPX elevatorMotorFollower = new WPI_VictorSPX (5);
 	public static WPI_TalonSRX intakeLeftMotor = new WPI_TalonSRX(6);
 	public static WPI_TalonSRX intakeRightMotor = new WPI_TalonSRX(7);
-	public static DigitalInput limitSwitch = new DigitalInput(8); 
+	public static DigitalInput bottomLimitSwitch = new DigitalInput(0); 
+	public static DigitalInput topLimitSwitch = new DigitalInput(1);
+	public static WPI_TalonSRX rampLeftMotor = new WPI_TalonSRX(8);
+	public static WPI_TalonSRX rampRightMotor = new WPI_TalonSRX(9);
 	
 	
 	public static AHRS ahrs = new AHRS(SerialPort.Port.kMXP);

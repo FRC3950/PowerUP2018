@@ -18,6 +18,7 @@ public class IntakeSubsystem extends Subsystem {
 	
 	WPI_TalonSRX left;
 	WPI_TalonSRX right;
+	boolean boxIn;
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -34,6 +35,10 @@ public class IntakeSubsystem extends Subsystem {
     public boolean currentOverload() {
     	return left.getOutputCurrent() >= 40 || right.getOutputCurrent() >= 40;
     
+    }
+    
+    public boolean boxInGetter( ) {
+    	return boxIn;
     }
     
     public void Intake(double trigger) {

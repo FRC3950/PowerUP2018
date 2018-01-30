@@ -2,6 +2,7 @@ package org.usfirst.frc.team3950.robot.subsystems;
 
 import org.usfirst.frc.team3950.robot.Robot;
 import org.usfirst.frc.team3950.robot.RobotMap;
+import org.usfirst.frc.team3950.robot.commands.ElevatorCommand;
 
 import com.ctre.phoenix.motorcontrol.can.*;
 
@@ -20,30 +21,33 @@ public class ElevatorSubsystem extends Subsystem {
 	
 	WPI_TalonSRX elevatorMotor;
 	WPI_VictorSPX elevatorMotorFollower;
-	DigitalInput limitSwitch;
+	DigitalInput bottomLimitSwitch;
+	DigitalInput topLimitSwitch;
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    	
+    	setDefaultCommand( new ElevatorCommand());
+
     	
     	elevatorMotor = RobotMap.elevatorMotor;
     	elevatorMotorFollower = RobotMap.elevatorMotorFollower;
-    	limitSwitch = RobotMap.limitSwitch;
+    	bottomLimitSwitch = RobotMap.bottomLimitSwitch;
+    	topLimitSwitch = RobotMap.topLimitSwitch;
     	
  
     	}
  
-
-    
-    
-    public void limitSwitch() {
-    	   if (limitSwitch.get()) {
-      	     elevatorMotor.set(0);
-    	   }else if (!limitSwitch.get()) {
-    	    	elevatorMotor.set(1);
-    	   }
+    public boolean bottomGetter() {
+    	return bottomLimitSwitch.get();
     }
+    
+    public boolean topGetter() {
+    	return topLimitSwitch.get();
+    }
+    
+    
+
     
     public void elevatorControl(double leftstick) {
     	elevatorMotor.set(leftstick);

@@ -9,6 +9,7 @@
 package org.usfirst.frc.team3950.robot;
 
 import org.usfirst.frc.team3950.robot.commands.DriveStraightCommand;
+import org.usfirst.frc.team3950.robot.commands.*;
 
 //Control packages 
 import edu.wpi.first.wpilibj.Joystick;
@@ -74,9 +75,9 @@ public class OI
 	    	//  xboxControllerBButton.whenPressed(new BallIntakeCommand());
 	        //	xboxControllerBButton.whenPressed(new BallOuttakeCommand());
 	        //	xboxControllerYButton.whenPressed(new ShooterIndexerCommand());
-	        //	xboxControllerLBButton.whileHeld(new ClimberDoCommand());
+	        xboxControllerRBButton.whileHeld(new RampUpCommand());
 	        //	xboxControllerXButton.whenPressed(new GearDistanceCommand());
-	      	//  xboxControllerRBButton.whenPressed(new StraightenShootCommandGroup());
+	        xboxControllerLBButton.whileHeld(new RampDownCommand());
 	        // 	xboxControllerYButton.whenPressed(new GearIntakeStartCommand());
 	        //	xboxControllerXButton.whenPressed(new GearIntakeGearCommand());
 	        //	xboxControllerAButton.whenPressed(new GearIntakeFloorCommand());
