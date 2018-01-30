@@ -3,6 +3,7 @@ package org.usfirst.frc.team3950.robot.commands;
 import org.usfirst.frc.team3950.robot.PIDSourceYaw;
 import org.usfirst.frc.team3950.robot.Robot;
 import org.usfirst.frc.team3950.robot.RobotMap;
+import org.usfirst.frc.team3950.robot.TCS34725ColorSensor;
 import org.slf4j.Logger;
 
 
@@ -18,6 +19,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class DriveStraightCommand extends Command implements PIDOutput {
 	
+	TCS34725ColorSensor colorSen = new TCS34725ColorSensor();
+	
 	PIDController pid;
 	double output = 1;
 	PIDSourceYaw yaw;
@@ -28,7 +31,7 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 	double D = SmartDashboard.getNumber("D (drive straight)", 0.075);
 	double F = SmartDashboard.getNumber("F (drive straight)", 0);
 
-	
+	double ret_val = colorSen.init();
 
     public DriveStraightCommand() {
         // Use requires() here to declare subsystem dependencies
@@ -55,11 +58,7 @@ public class DriveStraightCommand extends Command implements PIDOutput {
     	pid.setContinuous(false);
     	pid.setPID(P, I, D, F);
     	pid.setSetpoint(0);
-    	//Robot.robotLogger.info("This logger comes BEFORE PID Enable.");
     	pid.enable();
-    	//Robot.robotLogger.info("This logger comes AFTER PID Enable.");
-    	
-//    	timer.start();
     }
 
     // Called repeatedly when the command scheduled to run
@@ -69,7 +68,12 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 //		SmartDashboard.putNumber("Output", pid.get());
 //		pid.setSetpoint(0);
 		
-		
+		colorSen.readColors();
+    	SmartDashboard.putNumber("Red sensor", colorSen.getRedVal());
+    	SmartDashboard.putNumber("Green sensor", colorSen.getGreenVal());
+    	SmartDashboard.putNumber("Blue sensor", colorSen.getBlueVal());
+    	SmartDashboard.putNumber("Clear sensor", colorSen.getClearVal());
+    	
 		
 //		if (timer.get() == 2) {
 //			timer.stop();
@@ -100,7 +104,6 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 	public void pidWrite(double output) {
 		SmartDashboard.putNumber("YAW", yaw.pidGet());
 		SmartDashboard.putNumber("Output", pid.get());
-		Robot.RGBSensorSubsystem.readColor(i2cBuffer);
 		// TODO Auto-generated method stub
 		//Robot.robotLogger.debug("Output = " + output);
     	Robot.drivetrainSubsystem.Drive(SmartDashboard.getNumber("Speed", -0.5), output);

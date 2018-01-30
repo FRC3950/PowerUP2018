@@ -54,7 +54,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("F (drive straight)", 0);
 		SmartDashboard.putNumber("Speed", -0.75);
 		
-		m_autonomousCommand = new DriveStraightCommand();
+		m_autonomousCommand = new ScaleAutoCommand();
 		//robotLogger.info("Robot properly initialized.");
 	}
 

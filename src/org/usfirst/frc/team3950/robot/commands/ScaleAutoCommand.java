@@ -28,7 +28,7 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
 	double D = SmartDashboard.getNumber("D (distance)", 0);
 	double F = SmartDashboard.getNumber("F (distance)", 0);
 	
-	double ret_val = colorSen.init();
+	double ret_val;
 	double redVal;
 	double greenVal;
 	double blueVal;
@@ -56,6 +56,9 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
     	//Robot.robotLogger.info("This logger comes BEFORE PID Enable.");
     	pid.enable();
     	//Robot.robotLogger.info("This logger comes AFTER PID Enable.");
+    	ret_val = colorSen.init();
+    	
+    	Robot.robotLogger.info("Initialized" + ret_val);
     	
     	
     	
@@ -65,10 +68,13 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
     protected void execute() {
     	
     	ret_val = colorSen.readColors();
-    	redVal = colorSen.getRedVal();
-    	greenVal = colorSen.getGreenVal();
-    	blueVal = colorSen.getBlueVal();
-    	clearVal = colorSen.getClearVal();
+    	
+    	Robot.robotLogger.info("Read Colors Value" + ret_val);
+    	
+    	SmartDashboard.putNumber("Red sensor", colorSen.getRedVal());
+    	SmartDashboard.putNumber("Green sensor", colorSen.getGreenVal());
+    	SmartDashboard.putNumber("Blue sensor", colorSen.getBlueVal());
+    	SmartDashboard.putNumber("Clear sensor", colorSen.getClearVal());
     
 
     	// Robot.drivetrainSubsystem.readColor();
@@ -98,6 +104,6 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
     	SmartDashboard.putNumber("Left Encoder Distance", Robot.drivetrainSubsystem.getLeftEncoder());
     	SmartDashboard.putNumber("Right Encoder Distance", Robot.drivetrainSubsystem.getRightEncoder());
 		SmartDashboard.putNumber("Output", pid.get());
-    	Robot.drivetrainSubsystem.Drive(-output, 0);
+    	//Robot.drivetrainSubsystem.Drive(SmartDashboard.getNumber("Speed Scale Auto", -0.5), output);
 	}
 }
