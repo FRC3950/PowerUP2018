@@ -2,6 +2,7 @@ package org.usfirst.frc.team3950.robot.commands;
 
 import org.usfirst.frc.team3950.robot.PIDSourceDistance;
 import org.usfirst.frc.team3950.robot.Robot;
+import org.usfirst.frc.team3950.robot.TCS34725ColorSensor;
 
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.PIDController;
@@ -18,6 +19,7 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
 	
 	PIDController pid;
 	I2C i2cBus;
+	TCS34725ColorSensor colorSen = new TCS34725ColorSensor();
 	PIDSourceDistance source;
 	
 	//constants
@@ -25,10 +27,16 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
 	double setpoint = 8f;
 	
 	
-	double P = SmartDashboard.getNumber("P (distance)", .95);
-	double I = SmartDashboard.getNumber("I (distance)", 0.128);
-	double D = SmartDashboard.getNumber("D (distance)", 0.075);
+	double P = SmartDashboard.getNumber("P (distance)", 1.0);
+	double I = SmartDashboard.getNumber("I (distance)", 0);
+	double D = SmartDashboard.getNumber("D (distance)", 0);
 	double F = SmartDashboard.getNumber("F (distance)", 0);
+	
+	double ret_val = colorSen.init();
+	double redVal;
+	double greenVal;
+	double blueVal;
+	double clearVal;
 	
 	
     public ScaleAutoCommand() {
@@ -53,10 +61,19 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
     	pid.enable();
     	//Robot.robotLogger.info("This logger comes AFTER PID Enable.");
     	
+    	
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	
+    	ret_val = colorSen.readColors();
+    	redVal = colorSen.getRedVal();
+    	greenVal = colorSen.getGreenVal();
+    	blueVal = colorSen.getBlueVal();
+    	clearVal = colorSen.getClearVal();
+    
 
     	// Robot.drivetrainSubsystem.readColor();
     }
