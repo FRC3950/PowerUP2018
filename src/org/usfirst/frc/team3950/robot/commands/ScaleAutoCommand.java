@@ -7,7 +7,6 @@ import org.usfirst.frc.team3950.robot.TCS34725ColorSensor;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
-import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -21,6 +20,10 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
 	I2C i2cBus;
 	TCS34725ColorSensor colorSen = new TCS34725ColorSensor();
 	PIDSourceDistance source;
+	
+	//constants
+	double speed = 1;
+	double setpoint = 8f;
 	
 	
 	double P = SmartDashboard.getNumber("P (distance)", 1.0);
@@ -36,8 +39,6 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
 	
 	
     public ScaleAutoCommand() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     	requires(Robot.drivetrainSubsystem);
     	source = new PIDSourceDistance();
     	pid = new PIDController(P, I, D, F, source, this);
@@ -47,12 +48,12 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
     protected void initialize() {
     	source.reset();
     	source.setPIDSourceType(PIDSourceType.kDisplacement);
-    	pid.setInputRange(-5.0f,  5.0f);
-    	pid.setOutputRange(-.5, .5);
+    	pid.setInputRange(0f,  30f);
+    	pid.setOutputRange(0f, speed);
     	pid.setAbsoluteTolerance(0.1);
     	pid.setContinuous(false);
     	pid.setPID(P, I, D, F);
-    	pid.setSetpoint(4096);
+    	pid.setSetpoint(setpoint);
     	//Robot.robotLogger.info("This logger comes BEFORE PID Enable.");
     	pid.enable();
     	//Robot.robotLogger.info("This logger comes AFTER PID Enable.");
@@ -103,7 +104,9 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
 		// TODO Auto-generated method stub
     	SmartDashboard.putNumber("Left Encoder Distance", Robot.drivetrainSubsystem.getLeftEncoder());
     	SmartDashboard.putNumber("Right Encoder Distance", Robot.drivetrainSubsystem.getRightEncoder());
-		SmartDashboard.putNumber("Output", pid.get());
-    	//Robot.drivetrainSubsystem.Drive(SmartDashboard.getNumber("Speed Scale Auto", -0.5), output);
+    	SmartDashboard.putNumber("Total Distance Travelled", Robot.drivetrainSubsystem.getCountDistanceFeet());
+		SmartDashboard.putNumber("Output", output);
+    	Robot.drivetrainSubsystem.Drive(-output, 0);
+
 	}
 }
