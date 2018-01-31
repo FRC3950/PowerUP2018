@@ -75,8 +75,12 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
     	SmartDashboard.putNumber("Red sensor", colorSen.getRedVal());
     	SmartDashboard.putNumber("Green sensor", colorSen.getGreenVal());
     	SmartDashboard.putNumber("Blue sensor", colorSen.getBlueVal());
-    	SmartDashboard.putNumber("Clear sensor", colorSen.getClearVal());
-    
+    	SmartDashboard.putNumber("Clear sensor", colorSen.getClearVal()); 
+    	
+    	SmartDashboard.putNumber("P (distance)", 1.0);
+    	SmartDashboard.putNumber("I (distance)", 0.0);
+    	SmartDashboard.putNumber("D (distance)", 0.0);
+    	SmartDashboard.putNumber("F (distance)", 0.0);
 
     	// Robot.drivetrainSubsystem.readColor();
     }
@@ -105,7 +109,8 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
     	SmartDashboard.putNumber("Left Encoder Distance", Robot.drivetrainSubsystem.getLeftEncoder());
     	SmartDashboard.putNumber("Right Encoder Distance", Robot.drivetrainSubsystem.getRightEncoder());
     	SmartDashboard.putNumber("Total Distance Travelled", Robot.drivetrainSubsystem.getCountDistanceFeet());
-		SmartDashboard.putNumber("Output", output);
+		SmartDashboard.putNumber("Output (Distance)", output);
+		System.out.println("Output is " + output);
     	Robot.drivetrainSubsystem.Drive(-output, 0);
 
 	}

@@ -48,9 +48,9 @@ public class DrivetrainSubsystem extends Subsystem {
     	SpeedControllerGroup left = new SpeedControllerGroup(frontLeft,backLeft);
     	SpeedControllerGroup right = new SpeedControllerGroup(frontRight,backRight);
     	
-    	backLeft.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder, 0, 0);
+    	backLeft.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.Analog, 0, 0);
     	backLeft.setSensorPhase(false);
-    	backRight.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder, 0, 0);
+    	backRight.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.Analog, 0, 0);
     	backRight.setSensorPhase(false);
     	
     	drivetrain = new DifferentialDrive(left, right);

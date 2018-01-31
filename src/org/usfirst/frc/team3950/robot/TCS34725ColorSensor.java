@@ -84,7 +84,7 @@ I2C color_sen;
 		//Check we're actually connected to the sensor
 		color_sen.read(TCS34725_ID, 1, whoamiResponse);
 		if((whoamiResponse[0] != 0x44) && (whoamiResponse[0] != 0x10)){
-			System.out.println("\nError - whoami register mismatch on Color Sensor! Cannot Initalize!");
+			System.out.println("\nError - whoami register mismatch on Color Sensor! Cannot Initalize!" + " " + whoamiResponse[0]);
 			return -1;
 		}
 			
