@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.can.*;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SerialPort;
 
 /**
@@ -42,6 +43,7 @@ public class RobotMap {
 	public static DigitalInput topLimitSwitch = new DigitalInput(1);
 	public static WPI_TalonSRX rampLeftMotor = new WPI_TalonSRX(8);
 	public static WPI_TalonSRX rampRightMotor = new WPI_TalonSRX(9);
+	public static DoubleSolenoid elevatorSolenoid = new DoubleSolenoid(0, 1);
 	
 	
 	public static AHRS ahrs = new AHRS(SerialPort.Port.kMXP);

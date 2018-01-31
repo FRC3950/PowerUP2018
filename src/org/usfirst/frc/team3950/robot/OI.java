@@ -50,6 +50,8 @@ public class OI
 	    public Button xboxControllerYButton = new JoystickButton(xboxcontroller, 4);
 	    public Button xboxControllerLBButton = new JoystickButton(xboxcontroller, 5);
 	    public Button xboxControllerRBButton = new JoystickButton(xboxcontroller, 6);
+	    public Button xboxControllerLeftStickButton = new JoystickButton(xboxcontroller, 7);
+	    
 	//End button assignment import
 	   // public Button xboxControllerLTButton = new JoystickButton(xboxcontroller, 7);
 	   // public Button xboxControllerRTButton = new JoystickButton(xboxcontroller, 8);
@@ -82,6 +84,7 @@ public class OI
 	        //	xboxControllerXButton.whenPressed(new GearIntakeGearCommand());
 	        //	xboxControllerAButton.whenPressed(new GearIntakeFloorCommand());
 	        //  Xbox end
+	        xboxControllerLeftStickButton.whenPressed(new ElevatorShiftCommand());
 	    }
 	    //End 2017 control import
 } // End OI master class

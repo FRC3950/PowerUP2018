@@ -25,4 +25,9 @@ public class PIDSourceYaw implements PIDSource {
 		return navx.getYaw();
 	}
 	
+	public void reset() {
+		navx.zeroYaw(); 
+		navx.reset();
+	}
+	
 }

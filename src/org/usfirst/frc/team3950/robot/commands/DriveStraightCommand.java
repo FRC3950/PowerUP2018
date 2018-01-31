@@ -2,67 +2,104 @@ package org.usfirst.frc.team3950.robot.commands;
 
 import org.usfirst.frc.team3950.robot.PIDSourceYaw;
 import org.usfirst.frc.team3950.robot.Robot;
+import org.usfirst.frc.team3950.robot.RobotMap;
+import org.slf4j.Logger;
 
-import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class DriveStraightCommand extends Command {
+public class DriveStraightCommand extends Command implements PIDOutput {
 	
-	AHRS navx;
 	PIDController pid;
-	double output = 0;
+	double output = 1;
 	PIDSourceYaw yaw;
+	Timer timer = new Timer();
 	
-	double P = SmartDashboard.getNumber("P (drive straight)", 1);
-	double I = SmartDashboard.getNumber("I (drive straight)", 0);
-	double D = SmartDashboard.getNumber("D (drive straight)", 0);
+	double P = SmartDashboard.getNumber("P (drive straight)", .95);
+	double I = SmartDashboard.getNumber("I (drive straight)", 0.128);
+	double D = SmartDashboard.getNumber("D (drive straight)", 0.075);
 	double F = SmartDashboard.getNumber("F (drive straight)", 0);
+
+	
 
     public DriveStraightCommand() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.drivetrainSubsystem);
+        yaw = new PIDSourceYaw();
+    	pid = new PIDController(P, I, D, F, yaw, this);
+        
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	yaw = new PIDSourceYaw();
-;    	navx.zeroYaw();
-    	pid = new PIDController(P, I, D, F, yaw, new PIDOutput() {
-			@Override
-			public void pidWrite(double out) {
-				output = out;	
-			}
-    	});
-    	
-    	pid.enable();
-    	pid.setOutputRange(-1, 1);
+    	double P = SmartDashboard.getNumber("P (drive straight)", .95);
+    	double I = SmartDashboard.getNumber("I (drive straight)", 0.128);
+    	double D = SmartDashboard.getNumber("D (drive straight)", 0.075);
+    	double F = SmartDashboard.getNumber("F (drive straight)", 0);
+
+    	yaw.reset();
+    	yaw.setPIDSourceType(PIDSourceType.kDisplacement);
+    	pid.setInputRange(-5.0f,  5.0f);
+    	pid.setOutputRange(-.5, .5);
+    	pid.setAbsoluteTolerance(0.1);
+    	pid.setContinuous(false);
+    	pid.setPID(P, I, D, F);
     	pid.setSetpoint(0);
+    	//Robot.robotLogger.info("This logger comes BEFORE PID Enable.");
+    	pid.enable();
+    	//Robot.robotLogger.info("This logger comes AFTER PID Enable.");
     	
+//    	timer.start();
     }
 
-    // Called repeatedly when this Command is scheduled to run
+    // Called repeatedly when the command scheduled to run
     protected void execute() {
-    	Robot.drivetrainSubsystem.Drive(/*some number*/ .1, output);
+//		SmartDashboard.putNumber("YAW", yaw.pidGet());
+		SmartDashboard.putBoolean("On target", pid.onTarget());
+//		SmartDashboard.putNumber("Output", pid.get());
+//		pid.setSetpoint(0);
+		
+		
+		
+//		if (timer.get() == 2) {
+//			timer.stop();
+//			pid.setSetpoint(90);
+//		}    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return isCanceled();
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.drivetrainSubsystem.Drive(0,0);
+    	pid.disable();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.drivetrainSubsystem.Drive(0,0);
+    	pid.disable();
     }
+
+	byte[] i2cBuffer = new byte[6];
+	@Override
+	public void pidWrite(double output) {
+		SmartDashboard.putNumber("YAW", yaw.pidGet());
+		SmartDashboard.putNumber("Output", pid.get());
+		// TODO Auto-generated method stub 
+		//Robot.robotLogger.debug("Output = " + output);
+    	Robot.drivetrainSubsystem.Drive(SmartDashboard.getNumber("Speed", -0.5), output);
+	}
 }
