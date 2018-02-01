@@ -45,7 +45,6 @@ public class RobotMap {
 	public static WPI_TalonSRX rampRightMotor = new WPI_TalonSRX(9);
 	public static DoubleSolenoid elevatorSolenoid = new DoubleSolenoid(0, 1);
 	
-	
 	public static AHRS ahrs = new AHRS(SerialPort.Port.kMXP);
 	
 	

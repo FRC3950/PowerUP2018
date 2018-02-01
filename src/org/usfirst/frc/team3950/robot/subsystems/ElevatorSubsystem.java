@@ -56,6 +56,11 @@ public class ElevatorSubsystem extends Subsystem {
     	elevatorSolenoid.set(null);
     }
     
+    public void MotionMagic() {
+    	elevatorMotor.configMotionCruiseVelocity(1, 0);
+    	elevatorMotor.configMotionAcceleration(1, 0);
+    }
+    
 }
 
  

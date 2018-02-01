@@ -1,10 +1,15 @@
 package org.usfirst.frc.team3950.robot.commands;
 
 import org.usfirst.frc.team3950.robot.Robot;
+import org.usfirst.frc.team3950.robot.RobotMap;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -13,6 +18,11 @@ public class ElevatorCommand extends Command {
 	XboxController controller = Robot.oi.xboxcontroller;
 	boolean bottom = false;
 	boolean top = false;
+	
+	double P = SmartDashboard.getNumber("P (elevator)", .95);
+	double I = SmartDashboard.getNumber("I (elevator)", 0.128);
+	double D = SmartDashboard.getNumber("D (elevator)", 0.075);
+	double F = SmartDashboard.getNumber("F (elevator)", 0);
 
     public ElevatorCommand() {
         // Use requires() here to declare subsystem dependencies
@@ -59,6 +69,17 @@ public class ElevatorCommand extends Command {
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
-    protected void interrupted() {
+    protected void interrupted() {    
     }
+
+	public void pidWrite(double output) {
+		SmartDashboard.putNumber("output", output);
+		RobotMap.elevatorMotor.set(output);
+		RobotMap.elevatorMotorFollower.set(output);
+		//Robot.elevatorSubsystem.MotionMagic();
+	
+		
+	}
+
 }
+	
