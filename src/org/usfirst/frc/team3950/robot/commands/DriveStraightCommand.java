@@ -2,9 +2,8 @@ package org.usfirst.frc.team3950.robot.commands;
 
 import org.usfirst.frc.team3950.robot.PIDSourceYaw;
 import org.usfirst.frc.team3950.robot.Robot;
-import org.usfirst.frc.team3950.robot.RobotMap;
 import org.usfirst.frc.team3950.robot.TCS34725ColorSensor;
-import org.slf4j.Logger;
+//import org.slf4j.Logger;
 
 
 import edu.wpi.first.wpilibj.PIDController;
@@ -22,7 +21,7 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 	TCS34725ColorSensor colorSen = new TCS34725ColorSensor();
 	
 	PIDController pid;
-	double output = 1;
+	//double output = 1;
 	PIDSourceYaw yaw;
 	Timer timer = new Timer();
 	
@@ -37,7 +36,7 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 
     public DriveStraightCommand() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.drivetrainSubsystem);
+        //requires(Robot.drivetrainSubsystem);
         requires(Robot.RGBSensorSubsystem);
         yaw = new PIDSourceYaw();
     	pid = new PIDController(P, I, D, F, yaw, this);
@@ -90,24 +89,29 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.drivetrainSubsystem.Drive(0,0);
+    	//Robot.drivetrainSubsystem.Drive(0,0);
     	pid.disable();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.drivetrainSubsystem.Drive(0,0);
+    	//Robot.drivetrainSubsystem.Drive(0,0);
     	pid.disable();
     }
 
 	byte[] i2cBuffer = new byte[6];
+	
+	public double output = 0;
+	
 	@Override
 	public void pidWrite(double output) {
 		SmartDashboard.putNumber("YAW", yaw.pidGet());
 		SmartDashboard.putNumber("Output", pid.get());
 		// TODO Auto-generated method stub
-		//Robot.robotLogger.debug("Output = " + output);
-    	Robot.drivetrainSubsystem.Drive(SmartDashboard.getNumber("Speed", -.5), output);
+		Robot.robotLogger.debug("DriveStraightCommand.output = " + output);
+    	//Robot.drivetrainSubsystem.Drive(SmartDashboard.getNumber("Speed", -.5), output);
+		this.output = output;
+    	
 	}
 }
