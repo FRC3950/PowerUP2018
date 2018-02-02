@@ -27,7 +27,7 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
 	double setpoint = 27f;
 	
 	
-	double P = SmartDashboard.getNumber("P (distance)", 1.0);
+	double P = SmartDashboard.getNumber("P (distance)", .5);
 	double I = SmartDashboard.getNumber("I (distance)", 0);
 	double D = SmartDashboard.getNumber("D (distance)", 0);
 	double F = SmartDashboard.getNumber("F (distance)", 0);
