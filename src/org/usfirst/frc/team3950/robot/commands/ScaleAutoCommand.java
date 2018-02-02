@@ -22,8 +22,9 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
 	PIDSourceDistance source;
 	
 	//constants
-	double speed = 1;
-	double setpoint = 8f;
+	double maxSpeed = 1;
+	//setpoint is in feet
+	double setpoint = 27f;
 	
 	
 	double P = SmartDashboard.getNumber("P (distance)", 1.0);
@@ -48,8 +49,8 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
     protected void initialize() {
     	source.reset();
     	source.setPIDSourceType(PIDSourceType.kDisplacement);
-    	pid.setInputRange(0f,  30f);
-    	pid.setOutputRange(0f, speed);
+    	pid.setInputRange(0f,  setpoint*1.1);
+    	pid.setOutputRange(0f, maxSpeed);
     	pid.setAbsoluteTolerance(0.1);
     	pid.setContinuous(false);
     	pid.setPID(P, I, D, F);
@@ -76,11 +77,7 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
     	SmartDashboard.putNumber("Green sensor", colorSen.getGreenVal());
     	SmartDashboard.putNumber("Blue sensor", colorSen.getBlueVal());
     	SmartDashboard.putNumber("Clear sensor", colorSen.getClearVal()); 
-    	
-    	SmartDashboard.putNumber("P (distance)", 1.0);
-    	SmartDashboard.putNumber("I (distance)", 0.0);
-    	SmartDashboard.putNumber("D (distance)", 0.0);
-    	SmartDashboard.putNumber("F (distance)", 0.0);
+
 
     	// Robot.drivetrainSubsystem.readColor();
     }
@@ -105,7 +102,7 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
 
 	@Override
 	public void pidWrite(double output) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stud
     	SmartDashboard.putNumber("Left Encoder Distance", Robot.drivetrainSubsystem.getLeftEncoder());
     	SmartDashboard.putNumber("Right Encoder Distance", Robot.drivetrainSubsystem.getRightEncoder());
     	SmartDashboard.putNumber("Total Distance Travelled", Robot.drivetrainSubsystem.getCountDistanceFeet());
