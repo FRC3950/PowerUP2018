@@ -48,7 +48,8 @@ public class Robot extends TimedRobot {
 		m_chooser = new SendableChooser<Command>();
 		
 		m_chooser.addDefault("Scale Auto", new ScaleAutoCommand());
-		//m_chooser.addObject("Turn Precise", object);
+		m_chooser.addObject("Turn Precise", new DriveTurnPreciseCommand());
+		m_chooser.addObject("Drive Straight", new DriveStraightCommand());
 		
 		SmartDashboard.putData("Auto mode", m_chooser);
 		
