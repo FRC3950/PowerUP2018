@@ -123,7 +123,7 @@ public class StraightScaleAutoCommand extends Command implements PIDOutput{
 			navOut = output;
 			System.out.println("in the friccin if statement scale straight true");
 		}
-		Robot.drivetrainSubsystem.Drive(navOut, encOut);
+		Robot.drivetrainSubsystem.Drive(-navOut, encOut);
 	}
 	
 	
