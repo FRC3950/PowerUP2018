@@ -21,7 +21,7 @@ public class DriveTurnPreciseCommand extends Command implements PIDOutput {
 	//setpoint in degrees
 	double setpoint = 90;
 	
-	double P = SmartDashboard.getNumber("P (turn)", .45);
+	double P = SmartDashboard.getNumber("P (turn)", .35);
 	double I = SmartDashboard.getNumber("I (turn)", 0.128);
 	double D = SmartDashboard.getNumber("D (turn)", 0.075);
 	double F = SmartDashboard.getNumber("F (turn)", 0);
@@ -39,8 +39,8 @@ public class DriveTurnPreciseCommand extends Command implements PIDOutput {
     	yaw.reset();
     	yaw.setPIDSourceType(PIDSourceType.kDisplacement);
     	pid.setInputRange(0, setpoint*1.1);
-    	pid.setOutputRange(-.5,.5);
-    	pid.setAbsoluteTolerance(0.1);
+    	pid.setOutputRange(-.75,.75);
+    	pid.setAbsoluteTolerance(0.2);
     	pid.setContinuous(false);
     	pid.setPID(P, I, D, F);
     	pid.setSetpoint(setpoint);
@@ -53,7 +53,6 @@ public class DriveTurnPreciseCommand extends Command implements PIDOutput {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	Robot.drivetrainSubsystem.Drive(0,0);
         return pid.onTarget();
     }
 

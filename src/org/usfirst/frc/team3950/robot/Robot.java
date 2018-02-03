@@ -51,6 +51,7 @@ public class Robot extends TimedRobot {
 		m_chooser.addObject("Turn Precise", new DriveTurnPreciseCommand());
 		m_chooser.addObject("Drive Straight", new DriveStraightCommand());
 		m_chooser.addObject("Straight + Scale Auto", new StraightScaleAutoCommand());
+		m_chooser.addObject("No Auto", null);
 		
 		SmartDashboard.putData("Auto mode", m_chooser);
 		
@@ -60,7 +61,6 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("F (drive straight)", 0);
 		SmartDashboard.putNumber("Speed", -0.75);
 		
-		m_autonomousCommand = new StraightScaleAutoCommand();
 		//robotLogger.info("Robot properly initialized.");
 	}
 
@@ -93,7 +93,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		//m_autonomousCommand = m_chooser.getSelected();
-
+		m_autonomousCommand = m_chooser.getSelected();
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand

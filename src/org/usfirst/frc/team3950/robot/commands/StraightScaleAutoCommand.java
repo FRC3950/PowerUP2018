@@ -92,25 +92,25 @@ public class StraightScaleAutoCommand extends Command{
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() { 
-    	
-    	SmartDashboard.putNumber("P (distance)", 1.0);
-    	SmartDashboard.putNumber("I (distance)", 0.0);
-    	SmartDashboard.putNumber("D (distance)", 0.0);
-    	SmartDashboard.putNumber("F (distance)", 0.0);
 
+    	SmartDashboard.putNumber("Left Encoder Distance", Robot.drivetrainSubsystem.getLeftEncoder());
+    	SmartDashboard.putNumber("Right Encoder Distance", Robot.drivetrainSubsystem.getRightEncoder());
+    	SmartDashboard.putNumber("Total Distance Travelled", Robot.drivetrainSubsystem.getCountDistanceFeet());
+		SmartDashboard.putNumber("Output (Distance)", output);
+    	
     	Robot.drivetrainSubsystem.Drive(-outputDistance.pidGet(), outputYaw.pidGet());
     	// Robot.drivetrainSubsystem.readColor();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return isCanceled();
+        return pidDistance.onTarget();
     }
 
     // Called once after isFinished returns true
     protected void end() {
     	Robot.drivetrainSubsystem.Drive(0,0);
-    	pidEnc.disable();
+    	pidDistance.disable();
     	pidStraight.disable();
     }
 
@@ -118,7 +118,7 @@ public class StraightScaleAutoCommand extends Command{
     // subsystems is scheduled to run
     protected void interrupted() {
     	Robot.drivetrainSubsystem.Drive(0,0);
-    	pidEnc.disable();
+    	pidDistance.disable();
     	pidStraight.disable();
     }
 
