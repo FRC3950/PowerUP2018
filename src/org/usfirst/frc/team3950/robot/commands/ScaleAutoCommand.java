@@ -24,7 +24,7 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
 	//constants
 	double maxSpeed = 1;
 	//setpoint is in feet
-	double setpoint = 8f;
+	double setpoint = 27f;
 	
 	
 	double P = SmartDashboard.getNumber("P (distance)", .5);
@@ -40,7 +40,7 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
 	
 	
     public ScaleAutoCommand() {
-    	//requires(Robot.drivetrainSubsystem);
+    	requires(Robot.drivetrainSubsystem);
     	source = new PIDSourceDistance();
     	pid = new PIDController(P, I, D, F, source, this);
     }
@@ -58,9 +58,9 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
     	//Robot.robotLogger.info("This logger comes BEFORE PID Enable.");
     	pid.enable();
     	//Robot.robotLogger.info("This logger comes AFTER PID Enable.");
-    	ret_val = colorSen.init();
+    	//ret_val = colorSen.init();
     	
-    	Robot.robotLogger.info("Initialized" + ret_val);
+    	//Robot.robotLogger.info("Initialized" + ret_val);
     	
     	
     	
@@ -69,14 +69,16 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	ret_val = colorSen.readColors();
+    	//ret_val = colorSen.readColors();
     	
-    	Robot.robotLogger.info("Read Colors Value" + ret_val);
+    	//Robot.robotLogger.info("Read Colors Value" + ret_val);
     	
+    	/*
     	SmartDashboard.putNumber("Red sensor", colorSen.getRedVal());
     	SmartDashboard.putNumber("Green sensor", colorSen.getGreenVal());
     	SmartDashboard.putNumber("Blue sensor", colorSen.getBlueVal());
     	SmartDashboard.putNumber("Clear sensor", colorSen.getClearVal()); 
+    	*/
 
 
     	// Robot.drivetrainSubsystem.readColor();
@@ -89,27 +91,27 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
 
     // Called once after isFinished returns true
     protected void end() {
-    	//Robot.drivetrainSubsystem.Drive(0,0);
+    	Robot.drivetrainSubsystem.Drive(0,0);
     	pid.disable();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	//Robot.drivetrainSubsystem.Drive(0,0);
+    	Robot.drivetrainSubsystem.Drive(0,0);
     	pid.disable();
     }
     public double output = 0;
 	@Override
 	public void pidWrite(double output) {
 		// TODO Auto-generated method stud
-    	//SmartDashboard.putNumber("Left Encoder Distance", Robot.drivetrainSubsystem.getLeftEncoder());
-    	//SmartDashboard.putNumber("Right Encoder Distance", Robot.drivetrainSubsystem.getRightEncoder());
-    	//SmartDashboard.putNumber("Total Distance Travelled", Robot.drivetrainSubsystem.getCountDistanceFeet());
+    	SmartDashboard.putNumber("Left Encoder Distance", Robot.drivetrainSubsystem.getLeftEncoder());
+    	SmartDashboard.putNumber("Right Encoder Distance", Robot.drivetrainSubsystem.getRightEncoder());
+    	SmartDashboard.putNumber("Total Distance Travelled", Robot.drivetrainSubsystem.getCountDistanceFeet());
 		SmartDashboard.putNumber("Output (Distance)", output);
 		System.out.println("ScaleAuto.output = " + output);
-    	//Robot.drivetrainSubsystem.Drive(-output, 0);
-		this.output = output;
+    	Robot.drivetrainSubsystem.Drive(-output, 0);
+		//this.output = output;
 
 	}
 }
