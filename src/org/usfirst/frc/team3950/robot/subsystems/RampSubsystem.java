@@ -1,42 +1,35 @@
  package org.usfirst.frc.team3950.robot.subsystems;
 
 import org.usfirst.frc.team3950.robot.RobotMap;
-import org.usfirst.frc.team3950.robot.commands.RampStopCommand;
+ //import org.usfirst.frc.team3950.robot.commands.RampStopCommand;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
 public class RampSubsystem extends Subsystem {
-	WPI_TalonSRX leftMotor;
-	WPI_TalonSRX rightMotor;
+	Solenoid rampSolenoid;
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
-    	setDefaultCommand(new RampStopCommand());
-    	leftMotor = RobotMap.rampLeftMotor;
-    	rightMotor = RobotMap.rampRightMotor;
+        //setDefaultCommand(new MySpecialCommand())
+    	rampSolenoid = RobotMap.rampSolenoid;
     }
     
     public void RampIn() {
-    	leftMotor.set(1);
-    	rightMotor.set(1);
+    	rampSolenoid.set(false);
     }
     
-    public void RampStop() {
-    	leftMotor.set(0);
-    	rightMotor.set(0);
-    }
     public void RampDown() {
-    	leftMotor.set(-1);
-    	rightMotor.set(-1);
+    	rampSolenoid.set(true);
     }
     
     	

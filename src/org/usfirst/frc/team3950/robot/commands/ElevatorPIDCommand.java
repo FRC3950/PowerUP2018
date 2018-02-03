@@ -1,26 +1,38 @@
 package org.usfirst.frc.team3950.robot.commands;
 
+import org.usfirst.frc.team3950.robot.PIDSourceYaw;
 import org.usfirst.frc.team3950.robot.Robot;
 
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
 public class ElevatorPIDCommand extends Command {
+	
 
     public ElevatorPIDCommand() {
         // eg. requires(chassis);
         // Use requires() here to declare subsystem dependencies
     	requires(Robot.elevatorSubsystem);
+    	
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	}
+     	double P = SmartDashboard.getNumber("P (elevator)", .95);
+    	double I = SmartDashboard.getNumber("I (elevator)", 0.128);
+    	double D = SmartDashboard.getNumber("D (elevator)", 0.075);
+    	double F = SmartDashboard.getNumber("F (elevator)", 0);
+    	
+     }
+
     
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

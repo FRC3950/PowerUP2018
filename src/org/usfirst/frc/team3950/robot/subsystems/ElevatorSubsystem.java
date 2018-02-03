@@ -52,13 +52,27 @@ public class ElevatorSubsystem extends Subsystem {
     	elevatorMotorFollower.set(-leftstick);
     }
     
-    public void elevatorSolenoid( double leftstick) {
+    public void elevatorUp(double leftstick) {
     	elevatorSolenoid.set(null);
     }
     
     public void MotionMagic() {
+		elevatorMotor.configNominalOutputForward(0, 0);
+		elevatorMotor.configNominalOutputReverse(0, 0);
+		elevatorMotor.configPeakOutputForward(1, 0);
+		elevatorMotor.configPeakOutputReverse(-1, 0);
+    	
+		elevatorMotor.selectProfileSlot(0, 0);
+		elevatorMotor.config_kF(0, 0.2, 0);
+		elevatorMotor.config_kP(0, 0.2, 0);
+		elevatorMotor.config_kI(0, 0, 0);
+		elevatorMotor.config_kD(0, 0, 0);
+		
+
     	elevatorMotor.configMotionCruiseVelocity(1, 0);
     	elevatorMotor.configMotionAcceleration(1, 0);
+    	
+    	elevatorMotor.setSelectedSensorPosition(0, 0,0);
     }
     
 }

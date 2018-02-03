@@ -13,6 +13,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.Solenoid;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -41,8 +42,7 @@ public class RobotMap {
 	public static WPI_TalonSRX intakeRightMotor = new WPI_TalonSRX(7);
 	public static DigitalInput bottomLimitSwitch = new DigitalInput(0); 
 	public static DigitalInput topLimitSwitch = new DigitalInput(1);
-	public static WPI_TalonSRX rampLeftMotor = new WPI_TalonSRX(8);
-	public static WPI_TalonSRX rampRightMotor = new WPI_TalonSRX(9);
+	public static Solenoid rampSolenoid = new Solenoid(8);
 	public static DoubleSolenoid elevatorSolenoid = new DoubleSolenoid(0, 1);
 	
 	public static AHRS ahrs = new AHRS(SerialPort.Port.kMXP);
