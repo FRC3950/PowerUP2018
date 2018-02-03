@@ -1,8 +1,12 @@
 package org.usfirst.frc.team3950.robot.commands;
 
+import org.usfirst.frc.team3950.robot.EncPIDController;
+import org.usfirst.frc.team3950.robot.PIDOutputDistance;
+import org.usfirst.frc.team3950.robot.PIDOutputYaw;
 import org.usfirst.frc.team3950.robot.PIDSourceDistance;
 import org.usfirst.frc.team3950.robot.PIDSourceYaw;
 import org.usfirst.frc.team3950.robot.Robot;
+import org.usfirst.frc.team3950.robot.YawPIDController;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -13,16 +17,19 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class StraightScaleAutoCommand extends Command implements PIDOutput{
+public class StraightScaleAutoCommand extends Command{
 	
 	//from scaleAuto
-	PIDController pidEnc;
+	EncPIDController pidEnc;
+	PIDController pidDistance;
 	PIDSourceDistance source;
+	PIDOutputDistance outputDistance;
 	
 	//from driveStright
 	PIDController pidStraight;
 	double output = 1;
 	PIDSourceYaw yaw;
+	PIDOutputYaw outputYaw;
 	
 	//constants for scaleAuto, setpoint in feet
 	double maxSpeed = 1;
@@ -47,10 +54,13 @@ public class StraightScaleAutoCommand extends Command implements PIDOutput{
     public StraightScaleAutoCommand() {
     	requires(Robot.drivetrainSubsystem);
     	source = new PIDSourceDistance();
-    	pidEnc = new PIDController(PEnc, IEnc, DEnc, FEnc, source, this);
+    	outputDistance = new PIDOutputDistance();
+    	//pidEnc = new EncPIDController(PEnc, IEnc, DEnc, FEnc, source, this);
+    	pidDistance = new PIDController(PEnc, IEnc, DEnc, FEnc, source, outputDistance);
     	
     	yaw = new PIDSourceYaw();
-    	pidStraight = new PIDController(P, I, D, F, yaw, this);
+    	outputYaw = new PIDOutputYaw();
+    	pidStraight = new PIDController(P, I, D, F, yaw, outputYaw);
     	
     }
 
@@ -60,13 +70,13 @@ public class StraightScaleAutoCommand extends Command implements PIDOutput{
     	//from scaleAuto
     	source.reset();
     	source.setPIDSourceType(PIDSourceType.kDisplacement);
-    	pidEnc.setInputRange(0f,  setpoint*1.1);
-    	pidEnc.setOutputRange(0f, maxSpeed);
-    	pidEnc.setAbsoluteTolerance(0.1);
-    	pidEnc.setContinuous(false);
-    	pidEnc.setPID(PEnc, IEnc, DEnc, FEnc);
-    	pidEnc.setSetpoint(setpoint);
-    	pidEnc.enable();
+    	pidDistance.setInputRange(0f,  setpoint*1.1);
+    	pidDistance.setOutputRange(0f, maxSpeed);
+    	pidDistance.setAbsoluteTolerance(0.1);
+    	pidDistance.setContinuous(false);
+    	pidDistance.setPID(PEnc, IEnc, DEnc, FEnc);
+    	pidDistance.setSetpoint(setpoint);
+    	pidDistance.enable();
     	
     	//from driveStraight
     	yaw.reset();
@@ -88,6 +98,7 @@ public class StraightScaleAutoCommand extends Command implements PIDOutput{
     	SmartDashboard.putNumber("D (distance)", 0.0);
     	SmartDashboard.putNumber("F (distance)", 0.0);
 
+    	Robot.drivetrainSubsystem.Drive(-outputDistance.pidGet(), outputYaw.pidGet());
     	// Robot.drivetrainSubsystem.readColor();
     }
 
@@ -111,20 +122,22 @@ public class StraightScaleAutoCommand extends Command implements PIDOutput{
     	pidStraight.disable();
     }
 
-	@Override
-	public void pidWrite(double output) {
+//	@Override
+//	public synchronized void pidWrite(double output) {
 		// TODO Auto-generated method stud
-		String method = Thread.currentThread().getStackTrace()[2].getClassName();
-		System.out.println(method + " from pidWrite");
-		if(method.compareTo("ScaleAutoCommand") == 0) {
-			System.out.println("in the friccin if statement scale auto true");
-			encOut = output;
-		}else {
-			navOut = output;
-			System.out.println("in the friccin if statement scale straight true");
-		}
-		Robot.drivetrainSubsystem.Drive(-navOut, encOut);
-	}
-	
+//		for(StackTraceElement stElement : Thread.currentThread().getStackTrace()) {
+//			System.out.println(stElement.getClassName());
+//		}
+//		String method = Thread.currentThread().getStackTrace()[3].getClassName();
+//		System.out.println(method + " from pidWrite");
+//		if(method.compareTo("ScaleAutoCommand") == 0) {
+//			System.out.println("in the if statement scale auto true");
+//			encOut = output;
+//		}else if(method.compareTo("DriveStraightCommand") == 0) {
+//			navOut = output;
+//			System.out.println("in the if statement scale straight true");
+//		}
+//		Robot.drivetrainSubsystem.Drive(-pidStraight.get(), pidEnc.get());
+//	}
 	
 }

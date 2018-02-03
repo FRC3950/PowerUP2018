@@ -36,7 +36,7 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 
     public DriveStraightCommand() {
         // Use requires() here to declare subsystem dependencies
-        //requires(Robot.drivetrainSubsystem);
+        requires(Robot.drivetrainSubsystem);
         requires(Robot.RGBSensorSubsystem);
         yaw = new PIDSourceYaw();
     	pid = new PIDController(P, I, D, F, yaw, this);
@@ -64,16 +64,16 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 
     // Called repeatedly when the command scheduled to run
     protected void execute() {
-//		SmartDashboard.putNumber("YAW", yaw.pidGet());
+		SmartDashboard.putNumber("YAW", yaw.pidGet());
 		SmartDashboard.putBoolean("On target", pid.onTarget());
-//		SmartDashboard.putNumber("Output", pid.get());
+		SmartDashboard.putNumber("Output", pid.get());
 //		pid.setSetpoint(0);
 		
-		colorSen.readColors();
-    	SmartDashboard.putNumber("Red sensor", colorSen.getRedVal());
-    	SmartDashboard.putNumber("Green sensor", colorSen.getGreenVal());
-    	SmartDashboard.putNumber("Blue sensor", colorSen.getBlueVal());
-    	SmartDashboard.putNumber("Clear sensor", colorSen.getClearVal());
+//		colorSen.readColors();
+//    	SmartDashboard.putNumber("Red sensor", colorSen.getRedVal());
+//    	SmartDashboard.putNumber("Green sensor", colorSen.getGreenVal());
+//    	SmartDashboard.putNumber("Blue sensor", colorSen.getBlueVal());
+//    	SmartDashboard.putNumber("Clear sensor", colorSen.getClearVal());
     	
 		
 //		if (timer.get() == 2) {
@@ -89,14 +89,14 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 
     // Called once after isFinished returns true
     protected void end() {
-    	//Robot.drivetrainSubsystem.Drive(0,0);
+    	Robot.drivetrainSubsystem.Drive(0,0);
     	pid.disable();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	//Robot.drivetrainSubsystem.Drive(0,0);
+    	Robot.drivetrainSubsystem.Drive(0,0);
     	pid.disable();
     }
 
@@ -110,7 +110,7 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 		SmartDashboard.putNumber("Output", pid.get());
 		// TODO Auto-generated method stub
 		Robot.robotLogger.debug("DriveStraightCommand.output = " + output);
-    	//Robot.drivetrainSubsystem.Drive(SmartDashboard.getNumber("Speed", -.5), output);
+    	Robot.drivetrainSubsystem.Drive(SmartDashboard.getNumber("Speed", -.5), output);
 		this.output = output;
     	
 	}
