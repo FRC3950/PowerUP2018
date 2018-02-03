@@ -4,6 +4,8 @@ import org.usfirst.frc.team3950.robot.Robot;
 import org.usfirst.frc.team3950.robot.RobotMap;
 import org.usfirst.frc.team3950.robot.commands.ElevatorCommand;
 
+import com.ctre.CANTalon.TalonControlMode;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.*;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -26,6 +28,8 @@ public class ElevatorSubsystem extends Subsystem {
 	DigitalInput topLimitSwitch;
 	DoubleSolenoid elevatorSolenoid;
 	
+	double distancePerRotation;
+	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
@@ -36,7 +40,15 @@ public class ElevatorSubsystem extends Subsystem {
     	bottomLimitSwitch = RobotMap.bottomLimitSwitch;
     	topLimitSwitch = RobotMap.topLimitSwitch;
     	elevatorSolenoid = RobotMap.elevatorSolenoid;
+    	
+    	elevatorMotorFollower.follow(elevatorMotor);
+    	
+    	elevatorMotor.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
+    	elevatorMotor.setSensorPhase(false);
  
+    	//distance per rotation in inches
+    	distancePerRotation = 0;
+    	
     	}
  
     public boolean bottomGetter() {
@@ -49,11 +61,15 @@ public class ElevatorSubsystem extends Subsystem {
         
     public void elevatorControl(double leftstick) {
     	elevatorMotor.set(leftstick);
-    	elevatorMotorFollower.set(-leftstick);
+    	elevatorMotorFollower.set(leftstick);
     }
     
     public void elevatorUp(double leftstick) {
-    	elevatorSolenoid.set(null);
+    	elevatorSolenoid.set(DoubleSolenoid.Value.kForward);
+    }
+    
+    public void elevatorDown(double leftstick) {
+    	elevatorSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
     
     public void MotionMagic() {
@@ -75,7 +91,20 @@ public class ElevatorSubsystem extends Subsystem {
     	elevatorMotor.setSelectedSensorPosition(0, 0,0);
     }
     
-}
+    public int getEncoder(){
+    	return elevatorMotor.getSelectedSensorPosition(0);
+    }
+    
+    public void resetEncoder() {
+    	elevatorMotor.setSelectedSensorPosition(0, 0, 0);
+    }
+    
+    public double getElevatorHeight() {
+    	return (getEncoder()/4096)*distancePerRotation;
+    }
+    
+    }
+    
 
  
     		

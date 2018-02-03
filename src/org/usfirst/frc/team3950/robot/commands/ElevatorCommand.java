@@ -19,7 +19,7 @@ public class ElevatorCommand extends Command {
 	boolean bottom = false;
 	boolean top = false;
 	
-	double P = SmartDashboard.getNumber("P (elevator)", .95);
+	double P = SmartDashboard.getNumber("P (elevator)", .45);
 	double I = SmartDashboard.getNumber("I (elevator)", 0.128);
 	double D = SmartDashboard.getNumber("D (elevator)", 0.075);
 	double F = SmartDashboard.getNumber("F (elevator)", 0);
@@ -37,6 +37,7 @@ public class ElevatorCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if (bottom) {
+    		Robot.elevatorSubsystem.resetEncoder();
     		if (controller.getY(Hand.kLeft) >= 0) {
     			Robot.elevatorSubsystem.elevatorControl(controller.getY(Hand.kLeft));
     		}

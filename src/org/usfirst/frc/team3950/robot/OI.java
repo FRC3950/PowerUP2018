@@ -7,6 +7,7 @@
 
 //Fedex packages
 package org.usfirst.frc.team3950.robot;
+import org.usfirst.frc.team3950.robot.commands.ElevatorPIDCommand;
 import org.usfirst.frc.team3950.robot.commands.ElevatorShiftCommand;
 import org.usfirst.frc.team3950.robot.commands.RampDownCommand;
 import org.usfirst.frc.team3950.robot.commands.RampUpCommand;
@@ -80,7 +81,7 @@ public class OI
 	        //	xboxControllerXButton.whenPressed(new GearDistanceCommand());
 	        xboxControllerLBButton.whileHeld(new RampDownCommand());
 	        // 	xboxControllerYButton.whenPressed(new GearIntakeStartCommand());
-	        //	xboxControllerXButton.whenPressed(new GearIntakeGearCommand());
+	        xboxControllerXButton.whenPressed(new ElevatorPIDCommand(1));
 	        //	xboxControllerAButton.whenPressed(new GearIntakeFloorCommand());
 	        //  Xbox end
 	        xboxControllerLeftStickButton.whenPressed(new ElevatorShiftCommand());
