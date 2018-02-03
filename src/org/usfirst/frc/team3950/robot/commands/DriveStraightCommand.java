@@ -33,6 +33,7 @@ public class DriveStraightCommand extends Command implements PIDOutput {
     public DriveStraightCommand() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.drivetrainSubsystem);
+        requires(Robot.RGBSensorSubsystem);
         yaw = new PIDSourceYaw();
     	pid = new PIDController(P, I, D, F, yaw, this);
         
@@ -40,6 +41,9 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+
+    	Robot.robotLogger.info("DriveStraightCommand.initialize");
+
     	double P = SmartDashboard.getNumber("P (drive straight)", .95);
     	double I = SmartDashboard.getNumber("I (drive straight)", 0.128);
     	double D = SmartDashboard.getNumber("D (drive straight)", 0.075);
@@ -98,7 +102,7 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 	public void pidWrite(double output) {
 		SmartDashboard.putNumber("YAW", yaw.pidGet());
 		SmartDashboard.putNumber("Output", pid.get());
-		// TODO Auto-generated method stub 
+		Robot.RGBSensorSubsystem.readColor(i2cBuffer);
 		//Robot.robotLogger.debug("Output = " + output);
     	Robot.drivetrainSubsystem.Drive(SmartDashboard.getNumber("Speed", -0.5), output);
 	}

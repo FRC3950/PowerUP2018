@@ -13,7 +13,10 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SerialPort;
+
 import edu.wpi.first.wpilibj.Solenoid;
+
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -21,7 +24,10 @@ import edu.wpi.first.wpilibj.Solenoid;
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
  */
-public class RobotMap {
+public class RobotMap 
+{
+	
+	
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
 	// public static int leftMotor = 1;
@@ -33,9 +39,9 @@ public class RobotMap {
 	// public static int rangefinderModule = 1;
 	
 	public static WPI_TalonSRX frontLeft = new WPI_TalonSRX(0); 
-	public static WPI_VictorSPX backLeft = new WPI_VictorSPX(1);
+	public static WPI_TalonSRX backLeft = new WPI_TalonSRX(1);
 	public static WPI_TalonSRX frontRight = new WPI_TalonSRX(2);
-	public static WPI_VictorSPX backRight = new WPI_VictorSPX(3);
+	public static WPI_TalonSRX backRight = new WPI_TalonSRX(3);
 	public static WPI_TalonSRX elevatorMotor = new WPI_TalonSRX(4);
 	public static WPI_VictorSPX elevatorMotorFollower = new WPI_VictorSPX (5);
 	public static WPI_TalonSRX intakeLeftMotor = new WPI_TalonSRX(6);
@@ -44,9 +50,12 @@ public class RobotMap {
 	public static DigitalInput topLimitSwitch = new DigitalInput(1);
 	public static Solenoid rampSolenoid = new Solenoid(8);
 	public static DoubleSolenoid elevatorSolenoid = new DoubleSolenoid(0, 1);
+
 	
 	public static AHRS ahrs = new AHRS(SerialPort.Port.kMXP);
 	
+	public static SpeedControllerGroup left = new SpeedControllerGroup(frontLeft,backLeft);
+	public static SpeedControllerGroup right = new SpeedControllerGroup(frontRight,backRight);
 	
 	
 }

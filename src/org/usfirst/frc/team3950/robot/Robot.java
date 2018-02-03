@@ -20,6 +20,12 @@ import org.usfirst.frc.team3950.robot.subsystems.ElevatorSubsystem;
 import org.usfirst.frc.team3950.robot.subsystems.IntakeSubsystem;
 import org.usfirst.frc.team3950.robot.subsystems.RampSubsystem;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.usfirst.frc.team3950.robot.commands.*;
+import org.usfirst.frc.team3950.robot.subsystems.*;
+
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -28,10 +34,11 @@ import org.usfirst.frc.team3950.robot.subsystems.RampSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-//	public static final ExampleSubsystem kExampleSubsystem
-//			= new ExampleSubsystem();
+
 	public static OI oi;
 
+	public static Logger robotLogger = LoggerFactory.getLogger(Robot.class);
+	
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 	
@@ -39,6 +46,8 @@ public class Robot extends TimedRobot {
 	public static IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 	public static ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
 	public static RampSubsystem rampSubsystem = new RampSubsystem();
+	public static RGBSensorSubsystem RGBSensorSubsystem = new RGBSensorSubsystem();
+
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -55,7 +64,10 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("I (drive straight)", 0);
 		SmartDashboard.putNumber("D (drive straight)", 0);
 		SmartDashboard.putNumber("F (drive straight)", 0);
+		SmartDashboard.putNumber("Speed", -0.75);
 		
+		m_autonomousCommand = new DriveStraightCommand();
+		//robotLogger.info("Robot properly initialized.");
 	}
 
 	/**
@@ -86,7 +98,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = m_chooser.getSelected();
+		//m_autonomousCommand = m_chooser.getSelected();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -96,6 +108,8 @@ public class Robot extends TimedRobot {
 		 */
 
 		// schedule the autonomous command (example)
+		//robotLogger.info("I am in autoInit yay");
+		
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
 		}
@@ -107,6 +121,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+//		robotLogger.info("I am in autoPeriodic yay");
 	}
 
 	@Override
@@ -115,9 +130,12 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+		robotLogger.info("I am in teleopInit (be careful this is an iStripper  virus)");
+		
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
+		new DriveCommand().start();
 	}
 
 	/**
@@ -125,6 +143,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+	//	robotLogger.info("I am in teleopPeriodic");
 		Scheduler.getInstance().run();
 	}
 

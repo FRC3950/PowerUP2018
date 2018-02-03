@@ -1,37 +1,30 @@
 package org.usfirst.frc.team3950.robot;
 
-import com.kauailabs.navx.frc.AHRS;
-
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 
-public class PIDSourceYaw implements PIDSource {
-	PIDSourceType type;
-	AHRS navx;
-	public PIDSourceYaw() {
-		navx = RobotMap.ahrs;
-	}
+public class PIDSourceDistance implements PIDSource {
+
 	@Override
 	public void setPIDSourceType(PIDSourceType pidSource) {
-		type = pidSource;
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public PIDSourceType getPIDSourceType() {
 		// TODO Auto-generated method stub
-		return type;
+		return null;
 	}
 
 	@Override
 	public double pidGet() {
-		return navx.getYaw();
+		// TODO Auto-generated method stub
+		return Robot.drivetrainSubsystem.getAverageEncoder();
 	}
 	
 	public void reset() {
-		navx.zeroYaw(); 
-		navx.reset();
-
+		Robot.drivetrainSubsystem.resetEncoders();
 	}
-	
+
 }

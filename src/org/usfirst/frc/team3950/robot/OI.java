@@ -7,9 +7,9 @@
 
 //Fedex packages
 package org.usfirst.frc.team3950.robot;
-
-import org.usfirst.frc.team3950.robot.commands.DriveStraightCommand;
-import org.usfirst.frc.team3950.robot.commands.*;
+import org.usfirst.frc.team3950.robot.commands.ElevatorShiftCommand;
+import org.usfirst.frc.team3950.robot.commands.RampDownCommand;
+import org.usfirst.frc.team3950.robot.commands.RampUpCommand;
 
 //Control packages 
 import edu.wpi.first.wpilibj.Joystick;
@@ -25,7 +25,6 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI 
-
 { // OI master class begin
 	
 		public Joystick driveStick = new Joystick(0);
@@ -63,7 +62,7 @@ public class OI
 	    	System.out.println("Button assignment initialized.");
 	    	
 	    	//Joystick assignment
-	    	driveStick3Button.whenPressed(new DriveStraightCommand());
+	    	//driveStick3Button.whenPressed(new DriveStraightCommand());
 //	    	driveStick4Button.whenPressed(new   );
 //	    	driveStick1Button.whenPressed(new   );
 //	    	driveStick2Button.whenPressed(new   );
