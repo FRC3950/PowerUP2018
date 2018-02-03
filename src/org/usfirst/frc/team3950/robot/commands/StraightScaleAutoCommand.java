@@ -51,9 +51,10 @@ public class StraightScaleAutoCommand extends Command{
 	public double encOut;
 	public double navOut;
 	
-    public StraightScaleAutoCommand() {
+    public StraightScaleAutoCommand(double input) {
     	requires(Robot.drivetrainSubsystem);
     	source = new PIDSourceDistance();
+    	setpoint = input;
     	outputDistance = new PIDOutputDistance();
     	//pidEnc = new EncPIDController(PEnc, IEnc, DEnc, FEnc, source, this);
     	pidDistance = new PIDController(PEnc, IEnc, DEnc, FEnc, source, outputDistance);

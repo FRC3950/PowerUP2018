@@ -12,25 +12,26 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class DriveTurnPreciseCommand extends Command implements PIDOutput {
+public class DriveTurnPreciseCommand extends Command implements PIDOutput  {
 	
 	PIDController pid;
 	double output = 1;
 	PIDSourceYaw yaw;
 	
 	//setpoint in degrees
-	double setpoint = 90;
+	double setpoint = -45;
 	
 	double P = SmartDashboard.getNumber("P (turn)", .35);
 	double I = SmartDashboard.getNumber("I (turn)", 0.128);
 	double D = SmartDashboard.getNumber("D (turn)", 0.075);
 	double F = SmartDashboard.getNumber("F (turn)", 0);
 
-    public DriveTurnPreciseCommand() {
+    public DriveTurnPreciseCommand(double input) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires(Robot.drivetrainSubsystem);
     	yaw = new PIDSourceYaw();
+    	setpoint = input;
     	pid = new PIDController(P, I, D, F, yaw, this);
     }
 
@@ -38,7 +39,10 @@ public class DriveTurnPreciseCommand extends Command implements PIDOutput {
     protected void initialize() {
     	yaw.reset();
     	yaw.setPIDSourceType(PIDSourceType.kDisplacement);
+    	SmartDashboard.putNumber("Setpoint End", 45);
+    	SmartDashboard.putNumber("Setpoint Begin", 0);
     	pid.setInputRange(0, setpoint*1.1);
+//		pid.setInputRange(SmartDashboard.getNumber("Setpoint Begin", 0), (SmartDashboard.getNumber("Setpoint End", 45))*1.1);
     	pid.setOutputRange(-.75,.75);
     	pid.setAbsoluteTolerance(0.2);
     	pid.setContinuous(false);
