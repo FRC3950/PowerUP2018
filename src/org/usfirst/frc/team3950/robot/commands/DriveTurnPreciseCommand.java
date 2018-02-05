@@ -19,11 +19,11 @@ public class DriveTurnPreciseCommand extends Command implements PIDOutput  {
 	PIDSourceYaw yaw;
 	
 	//setpoint in degrees
-	double setpoint = -45;
+	double setpoint = 0;
 	
-	double P = SmartDashboard.getNumber("P (turn)", .35);
-	double I = SmartDashboard.getNumber("I (turn)", 0.128);
-	double D = SmartDashboard.getNumber("D (turn)", 0.075);
+	double P = SmartDashboard.getNumber("P (turn)", .05);
+	double I = SmartDashboard.getNumber("I (turn)", 0);
+	double D = SmartDashboard.getNumber("D (turn)", 0);
 	double F = SmartDashboard.getNumber("F (turn)", 0);
 
     public DriveTurnPreciseCommand(double input) {
@@ -39,16 +39,17 @@ public class DriveTurnPreciseCommand extends Command implements PIDOutput  {
     protected void initialize() {
     	yaw.reset();
     	yaw.setPIDSourceType(PIDSourceType.kDisplacement);
-    	SmartDashboard.putNumber("Setpoint End", 45);
-    	SmartDashboard.putNumber("Setpoint Begin", 0);
-    	pid.setInputRange(0, setpoint*1.1);
-//		pid.setInputRange(SmartDashboard.getNumber("Setpoint Begin", 0), (SmartDashboard.getNumber("Setpoint End", 45))*1.1);
+//    	SmartDashboard.putNumber("Setpoint End", 45);
+//    	SmartDashboard.putNumber("Setpoint Begin", 0);
+    	pid.setInputRange(setpoint*1.1, 0);
+		//pid.setInputRange(SmartDashboard.getNumber("Setpoint Begin", 0), (SmartDashboard.getNumber("Setpoint End", 45))*1.1);
     	pid.setOutputRange(-.75,.75);
-    	pid.setAbsoluteTolerance(0.2);
+    	pid.setAbsoluteTolerance(0.01);
     	pid.setContinuous(false);
     	pid.setPID(P, I, D, F);
     	pid.setSetpoint(setpoint);
     	pid.enable();
+
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -19,15 +19,15 @@ public class EncoderNavX2AutoCommand extends Command {
   // You will need to adjust your PID constants
 	
 	//encoder vals
-	double encP = SmartDashboard.getNumber("P (distance)", 0.5);
+	double encP = SmartDashboard.getNumber("P (distance)", 0.25);
 	double encI = SmartDashboard.getNumber("I (distance)", 0);
 	double encD = SmartDashboard.getNumber("D (distance)", 0);
 	double encF = SmartDashboard.getNumber("F (distance)", 0);
 	
 	//straight drive vals
-	double navxP = SmartDashboard.getNumber("P (drive straight)", .45);
-	double navxI = SmartDashboard.getNumber("I (drive straight)", 0.128);
-	double navxD = SmartDashboard.getNumber("D (drive straight)", 0.075);
+	double navxP = SmartDashboard.getNumber("P (drive straight)", .05);
+	double navxI = SmartDashboard.getNumber("I (drive straight)", 0.0);
+	double navxD = SmartDashboard.getNumber("D (drive straight)", 0.001);
 	double navxF = SmartDashboard.getNumber("F (drive straight)", 0);
 
   // Set to false once you are done tuning the PID
@@ -49,7 +49,7 @@ public class EncoderNavX2AutoCommand extends Command {
   
 	double maxSpeed = 1;
 	double setpoint = 27f;
-  
+		//Hally pls go to prom with me //fuck no
   /**
    * Command to use PID control to drive a fixed distance.
    *
@@ -136,13 +136,14 @@ public class EncoderNavX2AutoCommand extends Command {
   protected void initialize() {
     // Save distance at start (I don't like zeroing encoder counts - but this is
     // an option as well)
+	 RobotMap.ahrs.reset();
+	 Robot.drivetrainSubsystem.resetEncoders();
 	  
 	//from scaleAuto
 	encSource.setPIDSourceType(PIDSourceType.kDisplacement);
-	Robot.drivetrainSubsystem.resetEncoders();
-  	encPID.setInputRange(0f,  setpoint*1.1);
+	encPID.setInputRange(0f,  setpoint*1.1);
   	encPID.setOutputRange(0f, maxSpeed);
-  	encPID.setAbsoluteTolerance(0.1);
+  	encPID.setAbsoluteTolerance(0.2);
   	encPID.setContinuous(false);
   	encPID.setPID(encP, encI, encD, encF);
   	encPID.setSetpoint(setpoint);
@@ -150,11 +151,10 @@ public class EncoderNavX2AutoCommand extends Command {
   	
   	//from driveStraight
   	navxSource.setPIDSourceType(PIDSourceType.kDisplacement);
-    RobotMap.ahrs.reset();
 	RobotMap.ahrs.zeroYaw();
   	navXPID.setInputRange(-5.0f, 5.0f);
   	navXPID.setOutputRange(-0.25, 0.25);
-  	navXPID.setAbsoluteTolerance(0.1);
+  	navXPID.setAbsoluteTolerance(0.2);
   	navXPID.setContinuous(false);
   	navXPID.setPID(navxP, navxI, navxD, navxF);
   	navXPID.setSetpoint(0);

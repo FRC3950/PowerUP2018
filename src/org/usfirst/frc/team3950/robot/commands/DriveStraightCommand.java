@@ -27,9 +27,9 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 	
 
 			
-	double P = SmartDashboard.getNumber("P (drive straight)", .45);
-	double I = SmartDashboard.getNumber("I (drive straight)", 0.128);
-	double D = SmartDashboard.getNumber("D (drive straight)", 0.075);
+	double P = SmartDashboard.getNumber("P (drive straight)", .05);
+	double I = SmartDashboard.getNumber("I (drive straight)", 0.0);
+	double D = SmartDashboard.getNumber("D (drive straight)", 0.001);
 	double F = SmartDashboard.getNumber("F (drive straight)", 0);
 
 	double ret_val = colorSen.init();
@@ -54,8 +54,8 @@ public class DriveStraightCommand extends Command implements PIDOutput {
     	yaw.reset();
     	yaw.setPIDSourceType(PIDSourceType.kDisplacement);
     	pid.setInputRange(-5.0f,  5.0f);
-    	pid.setOutputRange(-.5,.5);
-    	pid.setAbsoluteTolerance(0.1);
+    	pid.setOutputRange(-.5, 0.5);
+    	pid.setAbsoluteTolerance(0.05);
     	pid.setContinuous(false);
     	pid.setPID(P, I, D, F);
     	pid.setSetpoint(0);
@@ -110,7 +110,7 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 		SmartDashboard.putNumber("Output", pid.get());
 		// TODO Auto-generated method stub
 		Robot.robotLogger.debug("DriveStraightCommand.output = " + output);
-    	Robot.drivetrainSubsystem.Drive(SmartDashboard.getNumber("Speed", -.5), output);
+    	Robot.drivetrainSubsystem.Drive(SmartDashboard.getNumber("Speed", -1), output);
 		this.output = output;
     	
 	}
