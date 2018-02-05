@@ -60,10 +60,11 @@ public class EncoderNavX2AutoCommand extends Command {
    * @param rightM
    *          How far the right side of the drive should travel (meters).
    */
-  public EncoderNavX2AutoCommand() {
+  public EncoderNavX2AutoCommand(double input) {
     //
     // Define PIDSource based on distance to travel
     //
+	  setpoint = input;
 	  encSource = new PIDSource() {
       @Override
       public void setPIDSourceType(PIDSourceType pidSource) {
@@ -152,7 +153,7 @@ public class EncoderNavX2AutoCommand extends Command {
     RobotMap.ahrs.reset();
 	RobotMap.ahrs.zeroYaw();
   	navXPID.setInputRange(-5.0f, 5.0f);
-  	navXPID.setOutputRange(-0.5, 0.5);
+  	navXPID.setOutputRange(-0.25, 0.25);
   	navXPID.setAbsoluteTolerance(0.1);
   	navXPID.setContinuous(false);
   	navXPID.setPID(navxP, navxI, navxD, navxF);
