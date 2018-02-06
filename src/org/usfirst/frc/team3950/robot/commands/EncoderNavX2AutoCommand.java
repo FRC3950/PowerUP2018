@@ -1,5 +1,9 @@
 package org.usfirst.frc.team3950.robot.commands;
 
+import org.usfirst.frc.team3950.robot.PIDOutputDistance;
+import org.usfirst.frc.team3950.robot.PIDOutputYaw;
+import org.usfirst.frc.team3950.robot.PIDSourceDistance;
+import org.usfirst.frc.team3950.robot.PIDSourceYaw;
 import org.usfirst.frc.team3950.robot.Robot;
 import org.usfirst.frc.team3950.robot.RobotMap;
 
@@ -19,15 +23,15 @@ public class EncoderNavX2AutoCommand extends Command {
   // You will need to adjust your PID constants
 	
 	//encoder vals
-	double encP = SmartDashboard.getNumber("P (distance)", 0.25);
+	double encP = SmartDashboard.getNumber("P (distance)", 0.05);
 	double encI = SmartDashboard.getNumber("I (distance)", 0);
 	double encD = SmartDashboard.getNumber("D (distance)", 0);
 	double encF = SmartDashboard.getNumber("F (distance)", 0);
 	
 	//straight drive vals
-	double navxP = SmartDashboard.getNumber("P (drive straight)", .05);
+	double navxP = SmartDashboard.getNumber("P (drive straight)", 2.9);
 	double navxI = SmartDashboard.getNumber("I (drive straight)", 0.0);
-	double navxD = SmartDashboard.getNumber("D (drive straight)", 0.001);
+	double navxD = SmartDashboard.getNumber("D (drive straight)", 0.01);
 	double navxF = SmartDashboard.getNumber("F (drive straight)", 0);
 
   // Set to false once you are done tuning the PID
@@ -44,12 +48,11 @@ public class EncoderNavX2AutoCommand extends Command {
   private double encOutput = Double.MAX_VALUE;
   private double navxOutput = Double.MAX_VALUE;
   
-  PIDSource encSource;
-  PIDSource navxSource;
+  PIDSourceDistance encSource;
+  PIDSourceYaw navxSource;
   
 	double maxSpeed = 1;
 	double setpoint = 27f;
-		//Hally pls go to prom with me //fuck no
   /**
    * Command to use PID control to drive a fixed distance.
    *
@@ -65,11 +68,12 @@ public class EncoderNavX2AutoCommand extends Command {
     // Define PIDSource based on distance to travel
     //
 	  setpoint = input;
-	  encSource = new PIDSource() {
+	  
+	  encSource = new PIDSourceDistance() {
       @Override
       public void setPIDSourceType(PIDSourceType pidSource) {
       }
-     
+      
       @Override
       public PIDSourceType getPIDSourceType() {
         // Distance type PID
@@ -83,7 +87,7 @@ public class EncoderNavX2AutoCommand extends Command {
        	
     };
 
-     navxSource = new PIDSource() {
+     navxSource = new PIDSourceYaw() {
       @Override
       public void setPIDSourceType(PIDSourceType pidSource) {
       }
@@ -104,7 +108,7 @@ public class EncoderNavX2AutoCommand extends Command {
     //
     // Define PID outputs to set drive power
     //
-    PIDOutput encOut = new PIDOutput() {
+    PIDOutputDistance encOut = new PIDOutputDistance() {
       @Override
       public void pidWrite(double output) {
     	  encOutput = output;
@@ -112,7 +116,7 @@ public class EncoderNavX2AutoCommand extends Command {
       }
     };
 
-    PIDOutput navxOut = new PIDOutput() {
+    PIDOutputYaw navxOut = new PIDOutputYaw() {
       @Override
       public void pidWrite(double output) {
     	  navxOutput = output;
@@ -143,7 +147,7 @@ public class EncoderNavX2AutoCommand extends Command {
 	encSource.setPIDSourceType(PIDSourceType.kDisplacement);
 	encPID.setInputRange(0f,  setpoint*1.1);
   	encPID.setOutputRange(0f, maxSpeed);
-  	encPID.setAbsoluteTolerance(0.2);
+  	encPID.setAbsoluteTolerance(0.1);
   	encPID.setContinuous(false);
   	encPID.setPID(encP, encI, encD, encF);
   	encPID.setSetpoint(setpoint);
@@ -153,18 +157,14 @@ public class EncoderNavX2AutoCommand extends Command {
   	navxSource.setPIDSourceType(PIDSourceType.kDisplacement);
 	RobotMap.ahrs.zeroYaw();
   	navXPID.setInputRange(-5.0f, 5.0f);
-  	navXPID.setOutputRange(-0.25, 0.25);
-  	navXPID.setAbsoluteTolerance(0.2);
+  	navXPID.setOutputRange(-0.5, 0.5);
+  	navXPID.setAbsoluteTolerance(0.1);
   	navXPID.setContinuous(false);
   	navXPID.setPID(navxP, navxI, navxD, navxF);
   	navXPID.setSetpoint(0);
   	navXPID.enable();
 	  
-    encPID.setSetpoint(27f);
-    navXPID.setSetpoint(0);
 
-    encPID.enable();
-    navXPID.enable();
   }
 
   @Override

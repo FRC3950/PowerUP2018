@@ -27,9 +27,9 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 	
 
 			
-	double P = SmartDashboard.getNumber("P (drive straight)", .05);
+	double P = SmartDashboard.getNumber("P (drive straight)", 2.9);
 	double I = SmartDashboard.getNumber("I (drive straight)", 0.0);
-	double D = SmartDashboard.getNumber("D (drive straight)", 0.001);
+	double D = SmartDashboard.getNumber("D (drive straight)", 0.01);
 	double F = SmartDashboard.getNumber("F (drive straight)", 0);
 
 	double ret_val = colorSen.init();
