@@ -30,21 +30,24 @@ public class DriveTurnPreciseCommand extends Command implements PIDOutput  {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires(Robot.drivetrainSubsystem);
-    	yaw = new PIDSourceYaw();
+    	//yaw = new PIDSourceYaw();
     	setpoint = input;
-    	pid = new PIDController(P, I, D, F, yaw, this);
+    	//pid = new PIDController(P, I, D, F, yaw, this);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	System.out.println("Drive Turn Precise init");
+    	yaw = new PIDSourceYaw();
     	yaw.reset();
     	yaw.setPIDSourceType(PIDSourceType.kDisplacement);
+    	pid = new PIDController(P, I, D, F, yaw, this);
 //    	SmartDashboard.putNumber("Setpoint End", 45);
 //    	SmartDashboard.putNumber("Setpoint Begin", 0);
-    	pid.setInputRange(setpoint*1.1, 0);
+    	pid.setInputRange(setpoint>0?0:setpoint*1.1, setpoint<0?0:setpoint*1.1);
 		//pid.setInputRange(SmartDashboard.getNumber("Setpoint Begin", 0), (SmartDashboard.getNumber("Setpoint End", 45))*1.1);
     	pid.setOutputRange(-.75,.75);
-    	pid.setAbsoluteTolerance(0.01);
+    	pid.setPercentTolerance(1);
     	pid.setContinuous(false);
     	pid.setPID(P, I, D, F);
     	pid.setSetpoint(setpoint);
@@ -54,10 +57,12 @@ public class DriveTurnPreciseCommand extends Command implements PIDOutput  {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	System.out.println("I am in DriveTurnPrecise Execute");
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    //	System.out.println("pid.onTarget() = " + pid.onTarget());
         return pid.onTarget();
     }
 

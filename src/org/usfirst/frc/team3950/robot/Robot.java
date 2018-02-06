@@ -52,6 +52,7 @@ public class Robot extends TimedRobot {
 		m_chooser.addObject("Drive Straight", new DriveStraightCommand());
 		m_chooser.addObject("Straight + Scale Auto", new StraightScaleAutoCommand(27));
 		m_chooser.addObject("EncoderNavx Drive", new EncoderNavX2AutoCommand(8));
+		m_chooser.addObject("Command Group Auto Test", new TestAutoCommandGroup());
 		m_chooser.addObject("No Auto", null);
 		
 		SmartDashboard.putData("Auto mode", m_chooser);

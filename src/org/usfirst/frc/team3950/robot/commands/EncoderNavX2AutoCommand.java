@@ -82,6 +82,7 @@ public class EncoderNavX2AutoCommand extends Command {
 
       @Override
       public double pidGet() {
+    	 System.out.println("Count distance feet = " + Robot.drivetrainSubsystem.getCountDistanceFeet());
         return Robot.drivetrainSubsystem.getCountDistanceFeet();
       }
        	
@@ -140,6 +141,7 @@ public class EncoderNavX2AutoCommand extends Command {
   protected void initialize() {
     // Save distance at start (I don't like zeroing encoder counts - but this is
     // an option as well)
+	 System.out.println("I am in EncNavX2 Init");
 	 RobotMap.ahrs.reset();
 	 Robot.drivetrainSubsystem.resetEncoders();
 	  
@@ -147,7 +149,7 @@ public class EncoderNavX2AutoCommand extends Command {
 	encSource.setPIDSourceType(PIDSourceType.kDisplacement);
 	encPID.setInputRange(0f,  setpoint*1.1);
   	encPID.setOutputRange(0f, maxSpeed);
-  	encPID.setAbsoluteTolerance(0.1);
+  	encPID.setAbsoluteTolerance(0.2);
   	encPID.setContinuous(false);
   	encPID.setPID(encP, encI, encD, encF);
   	encPID.setSetpoint(setpoint);
@@ -170,6 +172,8 @@ public class EncoderNavX2AutoCommand extends Command {
   @Override
   protected void execute() {
 	  
+	  System.out.println("I am in EncNavX2 Execute");
+	  
 	  // do something with the encOuptut and navxOutput 
 	  if(encOutput != Double.MAX_VALUE && navxOutput != Double.MAX_VALUE) {
 		  Robot.drivetrainSubsystem.Drive(-encOutput, navxOutput);
@@ -178,8 +182,8 @@ public class EncoderNavX2AutoCommand extends Command {
 
   @Override
   protected boolean isFinished() {
-    //return encPID.onTarget();
-	 return isCanceled();
+	  return encPID.onTarget();
+	 //return isCanceled();
   }
   
   
