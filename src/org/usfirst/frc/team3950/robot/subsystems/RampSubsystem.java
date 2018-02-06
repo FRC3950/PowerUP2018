@@ -24,12 +24,16 @@ public class RampSubsystem extends Subsystem {
     	rampSolenoid = RobotMap.rampSolenoid;
     }
     
-    public void RampIn() {
+    public void rampUp() {
     	rampSolenoid.set(false);
     }
     
-    public void RampDown() {
+    public void rampDown() {
     	rampSolenoid.set(true);
+    }
+    
+    public boolean getRampStatus() {
+    	return rampSolenoid.get();
     }
     
     	

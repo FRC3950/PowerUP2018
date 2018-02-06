@@ -8,10 +8,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RampDownCommand extends Command {
+public class RampCommand extends Command {
 	XboxController controller = Robot.oi.xboxcontroller;
 
-    public RampDownCommand() {
+    public RampCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.rampSubsystem);
@@ -23,7 +23,12 @@ public class RampDownCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.rampSubsystem.RampDown();
+    	if (Robot.rampSubsystem.getRampStatus()) {
+    		Robot.rampSubsystem.rampUp();
+    	}
+    	else {
+    		Robot.rampSubsystem.rampDown();
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

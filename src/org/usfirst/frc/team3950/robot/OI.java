@@ -7,10 +7,7 @@
 
 //Fedex packages
 package org.usfirst.frc.team3950.robot;
-import org.usfirst.frc.team3950.robot.commands.ElevatorPIDCommand;
-import org.usfirst.frc.team3950.robot.commands.ElevatorShiftCommand;
-import org.usfirst.frc.team3950.robot.commands.RampDownCommand;
-import org.usfirst.frc.team3950.robot.commands.RampUpCommand;
+import org.usfirst.frc.team3950.robot.commands.*;
 
 //Control packages 
 import edu.wpi.first.wpilibj.Joystick;
@@ -77,9 +74,9 @@ public class OI
 	    	//  xboxControllerBButton.whenPressed(new BallIntakeCommand());
 	        //	xboxControllerBButton.whenPressed(new BallOuttakeCommand());
 	        //	xboxControllerYButton.whenPressed(new ShooterIndexerCommand());
-	        xboxControllerRBButton.whileHeld(new RampUpCommand());
+	        //xboxControllerRBButton.whileHeld(new RampUpCommand());
 	        //	xboxControllerXButton.whenPressed(new GearDistanceCommand());
-	        xboxControllerLBButton.whileHeld(new RampDownCommand());
+	        xboxControllerLBButton.whenPressed(new RampCommand());
 	        // 	xboxControllerYButton.whenPressed(new GearIntakeStartCommand());
 	        xboxControllerXButton.whenPressed(new ElevatorPIDCommand(1));
 	        //	xboxControllerAButton.whenPressed(new GearIntakeFloorCommand());
