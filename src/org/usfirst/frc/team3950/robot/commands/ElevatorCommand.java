@@ -50,13 +50,20 @@ public class ElevatorCommand extends Command {
     		Robot.elevatorSubsystem.elevatorControl(controller.getY(Hand.kLeft));
     	}
     	
+    	if (Robot.elevatorSubsystem.getMotorValue() == 0) {
+    		Robot.elevatorSubsystem.elevatorBrake();
+    		}
+    	else {
+    		Robot.elevatorSubsystem.undoBrake();
+    	}
+    }
     		
     		// if (y<0) {
     		// elevatorMotor.set(0);
         // if (bottom) {
         	// if (y>0) {
         		// elevatorMotor.set(1);
-        	}
+        	
     		
 
     // Make this return true when this Command no longer needs to run execute()

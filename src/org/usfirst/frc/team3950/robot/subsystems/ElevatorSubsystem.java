@@ -102,8 +102,23 @@ public class ElevatorSubsystem extends Subsystem {
     public double getElevatorHeight() {
     	return (getEncoder()/4096)*distancePerRotation;
     }
-    
+    public void elevatorBrake() {
+    	elevatorSolenoid.set(DoubleSolenoid.Value.kForward);
+    	elevatorMotor.set(0);
+    	elevatorMotorFollower.set(0);
     }
+    
+    public double getMotorValue() {
+    	return elevatorMotor.get();
+    }
+    
+    public void undoBrake(){
+    	elevatorSolenoid.set(DoubleSolenoid.Value.kReverse);
+    }
+    
+} 
+
+    
     
 
  

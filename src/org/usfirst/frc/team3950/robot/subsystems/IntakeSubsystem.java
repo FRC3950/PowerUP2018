@@ -6,6 +6,7 @@ import org.usfirst.frc.team3950.robot.commands.*;
 import com.ctre.CANTalon;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -18,7 +19,7 @@ public class IntakeSubsystem extends Subsystem {
 	
 	WPI_TalonSRX left;
 	WPI_TalonSRX right;
-	boolean boxIn;
+	DigitalInput intakeSwitch;
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -37,8 +38,8 @@ public class IntakeSubsystem extends Subsystem {
     
     }
     
-    public boolean boxInGetter( ) {
-    	return boxIn;
+    public boolean boxIn() {
+    	return intakeSwitch.get();
     }
     
     public void Intake(double trigger) {

@@ -26,11 +26,11 @@ public class IntakeCommand extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if (boxIn) {
+		if (!boxIn) {
 			Robot.intakeSubsystem.Intake(-controller.getTriggerAxis(Hand.kRight) + controller.getTriggerAxis(Hand.kLeft));
-			boxIn = Robot.intakeSubsystem.currentOverload();
-		} else if (boxIn) {
-			Robot.intakeSubsystem.Intake(-controller.getTriggerAxis(Hand.kRight));
+			boxIn = Robot.intakeSubsystem.boxIn();
+		} else {
+			Robot.intakeSubsystem.Intake(controller.getTriggerAxis(Hand.kLeft));
 		}
 		if (controller.getTriggerAxis(Hand.kLeft) >= .5) {
 			boxIn = false;

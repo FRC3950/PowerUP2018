@@ -46,8 +46,11 @@ public class RobotMap
 	public static WPI_VictorSPX elevatorMotorFollower = new WPI_VictorSPX (5);
 	public static WPI_TalonSRX intakeLeftMotor = new WPI_TalonSRX(6);
 	public static WPI_TalonSRX intakeRightMotor = new WPI_TalonSRX(7);
+	
 	public static DigitalInput bottomLimitSwitch = new DigitalInput(0); 
 	public static DigitalInput topLimitSwitch = new DigitalInput(1);
+	public static DigitalInput intakeLimitSwitch = new DigitalInput(2);
+	
 	public static Solenoid rampSolenoid = new Solenoid(8);
 	public static DoubleSolenoid elevatorSolenoid = new DoubleSolenoid(0, 1);
 
