@@ -68,11 +68,11 @@ public class IntakeSubsystem extends Subsystem {
     
     }
     public void horizontalOut() {
-    	horizontal.set(DoubleSolenoid.Value.kReverse);
+    	horizontal.set(DoubleSolenoid.Value.kForward);
 
     }
     public void horitontalIn() {
-    	horizontal.set(DoubleSolenoid.Value.kForward);
+    	horizontal.set(DoubleSolenoid.Value.kReverse);
     }  
     public Value getIntakeVerticalValue() {
     	return vertical.get();

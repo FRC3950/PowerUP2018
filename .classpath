@@ -14,5 +14,8 @@
 	<classpathentry kind="var" path="USERLIBS_DIR/navx_frc.jar"/>
 	<classpathentry kind="var" path="USERLIBS_DIR/slf4j-api-1.7.23.jar"/>
 	<classpathentry kind="var" path="USERLIBS_DIR/slf4j-simple-1.7.23.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nshsrobotics/wpilib/user/java/lib/CTRE_Phoenix.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/CTRE_Phoenix-sources.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/CTRE_Phoenix.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
