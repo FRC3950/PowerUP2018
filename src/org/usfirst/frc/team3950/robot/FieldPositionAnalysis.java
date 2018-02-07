@@ -13,12 +13,32 @@ public class FieldPositionAnalysis {
 		
 	}
 	
-	public String getSwitchBposition() {
+	public String getSwitchAPosition() {
 		String side;
 		if(str.substring(0, 1).compareTo("L")==0) {
-			side = "The side is " + str.substring(0,1);
-		}else {
-			side = "The side is Right"; 
+			side = "Left";
+		} else {
+			side = "Right"; 
+		}
+		return side;
+	}
+	
+	public String getScalePosition() {
+		String side;
+		if(str.substring(1,2).compareTo("L")==0) {
+			side = "Left";
+		} else {
+			side = "Right";
+		}
+		return side;
+	}
+	
+	public String getSwitchBPosition() {
+		String side;
+		if(str.substring(2,3).compareTo("L")==0) {
+			side = "Left";
+		} else {
+			side = "Right";
 		}
 		return side;
 	}

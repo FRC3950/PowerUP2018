@@ -31,6 +31,8 @@ public class Robot extends TimedRobot {
 
 	public static Logger robotLogger = LoggerFactory.getLogger(Robot.class);
 	
+	public static FieldPositionAnalysis side = new FieldPositionAnalysis();
+	
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 	
@@ -97,7 +99,6 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		m_autonomousCommand = m_chooser.getSelected();
 		
-		DriverStation ds = DriverStation.getInstance();
 		//m_autonomousCommand = new EncoderNavX2AutoCommand();
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -109,7 +110,9 @@ public class Robot extends TimedRobot {
 		// schedule the autonomous command (example)
 		//robotLogger.info("I am in autoInit yay");
 		
-		System.out.println(ds.getGameSpecificMessage());
+		SmartDashboard.putString("Switch A side is ", side.getSwitchAPosition());
+		SmartDashboard.putString("Scale side is ", side.getScalePosition());
+		SmartDashboard.putString("Switch B side is ", side.getSwitchBPosition());
 		
 		
 		if (m_autonomousCommand != null) {
