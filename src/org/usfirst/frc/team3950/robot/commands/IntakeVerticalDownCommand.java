@@ -2,19 +2,17 @@ package org.usfirst.frc.team3950.robot.commands;
 
 import org.usfirst.frc.team3950.robot.Robot;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class RampCommand extends Command {
-	XboxController controller = Robot.oi.xboxcontroller;
+public class IntakeVerticalDownCommand extends Command {
 
-    public RampCommand() {
+    public IntakeVerticalDownCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.rampSubsystem);
+    	requires(Robot.intakeSubsystem);
     }
 
     // Called just before this Command runs the first time
@@ -23,12 +21,7 @@ public class RampCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Robot.rampSubsystem.getRampStatus()) {
-    		Robot.rampSubsystem.rampUp();
-    	}
-    	else {
-    		Robot.rampSubsystem.rampDown();
-    	}
+    	Robot.intakeSubsystem.verticalDown();
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -36,16 +36,6 @@ public class IntakeCommand extends Command {
 		if (controller.getTriggerAxis(Hand.kLeft) >= .5) {
 			boxIn = false;
 		}
-	 	
-    	if (Robot.intakeSubsystem.getSolenoidValue() == 0) {
-    		Robot.intakeSubsystem.elevatorBrake();
-    		}
-    	else {
-    		Robot.intakeSubsystem.undoBrake();
-    	}
-    }
-    		
-		
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

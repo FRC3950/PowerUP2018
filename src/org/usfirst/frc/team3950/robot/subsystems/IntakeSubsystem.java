@@ -10,6 +10,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -58,22 +59,30 @@ public class IntakeSubsystem extends Subsystem {
     	
     	
     }
-    public void IntakeVertical(int button) {
+    public void verticalUp() {
+    	vertical.set(DoubleSolenoid.Value.kReverse);
+    
+    }
+    public void verticalDown() {
     	vertical.set(DoubleSolenoid.Value.kForward);
-    	left.set(0);
-    	right.set(0);
     
     }
-    public void IntakeHorizontal(int button) {
+    public void horizontalOut() {
+    	horizontal.set(DoubleSolenoid.Value.kReverse);
+
+    }
+    public void horitontalIn() {
     	horizontal.set(DoubleSolenoid.Value.kForward);
-    	left.set(0);
-    	right.set(0);
-    }
-    public double getSolenoidValue() {
-    	return intakeVertical.get();
-    }
+    }  
+    public Value getIntakeVerticalValue() {
+    	return vertical.get();
     	
-    
-}
+    }
+    public Value getIntakeHorizontalValue() {
+    	return horizontal.get();
+    	
+    }
+    	    
+    }
 
 
