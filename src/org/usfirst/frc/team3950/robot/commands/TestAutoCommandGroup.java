@@ -13,10 +13,14 @@ public class TestAutoCommandGroup extends CommandGroup {
     	
     	requires(Robot.drivetrainSubsystem);
     	
-    	addSequential(new EncoderNavX2AutoCommand(8));
-    	addSequential(new DriveTurnPreciseCommand(180));
+    	addSequential(new EncoderNavX2AutoCommand(60));
+    	addSequential(new DriveTurnPreciseCommand(-90));
     	//addSequential(new DriveTurnPreciseCommand(90));
-    	addSequential(new EncoderNavX2AutoCommand(8));
+    	addSequential(new EncoderNavX2AutoCommand(50));
+    	addSequential(new DriveTurnPreciseCommand(-90));
+    	addSequential(new EncoderNavX2AutoCommand(60));
+    	addSequential(new DriveTurnPreciseCommand(-90));
+    	addSequential(new EncoderNavX2AutoCommand(50));
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

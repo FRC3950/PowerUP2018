@@ -7,6 +7,7 @@ import org.usfirst.frc.team3950.robot.PIDSourceYaw;
 import org.usfirst.frc.team3950.robot.Robot;
 import org.usfirst.frc.team3950.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
@@ -19,19 +20,19 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * PID command to drive the left and right side of a drive train a specific
  * distance using a PIDController.
  */
-public class EncoderNavX2AutoCommand extends Command {
+public class EncoderNavX2AutoCommand extends Command { 
   // You will need to adjust your PID constants
 	
 	//encoder vals
-	double encP = SmartDashboard.getNumber("P (distance)", 0.05);
-	double encI = SmartDashboard.getNumber("I (distance)", 0);
+	double encP = SmartDashboard.getNumber("P (distance)", 0.17);
+	double encI = SmartDashboard.getNumber("I (distance)", 0.001);
 	double encD = SmartDashboard.getNumber("D (distance)", 0);
 	double encF = SmartDashboard.getNumber("F (distance)", 0);
 	
-	//straight drive vals
-	double navxP = SmartDashboard.getNumber("P (drive straight)", 2.9);
+	//straight drive values
+	double navxP = SmartDashboard.getNumber("P (drive straight)", 0.05);
 	double navxI = SmartDashboard.getNumber("I (drive straight)", 0.0);
-	double navxD = SmartDashboard.getNumber("D (drive straight)", 0.01);
+	double navxD = SmartDashboard.getNumber("D (drive straight)", 0.0);
 	double navxF = SmartDashboard.getNumber("F (drive straight)", 0);
 
   // Set to false once you are done tuning the PID
@@ -149,7 +150,7 @@ public class EncoderNavX2AutoCommand extends Command {
 	encSource.setPIDSourceType(PIDSourceType.kDisplacement);
 	encPID.setInputRange(0f,  setpoint*1.1);
   	encPID.setOutputRange(0f, maxSpeed);
-  	encPID.setAbsoluteTolerance(0.2);
+  	encPID.setAbsoluteTolerance(0.3);
   	encPID.setContinuous(false);
   	encPID.setPID(encP, encI, encD, encF);
   	encPID.setSetpoint(setpoint);

@@ -27,8 +27,8 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
 	double setpoint = 8f;
 	
 	
-	double P = SmartDashboard.getNumber("P (distance)", .05);
-	double I = SmartDashboard.getNumber("I (distance)", 0);
+	double P = SmartDashboard.getNumber("P (distance)", 2.7);
+	double I = SmartDashboard.getNumber("I (distance)", 0.03);
 	double D = SmartDashboard.getNumber("D (distance)", 0);
 	double F = SmartDashboard.getNumber("F (distance)", 0);
 	
@@ -108,6 +108,7 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
     	SmartDashboard.putNumber("Left Encoder Distance", Robot.drivetrainSubsystem.getLeftEncoder());
     	SmartDashboard.putNumber("Right Encoder Distance", Robot.drivetrainSubsystem.getRightEncoder());
     	SmartDashboard.putNumber("Total Distance Travelled", Robot.drivetrainSubsystem.getCountDistanceFeet());
+    	System.out.println("Error is " + (setpoint - Robot.drivetrainSubsystem.getCountDistanceFeet()));
 		SmartDashboard.putNumber("Output (Distance)", output);
 		System.out.println("ScaleAuto.output = " + output);
     	Robot.drivetrainSubsystem.Drive(-output, 0);

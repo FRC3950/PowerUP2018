@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team3950.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -50,7 +51,7 @@ public class Robot extends TimedRobot {
 		m_chooser.addDefault("Turn Precise", new DriveTurnPreciseCommand(-90));
 		m_chooser.addObject("Scale Auto", new ScaleAutoCommand());
 		m_chooser.addObject("Drive Straight", new DriveStraightCommand());
-		m_chooser.addObject("Straight + Scale Auto", new StraightScaleAutoCommand(27));
+		//m_chooser.addObject("Straight + Scale Auto", new StraightScaleAutoCommand(27));
 		m_chooser.addObject("EncoderNavx Drive", new EncoderNavX2AutoCommand(8));
 		m_chooser.addObject("Command Group Auto Test", new TestAutoCommandGroup());
 		m_chooser.addObject("No Auto", null);
@@ -95,6 +96,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		m_autonomousCommand = m_chooser.getSelected();
+		
+		DriverStation ds = DriverStation.getInstance();
 		//m_autonomousCommand = new EncoderNavX2AutoCommand();
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -105,6 +108,9 @@ public class Robot extends TimedRobot {
 
 		// schedule the autonomous command (example)
 		//robotLogger.info("I am in autoInit yay");
+		
+		System.out.println(ds.getGameSpecificMessage());
+		
 		
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
