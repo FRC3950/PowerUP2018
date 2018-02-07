@@ -5,6 +5,7 @@ import org.usfirst.frc.team3950.robot.commands.*;
 
 import com.ctre.CANTalon;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -17,8 +18,8 @@ public class IntakeSubsystem extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	WPI_TalonSRX left;
-	WPI_TalonSRX right;
+	WPI_VictorSPX left;
+	WPI_VictorSPX right;
 	DigitalInput intakeSwitch;
 
     public void initDefaultCommand() {

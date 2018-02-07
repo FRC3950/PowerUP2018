@@ -38,14 +38,14 @@ public class RobotMap
 	// public static int rangefinderPort = 1;
 	// public static int rangefinderModule = 1;
 	
-	public static WPI_TalonSRX frontLeft = new WPI_TalonSRX(0); 
+	public static WPI_VictorSPX frontLeft = new WPI_VictorSPX(0); 
 	public static WPI_TalonSRX backLeft = new WPI_TalonSRX(1);
 	public static WPI_TalonSRX frontRight = new WPI_TalonSRX(2);
-	public static WPI_TalonSRX backRight = new WPI_TalonSRX(3);
+	public static WPI_VictorSPX backRight = new WPI_VictorSPX(3);
 	public static WPI_TalonSRX elevatorMotor = new WPI_TalonSRX(4);
 	public static WPI_VictorSPX elevatorMotorFollower = new WPI_VictorSPX (5);
-	public static WPI_TalonSRX intakeLeftMotor = new WPI_TalonSRX(6);
-	public static WPI_TalonSRX intakeRightMotor = new WPI_TalonSRX(7);
+	public static WPI_VictorSPX intakeLeftMotor = new WPI_VictorSPX(6);
+	public static WPI_VictorSPX intakeRightMotor = new WPI_VictorSPX(7);
 	
 	public static DigitalInput bottomLimitSwitch = new DigitalInput(0); 
 	public static DigitalInput topLimitSwitch = new DigitalInput(1);
