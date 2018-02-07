@@ -53,6 +53,8 @@ public class RobotMap
 	
 	public static Solenoid rampSolenoid = new Solenoid(8);
 	public static DoubleSolenoid elevatorSolenoid = new DoubleSolenoid(0, 1);
+	public static DoubleSolenoid intakeVertical = new DoubleSolenoid (2, 3);
+	public static DoubleSolenoid intakeHorizontal = new DoubleSolenoid (4, 5);
 
 	
 	public static AHRS ahrs = new AHRS(SerialPort.Port.kMXP);
