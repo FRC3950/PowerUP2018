@@ -7,39 +7,21 @@ public class FieldPositionAnalysis {
 	String str;
 	DriverStation ds;
 	
-	FieldPositionAnalysis(){
+	public FieldPositionAnalysis(){
 		DriverStation.getInstance();
 		str = ds.getGameSpecificMessage();
 		
 	}
 	
-	public String getSwitchAPosition() {
-		String side;
-		if(str.substring(0, 1).compareTo("L")==0) {
-			side = "Left";
-		} else {
-			side = "Right"; 
-		}
-		return side;
+	public String getSwitchClosePosition() {
+		return str.substring(0,1);
 	}
 	
 	public String getScalePosition() {
-		String side;
-		if(str.substring(1,2).compareTo("L")==0) {
-			side = "Left";
-		} else {
-			side = "Right";
-		}
-		return side;
+		return str.substring(1,2);
 	}
 	
-	public String getSwitchBPosition() {
-		String side;
-		if(str.substring(2,3).compareTo("L")==0) {
-			side = "Left";
-		} else {
-			side = "Right";
-		}
-		return side;
+	public String getSwitchFarPosition() {
+		return str.substring(2,3);
 	}
 }

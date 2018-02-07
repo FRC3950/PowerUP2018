@@ -110,9 +110,10 @@ public class Robot extends TimedRobot {
 		// schedule the autonomous command (example)
 		//robotLogger.info("I am in autoInit yay");
 		
-		SmartDashboard.putString("Switch A side is ", side.getSwitchAPosition());
+		SmartDashboard.putString("Switch A side is ", side.getSwitchClosePosition());
 		SmartDashboard.putString("Scale side is ", side.getScalePosition());
-		SmartDashboard.putString("Switch B side is ", side.getSwitchBPosition());
+		SmartDashboard.putString("Switch B side is ", side.getSwitchFarPosition());
+		
 		
 		
 		if (m_autonomousCommand != null) {
