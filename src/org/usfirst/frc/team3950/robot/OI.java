@@ -74,12 +74,12 @@ public class OI
 	    	//  xboxControllerBButton.whenPressed(new BallIntakeCommand());
 	        //	xboxControllerBButton.whenPressed(new BallOuttakeCommand());
 	        //	xboxControllerYButton.whenPressed(new ShooterIndexerCommand());
-	        //xboxControllerRBButton.whileHeld(new RampUpCommand());
+	        xboxControllerRBButton.whileHeld(new IntakeCommand());
 	        //	xboxControllerXButton.whenPressed(new GearDistanceCommand());
 	        xboxControllerLBButton.whenPressed(new RampCommand());
 	        // 	xboxControllerYButton.whenPressed(new GearIntakeStartCommand());
 	        xboxControllerXButton.whenPressed(new ElevatorPIDCommand(1));
-	        //	xboxControllerAButton.whenPressed(new GearIntakeFloorCommand());
+	       	xboxControllerAButton.whenPressed(new IntakeCommand());
 	        //  Xbox end
 	        xboxControllerLeftStickButton.whenPressed(new ElevatorShiftCommand());
 	    }

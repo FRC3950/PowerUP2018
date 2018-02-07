@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3950.robot.subsystems;
 
+import org.usfirst.frc.team3950.robot.Robot;
 import org.usfirst.frc.team3950.robot.RobotMap;
 import org.usfirst.frc.team3950.robot.commands.*;
 
@@ -7,6 +8,9 @@ import com.ctre.CANTalon;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -20,6 +24,9 @@ public class IntakeSubsystem extends Subsystem {
 	WPI_TalonSRX left;
 	WPI_TalonSRX right;
 	DigitalInput intakeSwitch;
+	DoubleSolenoid vertical;
+	DoubleSolenoid horizontal;
+	
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -28,6 +35,8 @@ public class IntakeSubsystem extends Subsystem {
     	
     	left = RobotMap.intakeLeftMotor;
     	right = RobotMap.intakeRightMotor;
+    	vertical = RobotMap.intakeVertical;
+    	horizontal = RobotMap.intakeHorizontal;
     	
     	
     }
@@ -48,6 +57,22 @@ public class IntakeSubsystem extends Subsystem {
     	
     	
     }
+    public void IntakeVertical(int button) {
+    	vertical.set(DoubleSolenoid.Value.kForward);
+    	left.set(0);
+    	right.set(0);
+    
+    }
+    public void IntakeHorizontal(int button) {
+    	horizontal.set(DoubleSolenoid.Value.kForward);
+    	left.set(0);
+    	right.set(0);
+    }
+    public double getSolenoidValue() {
+    	return intakeVertical.get();
+    }
+    	
+    
 }
 
 
