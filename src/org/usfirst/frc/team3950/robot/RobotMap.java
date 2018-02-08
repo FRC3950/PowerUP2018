@@ -24,8 +24,7 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
  */
-public class RobotMap 
-{
+public class RobotMap {
 	
 	
 	// For example to map the left and right motors, you could define the
@@ -38,23 +37,29 @@ public class RobotMap
 	// public static int rangefinderPort = 1;
 	// public static int rangefinderModule = 1;
 	
-	public static WPI_VictorSPX frontLeft = new WPI_VictorSPX(0); 
-	public static WPI_TalonSRX backLeft = new WPI_TalonSRX(1);
+
+	public static WPI_TalonSRX frontLeft = new WPI_TalonSRX(1);
 	public static WPI_TalonSRX frontRight = new WPI_TalonSRX(2);
-	public static WPI_VictorSPX backRight = new WPI_VictorSPX(3);
-	public static WPI_TalonSRX elevatorMotor = new WPI_TalonSRX(4);
-	public static WPI_VictorSPX elevatorMotorFollower = new WPI_VictorSPX (5);
-	public static WPI_VictorSPX intakeLeftMotor = new WPI_VictorSPX(6);
-	public static WPI_VictorSPX intakeRightMotor = new WPI_VictorSPX(7);
+	public static WPI_TalonSRX elevatorMotor = new WPI_TalonSRX(3);
+	public static WPI_TalonSRX intakeVerticalMotor = new WPI_TalonSRX(4);
 	
-	public static DigitalInput bottomLimitSwitch = new DigitalInput(0); 
-	public static DigitalInput topLimitSwitch = new DigitalInput(1);
-	public static DigitalInput intakeLimitSwitch = new DigitalInput(2);
+	public static WPI_VictorSPX backLeft = new WPI_VictorSPX(1); 
+	public static WPI_VictorSPX backRight = new WPI_VictorSPX(2);
+	public static WPI_VictorSPX elevatorMotorFollower = new WPI_VictorSPX (3);
+	public static WPI_VictorSPX intakeLeftMotor = new WPI_VictorSPX(4);
+	public static WPI_VictorSPX intakeRightMotor = new WPI_VictorSPX(5);
 	
-	public static Solenoid rampSolenoid = new Solenoid(8);
-	public static DoubleSolenoid elevatorSolenoid = new DoubleSolenoid(0, 1);
-	public static DoubleSolenoid intakeVertical = new DoubleSolenoid (2, 3);
-	public static DoubleSolenoid intakeHorizontal = new DoubleSolenoid (4, 5);
+	public static DigitalInput elevatorBottomLimitSwitch = new DigitalInput(0); 
+	public static DigitalInput elevatorTopLimitSwitch = new DigitalInput(1);
+	public static DigitalInput intakeCubeLimitSwitch = new DigitalInput(2);
+	public static DigitalInput intakeBottomLimitSwitch = new DigitalInput(3);
+	public static DigitalInput intakeTopLimitSwitch = new DigitalInput(4);
+	
+	public static DoubleSolenoid elevatorBrakeSolenoid = new DoubleSolenoid(0, 1);
+	public static DoubleSolenoid intakeHorizontalLeft = new DoubleSolenoid (2, 3);
+	public static DoubleSolenoid intakeHorizontalRight = new DoubleSolenoid (4, 5);
+	public static DoubleSolenoid rampSolenoid = new DoubleSolenoid(7, 8);
+	public static DoubleSolenoid elevatorShiftSolenoid = new DoubleSolenoid(1, 0, 1);
 
 	
 	public static AHRS ahrs = new AHRS(SerialPort.Port.kMXP);
