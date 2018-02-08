@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team3950.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -39,6 +40,8 @@ public class Robot extends TimedRobot {
 
 	public static Logger robotLogger = LoggerFactory.getLogger(Robot.class);
 	
+	public static FieldPositionAnalysis side = new FieldPositionAnalysis();
+	
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 	
@@ -56,17 +59,25 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		//m_chooser.addDefault("Default Auto", new ExampleCommand());
-		// chooser.addObject("My Auto", new MyAutoCommand());
+		
+		m_chooser = new SendableChooser<Command>();
+		
+		m_chooser.addDefault("Turn Precise", new DriveTurnPreciseCommand(-90));
+		m_chooser.addObject("Scale Auto", new ScaleAutoCommand());
+		m_chooser.addObject("Drive Straight", new DriveStraightCommand());
+		//m_chooser.addObject("Straight + Scale Auto", new StraightScaleAutoCommand(27));
+		m_chooser.addObject("EncoderNavx Drive", new EncoderNavX2AutoCommand(8));
+		m_chooser.addObject("Command Group Auto Test", new TestAutoCommandGroup());
+		m_chooser.addObject("No Auto", null);
+		
 		SmartDashboard.putData("Auto mode", m_chooser);
 		
-		SmartDashboard.putNumber("P (drive straight)", 1);
-		SmartDashboard.putNumber("I (drive straight)", 0);
-		SmartDashboard.putNumber("D (drive straight)", 0);
-		SmartDashboard.putNumber("F (drive straight)", 0);
-		SmartDashboard.putNumber("Speed", -0.75);
+//		SmartDashboard.putNumber("P (drive straight)", 1);
+//		SmartDashboard.putNumber("I (drive straight)", 0);
+//		SmartDashboard.putNumber("D (drive straight)", 0);
+//		SmartDashboard.putNumber("F (drive straight)", 0);
+//		SmartDashboard.putNumber("Speed", -0.75);
 		
-		m_autonomousCommand = new DriveStraightCommand();
 		//robotLogger.info("Robot properly initialized.");
 	}
 
@@ -98,8 +109,9 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		//m_autonomousCommand = m_chooser.getSelected();
-
+		m_autonomousCommand = m_chooser.getSelected();
+		
+		//m_autonomousCommand = new EncoderNavX2AutoCommand();
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -109,6 +121,12 @@ public class Robot extends TimedRobot {
 
 		// schedule the autonomous command (example)
 		//robotLogger.info("I am in autoInit yay");
+		
+		SmartDashboard.putString("Switch A side is ", side.getSwitchClosePosition());
+		SmartDashboard.putString("Scale side is ", side.getScalePosition());
+		SmartDashboard.putString("Switch B side is ", side.getSwitchFarPosition());
+		
+		
 		
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();

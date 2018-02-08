@@ -6,6 +6,7 @@ import org.usfirst.frc.team3950.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -13,7 +14,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class RampSubsystem extends Subsystem {
-	Solenoid rampSolenoid;
+	DoubleSolenoid rampSolenoid;
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -25,14 +26,14 @@ public class RampSubsystem extends Subsystem {
     }
     
     public void rampUp() {
-    	rampSolenoid.set(false);
+    	rampSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
     
     public void rampDown() {
-    	rampSolenoid.set(true);
+    	rampSolenoid.set(DoubleSolenoid.Value.kForward);
     }
     
-    public boolean getRampStatus() {
+    public Value getRampStatus() {
     	return rampSolenoid.get();
     }
     

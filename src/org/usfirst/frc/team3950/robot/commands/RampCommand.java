@@ -23,12 +23,20 @@ public class RampCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Robot.rampSubsystem.getRampStatus()) {
+    	if (Robot.rampSubsystem.getRampStatus().toString().compareTo("kForward")==0) {
     		Robot.rampSubsystem.rampUp();
     	}
     	else {
     		Robot.rampSubsystem.rampDown();
     	}
+    	
+    	if(controller.getBButtonPressed()) {
+    		if(Robot.rampSubsystem.getRampStatus().toString().compareTo("kForward")==0) {
+		   		Robot.rampSubsystem.rampDown();
+        	} else if(Robot.rampSubsystem.getRampStatus().toString().compareTo("kReverse")==0) {
+        		Robot.rampSubsystem.rampUp();
+        	}
+    	} 
     }
 
     // Make this return true when this Command no longer needs to run execute()
