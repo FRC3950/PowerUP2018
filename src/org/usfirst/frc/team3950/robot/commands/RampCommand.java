@@ -1,7 +1,9 @@
 package org.usfirst.frc.team3950.robot.commands;
 
 import org.usfirst.frc.team3950.robot.Robot;
+import org.usfirst.frc.team3950.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -21,19 +23,21 @@ public class RampCommand extends Command {
     protected void initialize() {
     }
 
-    // Called repeatedly when this Command is scheduled to run
+
     protected void execute() {
+    	/*
     	if (Robot.rampSubsystem.getRampStatus().toString().compareTo("kForward")==0) {
     		Robot.rampSubsystem.rampUp();
     	}
     	else {
     		Robot.rampSubsystem.rampDown();
     	}
+    	*/
     	
     	if(controller.getBButtonPressed()) {
-    		if(Robot.rampSubsystem.getRampStatus().toString().compareTo("kForward")==0) {
+    		if(RobotMap.rampSolenoid.get() == DoubleSolenoid.Value.kForward) {
 		   		Robot.rampSubsystem.rampDown();
-        	} else if(Robot.rampSubsystem.getRampStatus().toString().compareTo("kReverse")==0) {
+        	} else if(RobotMap.rampSolenoid.get() == DoubleSolenoid.Value.kReverse) {
         		Robot.rampSubsystem.rampUp();
         	}
     	} 

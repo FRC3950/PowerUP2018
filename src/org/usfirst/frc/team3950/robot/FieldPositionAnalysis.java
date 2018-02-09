@@ -8,9 +8,8 @@ public class FieldPositionAnalysis {
 	DriverStation ds;
 	
 	public FieldPositionAnalysis(){
-		DriverStation.getInstance();
+		ds = DriverStation.getInstance();
 		str = ds.getGameSpecificMessage();
-		
 	}
 	
 	public String getSwitchClosePosition() {

@@ -8,15 +8,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  */
 public class ScalePositionLeftAutoCommandGroup extends CommandGroup {
-	
-	FieldPositionAnalysis analyzer;
-
-    public ScalePositionLeftAutoCommandGroup() {
-    	
-    	analyzer = new FieldPositionAnalysis();
-    	
-    	//Command Group for when scale is on left side
-    	if (analyzer.getScalePosition().compareTo("L") == 0) {
+		
+	public void setLocation(String location) {
+		
+		if (location.compareTo("L") == 0) {
     		
     		//write left position to left scale code in here
     		
@@ -27,7 +22,7 @@ public class ScalePositionLeftAutoCommandGroup extends CommandGroup {
     	}
     	
     	//Command Group for when scale is on right side
-    	if (analyzer.getScalePosition().compareTo("R") == 0) {
+    	else if (location.compareTo("R") == 0) {
     		
     		//write left position to right scale code in here
     		
@@ -35,7 +30,16 @@ public class ScalePositionLeftAutoCommandGroup extends CommandGroup {
     		addSequential(new EncoderNavX2AutoCommand(8));
     		addSequential(new DriveTurnPreciseCommand(-90));
     		addSequential(new EncoderNavX2AutoCommand(8));
+    	} else {
+    		System.out.println("ScalePositionLeftAutoCommand BIG ERROR - string passed in is equal to:" + location);
     	}
+    	
+	}
+
+    public ScalePositionLeftAutoCommandGroup(String location) {
+    	
+    	
+    	//Command Group for when scale is on left side
     	
     }
 }

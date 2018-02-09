@@ -63,7 +63,8 @@ public class DrivetrainSubsystem extends Subsystem {
     	wheelDiameter = (1.0/3.0);
     	
     	
-    	wheelCircumference = 11.875/12.0;
+    	wheelCircumference = .5*Math.PI;
+    	
     	
     	System.out.println("I am in drivetrainSubsystem initDefaultCommand");
 
@@ -87,7 +88,7 @@ public class DrivetrainSubsystem extends Subsystem {
      * Hey Bryce! If you're reading this, it's probably because you're wondering
      * why your encoders aren't working the way they should. Have you tried
      * negating them? I negated the left one. Maybe it shouldn't be.
-     * Hope this was helpful. See ya!
+     * Hope this was helpful. See ya! 
      */
     
     public int getLeftEncoder() {

@@ -9,14 +9,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class SwitchPositionMiddleAutoCommandGroup extends CommandGroup {
     	
-    FieldPositionAnalysis analyzer;
-
-    public SwitchPositionMiddleAutoCommandGroup() {
-    	
-    	analyzer = new FieldPositionAnalysis();
-    	
+    
+    public void setLocation(String location) {
     	//Command Group for when switch is on left side
-    	if (analyzer.getSwitchClosePosition().compareTo("L") == 0) {
+    	if (location.compareTo("L") == 0) {
     		
     		//write right position to left switch code in here
     		
@@ -27,7 +23,7 @@ public class SwitchPositionMiddleAutoCommandGroup extends CommandGroup {
     	}
     	
     	//Command Group for when switch is on right side
-    	if (analyzer.getSwitchClosePosition().compareTo("R") == 0) {
+    	if (location.compareTo("R") == 0) {
     		
     		//write right position to right switch code in here
     		
@@ -36,7 +32,6 @@ public class SwitchPositionMiddleAutoCommandGroup extends CommandGroup {
     		addSequential(new DriveTurnPreciseCommand(-90));
     		addSequential(new EncoderNavX2AutoCommand(8));
     	}
-    	
     }
 	
 }

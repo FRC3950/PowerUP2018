@@ -37,6 +37,10 @@ import org.usfirst.frc.team3950.robot.subsystems.*;
 public class Robot extends TimedRobot {
 
 	public static OI oi;
+	
+	public static String switchClosePosition = "";
+	public static String scalePosition = "";
+	public static String switchFarPosition = "";
 
 	public static Logger robotLogger = LoggerFactory.getLogger(Robot.class);
 	
@@ -96,6 +100,13 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 	}
 
+	private static void fieldPositionAnalysis() {
+		String str = DriverStation.getInstance().getGameSpecificMessage();
+		switchClosePosition = str.substring(0,1);
+		scalePosition = str.substring(1,2);
+		switchFarPosition = str.substring(2,3);
+	}
+	
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
 	 * between different autonomous modes using the dashboard. The sendable
@@ -109,7 +120,23 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		fieldPositionAnalysis();
 		m_autonomousCommand = m_chooser.getSelected();
+		try {
+			if (m_autonomousCommand.getClass() == Class.forName("org.usfirst.frc.team3950.robot.commands.ScalePositionLeftAutoCommandGroup")) {
+				((ScalePositionLeftAutoCommandGroup)m_autonomousCommand).setLocation(Robot.scalePosition);
+			} 
+			else if (m_autonomousCommand.getClass() == Class.forName("org.usfirst.frc.team3950.robot.commands.ScalePositionRightAutoCommandGroup")) {
+				((ScalePositionRightAutoCommandGroup)m_autonomousCommand).setLocation(Robot.scalePosition);
+			}
+			else if(m_autonomousCommand.getClass() == Class.forName("org.usfirst.frc.team3950.robot.commands.SwitchPositionMiddleAutoCommandGroup")) {
+				((SwitchPositionMiddleAutoCommandGroup)m_autonomousCommand).setLocation(Robot.switchClosePosition);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		//m_autonomousCommand = new EncoderNavX2AutoCommand();
 		/*
