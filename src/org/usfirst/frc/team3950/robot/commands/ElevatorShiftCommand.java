@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class ElevatorShiftCommand extends Command {
-	XboxController controller = Robot.oi.xboxcontroller;
+	//XboxController controller = Robot.oi.xboxcontroller;
 
     public ElevatorShiftCommand() {
         // Use requires() here to declare subsystem dependencies

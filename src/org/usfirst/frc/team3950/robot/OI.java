@@ -76,7 +76,7 @@ public class OI
 	        //	xboxControllerYButton.whenPressed(new ShooterIndexerCommand());
 	        xboxControllerRBButton.whenPressed(new IntakeVerticalCommand());
 	        //	xboxControllerXButton.whenPressed(new GearDistanceCommand());
-	        xboxControllerLBButton.whenPressed(new RampCommand());
+	       // xboxControllerLBButton.whenPressed(new RampCommand());
 	        // 	xboxControllerYButton.whenPressed(new GearIntakeStartCommand());
 	        xboxControllerXButton.whenPressed(new ElevatorPIDCommand(1));
 	       	xboxControllerAButton.whenPressed(new IntakeGrabCommand());

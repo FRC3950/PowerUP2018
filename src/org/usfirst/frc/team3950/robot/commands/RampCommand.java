@@ -11,12 +11,14 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class RampCommand extends Command {
-	XboxController controller = Robot.oi.xboxcontroller;
+	XboxController controller;
 
     public RampCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.rampSubsystem);
+    	controller = Robot.oi.xboxcontroller;
+    	
     }
 
     // Called just before this Command runs the first time

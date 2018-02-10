@@ -58,7 +58,7 @@ public class RobotMap {
 	public static DoubleSolenoid elevatorBrakeSolenoid = new DoubleSolenoid(0, 1);
 	public static DoubleSolenoid intakeHorizontalLeft = new DoubleSolenoid (2, 3);
 	public static DoubleSolenoid intakeHorizontalRight = new DoubleSolenoid (4, 5);
-	public static DoubleSolenoid rampSolenoid = new DoubleSolenoid(7, 8);
+	public static DoubleSolenoid rampSolenoid = new DoubleSolenoid(6, 7);
 	public static DoubleSolenoid elevatorShiftSolenoid = new DoubleSolenoid(1, 0, 1);
 
 	
