@@ -106,6 +106,27 @@ public class Robot extends TimedRobot {
 		switchFarPosition = str.substring(2,3);
 	}
 	
+	public static Command chooseAutoMode(String leftRightCenter, String rightSwitchAbility, String scaleAbility) {
+		if(leftRightCenter.compareTo("C") == 0) {
+			if(rightSwitchAbility.compareTo("N") == 0) {
+				return new SwitchPositionAutoCommandGroup(leftRightCenter, Robot.switchClosePosition); //switch right auto
+			} else {
+				return new EncoderNavX2AutoCommand(8);
+			}
+		} else {
+			if (leftRightCenter.compareTo(Robot.scalePosition) == 0 || scaleAbility.compareTo("N") == 0) {
+				return new ScalePositionAutoCommandGroup(leftRightCenter, Robot.scalePosition); //make one over-arching and pass in robotPOs and scalePos
+			} else {
+				if(leftRightCenter.compareTo(Robot.switchClosePosition) == 0) {
+					return new SwitchPositionAutoCommandGroup(leftRightCenter, Robot.switchClosePosition); //pass in switch side AND robotPos
+				} else {
+					return new EncoderNavX2AutoCommand(8);
+				}		
+			}
+		} 
+	}
+	
+	
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
 	 * between different autonomous modes using the dashboard. The sendable
@@ -129,7 +150,7 @@ public class Robot extends TimedRobot {
 				((ScalePositionRightAutoCommandGroup)m_autonomousCommand).setLocation(Robot.scalePosition);
 			}
 			else if(m_autonomousCommand.getClass() == Class.forName("org.usfirst.frc.team3950.robot.commands.SwitchPositionMiddleAutoCommandGroup")) {
-				((SwitchPositionMiddleAutoCommandGroup)m_autonomousCommand).setLocation(Robot.switchClosePosition);
+				((SwitchPositionAutoCommandGroup)m_autonomousCommand).setLocation(Robot.switchClosePosition);
 			}
 			
 		} catch (ClassNotFoundException e) {

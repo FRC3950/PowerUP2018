@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class SwitchPositionMiddleAutoCommandGroup extends CommandGroup {
+public class SwitchPositionAutoCommandGroup extends CommandGroup {
     	
     
     public void setLocation(String location) {
@@ -32,6 +32,11 @@ public class SwitchPositionMiddleAutoCommandGroup extends CommandGroup {
     		addSequential(new DriveTurnPreciseCommand(-90));
     		addSequential(new EncoderNavX2AutoCommand(8));
     	}
+    }
+    
+    public SwitchPositionAutoCommandGroup(String fieldPos, String switchPos) {
+    	
+    	
     }
 	
 }
