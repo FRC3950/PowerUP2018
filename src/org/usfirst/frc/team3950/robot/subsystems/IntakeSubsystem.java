@@ -21,13 +21,16 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class IntakeSubsystem extends Subsystem {
 
     // Put methods for controlling this subsystem
-    // here. Call these from Commands.
+    // here. Call these from Commands
 	
 	WPI_VictorSPX left;
 	WPI_VictorSPX right;
-	DigitalInput intakeSwitch;
-	DoubleSolenoid vertical;
-	DoubleSolenoid horizontal;
+	WPI_TalonSRX vertical;
+	DigitalInput cubeSwitch;
+	DigitalInput bottomSwitch;
+	DigitalInput topSwitch;
+	DoubleSolenoid horizontalLeft;
+	DoubleSolenoid horizontalRight;
 	
 
     public void initDefaultCommand() {
@@ -37,10 +40,12 @@ public class IntakeSubsystem extends Subsystem {
     	
     	left = RobotMap.intakeLeftMotor;
     	right = RobotMap.intakeRightMotor;
-    	vertical = RobotMap.intakeVertical;
-    	horizontal = RobotMap.intakeHorizontal;
-    	
-    	
+    	vertical = RobotMap.intakeVerticalMotor;
+    	horizontalLeft = RobotMap.intakeHorizontalLeft;
+    	horizontalRight = RobotMap.intakeHorizontalRight;
+    	cubeSwitch = RobotMap.intakeCubeLimitSwitch;
+    	bottomSwitch = RobotMap.intakeBottomLimitSwitch;
+    	topSwitch = RobotMap.intakeTopLimitSwitch;
     }
     
     	
@@ -50,7 +55,15 @@ public class IntakeSubsystem extends Subsystem {
     }
     
     public boolean boxIn() {
-    	return intakeSwitch.get();
+    	return cubeSwitch.get();
+    }
+    
+    public boolean atBottom() {
+    	return bottomSwitch.get();
+    }
+    
+    public boolean atTop() {
+    	return topSwitch.get();
     }
     
     public void Intake(double trigger) {
@@ -59,27 +72,23 @@ public class IntakeSubsystem extends Subsystem {
     	
     	
     }
-    public void verticalUp() {
-    	vertical.set(DoubleSolenoid.Value.kReverse);
     
+    public void intakeVertical(double speed) {
+    	vertical.set(speed);
     }
-    public void verticalDown() {
-    	vertical.set(DoubleSolenoid.Value.kForward);
-    
-    }
+
     public void horizontalOut() {
-    	horizontal.set(DoubleSolenoid.Value.kForward);
+    	horizontalLeft.set(DoubleSolenoid.Value.kReverse);
+    	horizontalRight.set(DoubleSolenoid.Value.kReverse);
 
     }
     public void horitontalIn() {
-    	horizontal.set(DoubleSolenoid.Value.kReverse);
+    	horizontalLeft.set(DoubleSolenoid.Value.kForward);
+    	horizontalRight.set(DoubleSolenoid.Value.kForward);
     }  
-    public Value getIntakeVerticalValue() {
-    	return vertical.get();
-    	
-    }
+
     public Value getIntakeHorizontalValue() {
-    	return horizontal.get();
+    	return horizontalRight.get();
     	
     }
     	    

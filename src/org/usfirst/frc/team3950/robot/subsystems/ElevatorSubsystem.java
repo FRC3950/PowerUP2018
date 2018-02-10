@@ -4,7 +4,7 @@ import org.usfirst.frc.team3950.robot.Robot;
 import org.usfirst.frc.team3950.robot.RobotMap;
 import org.usfirst.frc.team3950.robot.commands.ElevatorCommand;
 
-import com.ctre.CANTalon.TalonControlMode;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.*;
 
@@ -26,7 +26,8 @@ public class ElevatorSubsystem extends Subsystem {
 	WPI_VictorSPX elevatorMotorFollower;
 	DigitalInput bottomLimitSwitch;
 	DigitalInput topLimitSwitch;
-	DoubleSolenoid elevatorSolenoid;
+	DoubleSolenoid brakeSolenoid;
+	DoubleSolenoid shiftSolenoid;
 	
 	double distancePerRotation;
 	
@@ -37,9 +38,10 @@ public class ElevatorSubsystem extends Subsystem {
 
     	elevatorMotor = RobotMap.elevatorMotor;
     	elevatorMotorFollower = RobotMap.elevatorMotorFollower;
-    	bottomLimitSwitch = RobotMap.bottomLimitSwitch;
-    	topLimitSwitch = RobotMap.topLimitSwitch;
-    	elevatorSolenoid = RobotMap.elevatorSolenoid;
+    	bottomLimitSwitch = RobotMap.elevatorBottomLimitSwitch;
+    	topLimitSwitch = RobotMap.elevatorTopLimitSwitch;
+    	brakeSolenoid = RobotMap.elevatorBrakeSolenoid;
+    	shiftSolenoid = RobotMap.elevatorShiftSolenoid;
     	
     	elevatorMotorFollower.follow(elevatorMotor);
     	
@@ -62,14 +64,6 @@ public class ElevatorSubsystem extends Subsystem {
     public void elevatorControl(double leftstick) {
     	elevatorMotor.set(leftstick);
     	elevatorMotorFollower.set(leftstick);
-    }
-    
-    public void elevatorUp(double leftstick) {
-    	elevatorSolenoid.set(DoubleSolenoid.Value.kForward);
-    }
-    
-    public void elevatorDown(double leftstick) {
-    	elevatorSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
     
     public void MotionMagic() {
@@ -103,7 +97,7 @@ public class ElevatorSubsystem extends Subsystem {
     	return (getEncoder()/4096)*distancePerRotation;
     }
     public void elevatorBrake() {
-    	elevatorSolenoid.set(DoubleSolenoid.Value.kForward);
+    	brakeSolenoid.set(DoubleSolenoid.Value.kForward);
     	elevatorMotor.set(0);
     	elevatorMotorFollower.set(0);
     }
@@ -112,8 +106,16 @@ public class ElevatorSubsystem extends Subsystem {
     	return elevatorMotor.get();
     }
     
+    public void shiftGear() {
+    	if (shiftSolenoid.get() == DoubleSolenoid.Value.kForward) {
+    		shiftSolenoid.set(DoubleSolenoid.Value.kReverse);
+    	} else {
+    		shiftSolenoid.set(DoubleSolenoid.Value.kForward);
+    	}
+    }
+    
     public void undoBrake(){
-    	elevatorSolenoid.set(DoubleSolenoid.Value.kReverse);
+    	brakeSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
     
 } 
