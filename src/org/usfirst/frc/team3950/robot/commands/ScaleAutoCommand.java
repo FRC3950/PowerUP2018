@@ -2,7 +2,6 @@ package org.usfirst.frc.team3950.robot.commands;
 
 import org.usfirst.frc.team3950.robot.PIDSourceDistance;
 import org.usfirst.frc.team3950.robot.Robot;
-import org.usfirst.frc.team3950.robot.TCS34725ColorSensor;
 
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.PIDController;
@@ -18,7 +17,6 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
 	
 	PIDController pid;
 	I2C i2cBus;
-	TCS34725ColorSensor colorSen = new TCS34725ColorSensor();
 	PIDSourceDistance source;
 	
 	//constants
