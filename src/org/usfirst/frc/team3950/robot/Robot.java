@@ -41,6 +41,12 @@ public class Robot extends TimedRobot {
 	public static String switchClosePosition = "";
 	public static String scalePosition = "";
 	public static String switchFarPosition = "";
+	
+	public static String teamScale = "";
+	public static String teamSwitchRight = "";
+	public static String teamSwitchLeft = "";
+	
+	public static String ourFieldPosition = "";
 
 	public static Logger robotLogger = LoggerFactory.getLogger(Robot.class);
 	
@@ -75,6 +81,11 @@ public class Robot extends TimedRobot {
 		
 		SmartDashboard.putData("Auto mode", m_chooser);
 		
+		Robot.teamScale = SmartDashboard.getString("Can team do Scale Auto (Y/N)", null);
+		Robot.teamSwitchRight = SmartDashboard.getString("Can team do Switch Right (Y/N)", null);
+		
+		Robot.ourFieldPosition = SmartDashboard.getString("Which position are we at (L/R/C)", null);
+		
 //		SmartDashboard.putNumber("P (drive straight)", 1);
 //		SmartDashboard.putNumber("I (drive straight)", 0);
 //		SmartDashboard.putNumber("D (drive straight)", 0);
@@ -82,6 +93,8 @@ public class Robot extends TimedRobot {
 //		SmartDashboard.putNumber("Speed", -0.75);
 		
 		//robotLogger.info("Robot properly initialized.");
+		
+		
 	}
 
 	/**
@@ -109,7 +122,7 @@ public class Robot extends TimedRobot {
 	public static Command chooseAutoMode(String leftRightCenter, String rightSwitchAbility, String scaleAbility) {
 		if(leftRightCenter.compareTo("C") == 0) {
 			if(rightSwitchAbility.compareTo("N") == 0) {
-				return new SwitchPositionAutoCommandGroup(leftRightCenter, Robot.switchClosePosition); //switch right auto
+				return new SwitchPositionAutoCommandGroup(Robot.switchClosePosition); //switch right auto
 			} else {
 				return new EncoderNavX2AutoCommand(8);
 			}
@@ -118,10 +131,10 @@ public class Robot extends TimedRobot {
 				return new ScalePositionAutoCommandGroup(leftRightCenter, Robot.scalePosition); //make one over-arching and pass in robotPOs and scalePos
 			} else {
 				if(leftRightCenter.compareTo(Robot.switchClosePosition) == 0) {
-					return new SwitchPositionAutoCommandGroup(leftRightCenter, Robot.switchClosePosition); //pass in switch side AND robotPos
+					return new SwitchPositionAutoCommandGroup(  Robot.switchClosePosition); //pass in switch side AND robotPos
 				} else {
 					return new EncoderNavX2AutoCommand(8);
-				}		
+				}		 
 			}
 		} 
 	}
@@ -141,7 +154,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		fieldPositionAnalysis();
-		m_autonomousCommand = m_chooser.getSelected();
+		//m_autonomousCommand = m_chooser.getSelected();
+		/*
 		try {
 			if (m_autonomousCommand.getClass() == Class.forName("org.usfirst.frc.team3950.robot.commands.ScalePositionLeftAutoCommandGroup")) {
 				((ScalePositionLeftAutoCommandGroup)m_autonomousCommand).setLocation(Robot.scalePosition);
@@ -157,6 +171,9 @@ public class Robot extends TimedRobot {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/
+		
+		m_autonomousCommand = Robot.chooseAutoMode(Robot.ourFieldPosition, Robot.teamSwitchRight, Robot.teamScale);
 		
 		//m_autonomousCommand = new EncoderNavX2AutoCommand();
 		/*
