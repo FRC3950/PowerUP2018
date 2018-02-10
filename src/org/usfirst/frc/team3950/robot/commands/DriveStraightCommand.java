@@ -2,7 +2,6 @@ package org.usfirst.frc.team3950.robot.commands;
 
 import org.usfirst.frc.team3950.robot.PIDSourceYaw;
 import org.usfirst.frc.team3950.robot.Robot;
-import org.usfirst.frc.team3950.robot.TCS34725ColorSensor;
 //import org.slf4j.Logger;
 
 
@@ -18,7 +17,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class DriveStraightCommand extends Command implements PIDOutput {
 	
-	TCS34725ColorSensor colorSen = new TCS34725ColorSensor();
 	
 	PIDController pid;
 	//double output = 1;
@@ -32,12 +30,10 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 	double D = SmartDashboard.getNumber("D (drive straight)", 0.01);
 	double F = SmartDashboard.getNumber("F (drive straight)", 0);
 
-	double ret_val = colorSen.init();
 
     public DriveStraightCommand() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.drivetrainSubsystem);
-        requires(Robot.RGBSensorSubsystem);
         yaw = new PIDSourceYaw();
     	pid = new PIDController(P, I, D, F, yaw, this);
         
@@ -111,7 +107,6 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 	public void pidWrite(double output) {
 		SmartDashboard.putNumber("YAW", yaw.pidGet());
 		SmartDashboard.putNumber("Output", pid.get());
-		Robot.RGBSensorSubsystem.readColor(i2cBuffer);
 		//Robot.robotLogger.debug("Output = " + output);
     	Robot.drivetrainSubsystem.Drive(SmartDashboard.getNumber("Speed", -0.5), output);
 		// TODO Auto-generated method stub

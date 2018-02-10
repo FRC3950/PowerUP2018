@@ -53,7 +53,6 @@ public class Robot extends TimedRobot {
 	public static IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 	public static ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
 	public static RampSubsystem rampSubsystem = new RampSubsystem();
-	public static RGBSensorSubsystem RGBSensorSubsystem = new RGBSensorSubsystem();
 
 
 	/**
