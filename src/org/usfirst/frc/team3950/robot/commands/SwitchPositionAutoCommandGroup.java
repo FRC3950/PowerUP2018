@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3950.robot.commands;
 
-import org.usfirst.frc.team3950.robot.FieldPositionAnalysis;
+//import org.usfirst.frc.team3950.robot.FieldPositionAnalysis;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -20,6 +20,7 @@ public class SwitchPositionAutoCommandGroup extends CommandGroup {
     		addSequential(new EncoderNavX2AutoCommand(8));
     		addSequential(new DriveTurnPreciseCommand(90));
     		addSequential(new EncoderNavX2AutoCommand(8));
+    		addSequential(new OuttakeAutoCommand());
     	}
     	
     	//Command Group for when switch is on right side
@@ -31,6 +32,7 @@ public class SwitchPositionAutoCommandGroup extends CommandGroup {
     		addSequential(new EncoderNavX2AutoCommand(8));
     		addSequential(new DriveTurnPreciseCommand(-90));
     		addSequential(new EncoderNavX2AutoCommand(8));
+    		addSequential(new OuttakeAutoCommand());
     	}
     }
     

@@ -1,15 +1,14 @@
 package org.usfirst.frc.team3950.robot.subsystems;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.usfirst.frc.team3950.robot.Robot;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
+//import org.usfirst.frc.team3950.robot.Robot;
 import org.usfirst.frc.team3950.robot.RobotMap;
 import org.usfirst.frc.team3950.robot.commands.DriveCommand;
 
 import com.ctre.phoenix.motorcontrol.can.*;
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -35,7 +34,7 @@ public class DrivetrainSubsystem extends Subsystem {
 	
 	DifferentialDrive drivetrain;
 	
-	private static Logger logger = LoggerFactory.getLogger(DrivetrainSubsystem.class);
+	//private static Logger logger = LoggerFactory.getLogger(DrivetrainSubsystem.class);
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -57,7 +56,6 @@ public class DrivetrainSubsystem extends Subsystem {
     	drivetrain = new DifferentialDrive(left, right);
     	navx = RobotMap.ahrs;
     	
-    	byte[] buffer = new byte[6];
     	
     	//diameter in feet
     	wheelDiameter = (1.0/3.0);

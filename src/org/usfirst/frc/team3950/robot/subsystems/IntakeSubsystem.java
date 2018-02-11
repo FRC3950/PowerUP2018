@@ -1,18 +1,18 @@
 package org.usfirst.frc.team3950.robot.subsystems;
 
-import org.usfirst.frc.team3950.robot.Robot;
+//import org.usfirst.frc.team3950.robot.Robot;
 import org.usfirst.frc.team3950.robot.RobotMap;
 import org.usfirst.frc.team3950.robot.commands.*;
 
-import com.ctre.CANTalon;
+//import com.ctre.CANTalon;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
+//import edu.wpi.first.wpilibj.XboxController;
+//import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -68,9 +68,12 @@ public class IntakeSubsystem extends Subsystem {
     
     public void Intake(double trigger) {
     	left.set(trigger);
-    	right.set(-trigger);
-    	
-    	
+    	right.set(-trigger);    	
+    }
+    
+    public void Outtake(double speed) {
+    	left.set(-speed);
+    	right.set(speed);
     }
     
     public void intakeVertical(double speed) {

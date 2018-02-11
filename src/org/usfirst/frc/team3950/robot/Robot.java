@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import org.usfirst.frc.team3950.robot.commands.ExampleCommand;
-import org.usfirst.frc.team3950.robot.commands.IntakeCommand;
+//import org.usfirst.frc.team3950.robot.commands.IntakeCommand;
 import org.usfirst.frc.team3950.robot.subsystems.DrivetrainSubsystem;
 import org.usfirst.frc.team3950.robot.subsystems.ElevatorSubsystem;
 //import org.usfirst.frc.team3950.robot.subsystems.ExampleSubsystem;
@@ -24,7 +24,7 @@ import org.usfirst.frc.team3950.robot.subsystems.RampSubsystem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.usfirst.frc.team3950.robot.commands.*;
-import org.usfirst.frc.team3950.robot.subsystems.*;
+//import org.usfirst.frc.team3950.robot.subsystems.*;
 
 
 /**
@@ -124,16 +124,16 @@ public class Robot extends TimedRobot {
 			if(rightSwitchAbility.compareTo("N") == 0) {
 				return new SwitchPositionAutoCommandGroup(Robot.switchClosePosition); //switch right auto
 			} else {
-				return new EncoderNavX2AutoCommand(8);
+				return new BaselineAutoCommandGroup();
 			}
 		} else {
 			if (leftRightCenter.compareTo(Robot.scalePosition) == 0 || scaleAbility.compareTo("N") == 0) {
 				return new ScalePositionAutoCommandGroup(leftRightCenter, Robot.scalePosition); //make one over-arching and pass in robotPOs and scalePos
 			} else {
 				if(leftRightCenter.compareTo(Robot.switchClosePosition) == 0) {
-					return new SwitchPositionAutoCommandGroup(  Robot.switchClosePosition); //pass in switch side AND robotPos
+					return new SwitchPositionAutoCommandGroup(Robot.switchClosePosition); //pass in switch side AND robotPos
 				} else {
-					return new EncoderNavX2AutoCommand(8);
+					return new BaselineAutoCommandGroup();
 				}		 
 			}
 		} 
@@ -213,6 +213,9 @@ public class Robot extends TimedRobot {
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
 		robotLogger.info("I am in teleopInit (be careful this is an iStripper  virus)");
+		
+		SmartDashboard.getString("Test", "Test");
+		System.out.println("Test");
 		
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();

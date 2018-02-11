@@ -2,28 +2,40 @@ package org.usfirst.frc.team3950.robot.commands;
 
 import org.usfirst.frc.team3950.robot.Robot;
 
-//import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ElevatorShiftCommand extends Command {
-	//XboxController controller = Robot.oi.xboxcontroller;
-
-    public ElevatorShiftCommand() {
+public class OuttakeAutoCommand extends Command {
+	
+	double speed = 0;
+	Timer timer;
+	
+    public OuttakeAutoCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.elevatorSubsystem);
+    	
+    	requires(Robot.intakeSubsystem);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	speed = 0.5;
+    	timer = new Timer();
+    	timer.start();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.elevatorSubsystem.shiftGear();
+    	if(timer.get() <= 5) {
+    		Robot.intakeSubsystem.Outtake(speed);
+    	} else {
+    		timer.stop();
+    		Robot.intakeSubsystem.Outtake(0);
+    	}
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

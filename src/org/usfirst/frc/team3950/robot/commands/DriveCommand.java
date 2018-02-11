@@ -22,7 +22,7 @@ public class DriveCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
+    	//SmartDashboard.putString("Test", "Test");
     }
 
     // Called repeatedly when this Command is scheduled to run

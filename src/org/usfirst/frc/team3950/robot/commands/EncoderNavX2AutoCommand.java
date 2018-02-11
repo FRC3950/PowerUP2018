@@ -7,10 +7,10 @@ import org.usfirst.frc.team3950.robot.PIDSourceYaw;
 import org.usfirst.frc.team3950.robot.Robot;
 import org.usfirst.frc.team3950.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.DriverStation;
+//import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.PIDOutput;
-import edu.wpi.first.wpilibj.PIDSource;
+//import edu.wpi.first.wpilibj.PIDOutput;
+//import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -36,7 +36,7 @@ public class EncoderNavX2AutoCommand extends Command {
 	double navxF = SmartDashboard.getNumber("F (drive straight)", 0);
 
   // Set to false once you are done tuning the PID
-  private static final boolean DEBUG = true;
+  //private static final boolean DEBUG = true;
 
   // PID controllers for each side of drive train
   private PIDController encPID;

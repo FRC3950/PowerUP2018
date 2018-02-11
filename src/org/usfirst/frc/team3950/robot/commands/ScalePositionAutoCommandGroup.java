@@ -35,6 +35,7 @@ public class ScalePositionAutoCommandGroup extends CommandGroup {
         		addSequential(new EncoderNavX2AutoCommand(8));
         		addSequential(new DriveTurnPreciseCommand(90));
         		addSequential(new EncoderNavX2AutoCommand(8));
+        		addSequential(new OuttakeAutoCommand());
         	}
         	
         	//Command Group for when scale is on right side
@@ -46,6 +47,7 @@ public class ScalePositionAutoCommandGroup extends CommandGroup {
         		addSequential(new EncoderNavX2AutoCommand(8));
         		addSequential(new DriveTurnPreciseCommand(-90));
         		addSequential(new EncoderNavX2AutoCommand(8));
+        		addSequential(new OuttakeAutoCommand());
         	} else {
         		System.out.println("ScalePositionLeftAutoCommand BIG ERROR - string passed in is equal to:" + scaleSide);
         	}
