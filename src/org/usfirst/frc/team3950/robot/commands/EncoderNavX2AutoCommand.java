@@ -24,14 +24,14 @@ public class EncoderNavX2AutoCommand extends Command {
   // You will need to adjust your PID constants
 	
 	//encoder values
-	double encP = SmartDashboard.getNumber("P (distance)", .2125);
-	double encI = SmartDashboard.getNumber("I (distance)", 0.003);
+	double encP = SmartDashboard.getNumber("P (distance)", .278);
+	double encI = SmartDashboard.getNumber("I (distance)", 0.0001);
 	double encD = SmartDashboard.getNumber("D (distance)", 0);
 	double encF = SmartDashboard.getNumber("F (distance)", 0);
 	
 	//straight drive values
-	double navxP = SmartDashboard.getNumber("P (drive straight)", 0.05);
-	double navxI = SmartDashboard.getNumber("I (drive straight)", 0.0);
+	double navxP = SmartDashboard.getNumber("P (drive straight)", 0.032);
+	double navxI = SmartDashboard.getNumber("I (drive straight)", 0.0001);
 	double navxD = SmartDashboard.getNumber("D (drive straight)", 0.0);
 	double navxF = SmartDashboard.getNumber("F (drive straight)", 0);
 
@@ -53,7 +53,7 @@ public class EncoderNavX2AutoCommand extends Command {
   PIDSourceYaw navxSource;
   
 	double maxSpeed = 1;
-	double setpoint = 27f;
+	double setpoint = 0;
   /**
    * Command to use PID control to drive a fixed distance.
    *
@@ -150,7 +150,7 @@ public class EncoderNavX2AutoCommand extends Command {
 	encSource.setPIDSourceType(PIDSourceType.kDisplacement);
 	encPID.setInputRange(0f,  setpoint*1.1);
   	encPID.setOutputRange(0f, maxSpeed);
-  	encPID.setAbsoluteTolerance(0.3);
+  	encPID.setPercentTolerance(2);
   	encPID.setContinuous(false);
   	encPID.setPID(encP, encI, encD, encF);
   	encPID.setSetpoint(setpoint);
@@ -161,7 +161,7 @@ public class EncoderNavX2AutoCommand extends Command {
 	RobotMap.ahrs.zeroYaw();
   	navXPID.setInputRange(-5.0f, 5.0f);
   	navXPID.setOutputRange(-0.5, 0.5);
-  	navXPID.setAbsoluteTolerance(0.1);
+  	navXPID.setPercentTolerance(2);
   	navXPID.setContinuous(false);
   	navXPID.setPID(navxP, navxI, navxD, navxF);
   	navXPID.setSetpoint(0);

@@ -71,11 +71,11 @@ public class Robot extends TimedRobot {
 		
 		m_chooser = new SendableChooser<Command>();
 		
-		m_chooser.addDefault("Turn Precise", new DriveTurnPreciseCommand(135));
+		m_chooser.addDefault("Turn Precise", new DriveTurnPreciseCommand(90));
 		m_chooser.addObject("Scale Auto", new ScaleAutoCommand());
 		m_chooser.addObject("Drive Straight", new DriveStraightCommand());
 		//m_chooser.addObject("Straight + Scale Auto", new StraightScaleAutoCommand(27));
-		m_chooser.addObject("EncoderNavx Drive", new EncoderNavX2AutoCommand(8));
+		m_chooser.addObject("EncoderNavx Drive", new EncoderNavX2AutoCommand(6));
 		m_chooser.addObject("Command Group Auto Test", new TestAutoCommandGroup());
 		m_chooser.addObject("No Auto", null);
 		

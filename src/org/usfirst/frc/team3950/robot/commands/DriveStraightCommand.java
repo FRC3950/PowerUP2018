@@ -30,7 +30,7 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 //	double D = SmartDashboard.getNumber("D (drive straight)", 0.01);
 //	double F = SmartDashboard.getNumber("F (drive straight)", 0);
 	
-	double P = 0.025;
+	double P = 0.035;
 	double I = 0.0;
 	double D = 0.0;
 	double F = 0;

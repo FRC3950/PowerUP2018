@@ -21,10 +21,15 @@ public class DriveTurnPreciseCommand extends Command implements PIDOutput  {
 	//setpoint in degrees
 	double setpoint = 0;
 	
-	double P = SmartDashboard.getNumber("P (turn)", .025);
-	double I = SmartDashboard.getNumber("I (turn)", 0.0);
-	double D = SmartDashboard.getNumber("D (turn)", 0);
-	double F = SmartDashboard.getNumber("F (turn)", 0);
+//	double P = SmartDashboard.getNumber("P (turn)", .025);
+//	double I = SmartDashboard.getNumber("I (turn)", 0.0);
+//	double D = SmartDashboard.getNumber("D (turn)", 0);
+//	double F = SmartDashboard.getNumber("F (turn)", 0);
+	
+	double P = .035;
+	double I = 0;
+	double D = 0;
+	double F = 0;
 
     public DriveTurnPreciseCommand(double input) {
         // Use requires() here to declare subsystem dependencies
