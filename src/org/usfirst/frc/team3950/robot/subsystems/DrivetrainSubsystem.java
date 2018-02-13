@@ -1,11 +1,9 @@
 package org.usfirst.frc.team3950.robot.subsystems;
 
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
-//import org.usfirst.frc.team3950.robot.Robot;
 import org.usfirst.frc.team3950.robot.RobotMap;
 import org.usfirst.frc.team3950.robot.commands.DriveCommand;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.*;
 import com.kauailabs.navx.frc.AHRS;
 
@@ -45,23 +43,28 @@ public class DrivetrainSubsystem extends Subsystem {
     	frontRight = RobotMap.frontRight;
     	backRight = RobotMap.backRight;
     	
+    	frontLeft.setNeutralMode(NeutralMode.Brake);
+    	backLeft.setNeutralMode(NeutralMode.Brake);
+    	frontRight.setNeutralMode(NeutralMode.Brake);
+    	backRight.setNeutralMode(NeutralMode.Brake);
+    	
     	SpeedControllerGroup left = new SpeedControllerGroup(frontLeft,backLeft);
     	SpeedControllerGroup right = new SpeedControllerGroup(frontRight,backRight);
     	
     	frontLeft.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.Analog, 0, 0);
     	frontLeft.setSensorPhase(false);
-    	backRight.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.Analog, 0, 0);
-    	backRight.setSensorPhase(false);
+    	frontRight.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.Analog, 0, 0);
+    	frontRight.setSensorPhase(false);
     	
     	drivetrain = new DifferentialDrive(left, right);
     	navx = RobotMap.ahrs;
     	
     	
     	//diameter in feet
-    	wheelDiameter = (1.0/3.0);
+    	//wheelDiameter = (1.0/3.0);
     	
     	
-    	wheelCircumference = .5*Math.PI;
+    wheelCircumference =  (19.0 + (11.0/16))/12.0; //(18.75)/12; //.5*Math.PI;
     	
     	
     	System.out.println("I am in drivetrainSubsystem initDefaultCommand");
@@ -87,21 +90,24 @@ public class DrivetrainSubsystem extends Subsystem {
      * why your encoders aren't working the way they should. Have you tried
      * negating them? I negated the left one. Maybe it shouldn't be.
      * Hope this was helpful. See ya! 
+     * 
+     * This is really strange, just saying. 
+     * 
      */
     
     public int getLeftEncoder() {
     	return -(frontLeft.getSelectedSensorPosition(0));
     }
     public int getRightEncoder() {
-    	return backRight.getSelectedSensorPosition(0);
+    	return frontRight.getSelectedSensorPosition(0);
     }
     public double getAverageEncoder() {
-     return (-(frontLeft.getSelectedSensorPosition(0)) + backRight.getSelectedSensorPosition(0))/2;
+     return (-(frontLeft.getSelectedSensorPosition(0)) + frontRight.getSelectedSensorPosition(0))/2;
     }
  
     public void resetEncoders() {
     	frontLeft.setSelectedSensorPosition(0, 0, 0);
-    	backRight.setSelectedSensorPosition(0, 0, 0);
+    	frontRight.setSelectedSensorPosition(0, 0, 0);
     }
     
     public double getCountDistanceFeet() {

@@ -4,6 +4,8 @@ import edu.wpi.first.wpilibj.DriverStation;
 
 public class FieldPositionAnalysis {
 	
+	/*
+	
 	String str;
 	DriverStation ds;
 	
@@ -23,4 +25,6 @@ public class FieldPositionAnalysis {
 	public String getSwitchFarPosition() {
 		return str.substring(2,3);
 	}
+	
+	*/
 }

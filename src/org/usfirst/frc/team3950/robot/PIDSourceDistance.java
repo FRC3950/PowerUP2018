@@ -26,6 +26,7 @@ public class PIDSourceDistance implements PIDSource {
 	
 	public void reset() {
 		Robot.drivetrainSubsystem.resetEncoders();
+		System.out.println("encoders have been reset");
 	}
 
 }

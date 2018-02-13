@@ -32,7 +32,7 @@ import org.usfirst.frc.team3950.robot.commands.*;
  * functions corresponding to each mode, as described in the TimedRobot
  * documentation. If you change the name of this class or the package after
  * creating this project, you must also update the build.properties file in the
- * project.
+ * project.  
  */
 public class Robot extends TimedRobot {
 
@@ -71,7 +71,7 @@ public class Robot extends TimedRobot {
 		
 		m_chooser = new SendableChooser<Command>();
 		
-		m_chooser.addDefault("Turn Precise", new DriveTurnPreciseCommand(-90));
+		m_chooser.addDefault("Turn Precise", new DriveTurnPreciseCommand(135));
 		m_chooser.addObject("Scale Auto", new ScaleAutoCommand());
 		m_chooser.addObject("Drive Straight", new DriveStraightCommand());
 		//m_chooser.addObject("Straight + Scale Auto", new StraightScaleAutoCommand(27));
@@ -111,6 +111,8 @@ public class Robot extends TimedRobot {
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 	}
+	
+	/*
 
 	private static void fieldPositionAnalysis() {
 		String str = DriverStation.getInstance().getGameSpecificMessage();
@@ -138,6 +140,7 @@ public class Robot extends TimedRobot {
 			}
 		} 
 	}
+	*/
 	
 	
 	/**
@@ -153,8 +156,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		fieldPositionAnalysis();
-		//m_autonomousCommand = m_chooser.getSelected();
+		//fieldPositionAnalysis();
+		m_autonomousCommand = m_chooser.getSelected();//new ScaleAutoCommand();//m_chooser.getSelected();
 		/*
 		try {
 			if (m_autonomousCommand.getClass() == Class.forName("org.usfirst.frc.team3950.robot.commands.ScalePositionLeftAutoCommandGroup")) {
@@ -173,7 +176,7 @@ public class Robot extends TimedRobot {
 		}
 		*/
 		
-		m_autonomousCommand = Robot.chooseAutoMode(Robot.ourFieldPosition, Robot.teamSwitchRight, Robot.teamScale);
+		//m_autonomousCommand = Robot.chooseAutoMode(Robot.ourFieldPosition, Robot.teamSwitchRight, Robot.teamScale);
 		
 		//m_autonomousCommand = new EncoderNavX2AutoCommand();
 		/*
@@ -186,10 +189,12 @@ public class Robot extends TimedRobot {
 		// schedule the autonomous command (example)
 		//robotLogger.info("I am in autoInit yay");
 		
+		/*
+		
 		SmartDashboard.putString("Switch A side is ", side.getSwitchClosePosition());
 		SmartDashboard.putString("Scale side is ", side.getScalePosition());
 		SmartDashboard.putString("Switch B side is ", side.getSwitchFarPosition());
-		
+		*/
 		
 		
 		if (m_autonomousCommand != null) {
@@ -214,8 +219,7 @@ public class Robot extends TimedRobot {
 		// this line or comment it out.
 		robotLogger.info("I am in teleopInit (be careful this is an iStripper  virus)");
 		
-		SmartDashboard.getString("Test", "Test");
-		System.out.println("Test");
+		System.out.println(SmartDashboard.getString("Test", "Test"));
 		
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();

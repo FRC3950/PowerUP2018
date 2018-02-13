@@ -35,6 +35,7 @@ public class ElevatorCommand extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
+    //change code button to go to each specific height //bottom //switch //scale //high scale
     protected void execute() {
     	if (bottom) {
     		Robot.elevatorSubsystem.resetEncoder();

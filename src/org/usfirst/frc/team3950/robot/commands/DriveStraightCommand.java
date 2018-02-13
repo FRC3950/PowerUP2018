@@ -25,10 +25,15 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 	
 
 			
-	double P = SmartDashboard.getNumber("P (drive straight)", 2.9);
-	double I = SmartDashboard.getNumber("I (drive straight)", 0.0);
-	double D = SmartDashboard.getNumber("D (drive straight)", 0.01);
-	double F = SmartDashboard.getNumber("F (drive straight)", 0);
+//	double P = SmartDashboard.getNumber("P (drive straight)", 2.9);
+//	double I = SmartDashboard.getNumber("I (drive straight)", 0.0);
+//	double D = SmartDashboard.getNumber("D (drive straight)", 0.01);
+//	double F = SmartDashboard.getNumber("F (drive straight)", 0);
+	
+	double P = 0.025;
+	double I = 0.0;
+	double D = 0.0;
+	double F = 0;
 
 
     public DriveStraightCommand() {
@@ -44,17 +49,17 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 
     	Robot.robotLogger.info("DriveStraightCommand.initialize");
 
-    	double P = SmartDashboard.getNumber("P (drive straight)", .95);
-    	double I = SmartDashboard.getNumber("I (drive straight)", 0.128);
-    	double D = SmartDashboard.getNumber("D (drive straight)", 0.075);
-    	double F = SmartDashboard.getNumber("F (drive straight)", 0);
+//    	double P = SmartDashboard.getNumber("P (drive straight)", .95);
+//    	double I = SmartDashboard.getNumber("I (drive straight)", 0.128);
+//    	double D = SmartDashboard.getNumber("D (drive straight)", 0.075);
+//    	double F = SmartDashboard.getNumber("F (drive straight)", 0);
 
 
     	yaw.reset();
     	yaw.setPIDSourceType(PIDSourceType.kDisplacement);
     	pid.setInputRange(-5.0f,  5.0f);
-    	pid.setOutputRange(-.5, 0.5);
-    	pid.setAbsoluteTolerance(0.05);
+    	pid.setOutputRange(-.5, 0.4);
+    	pid.setPercentTolerance(2);
     	pid.setContinuous(false);
     	pid.setPID(P, I, D, F);
     	pid.setSetpoint(0);

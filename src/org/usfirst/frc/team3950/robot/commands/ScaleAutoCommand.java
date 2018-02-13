@@ -16,25 +16,23 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class ScaleAutoCommand extends Command implements PIDOutput{
 	
 	PIDController pid;
-	I2C i2cBus;
 	PIDSourceDistance source;
 	
 	//constants
-	double maxSpeed = 1;
+	double maxSpeed = 0.75;
 	//setpoint is in feet
-	double setpoint = 8f;
+	double setpoint = 6f;
 	
 	
-	double P = SmartDashboard.getNumber("P (distance)", 2.7);
-	double I = SmartDashboard.getNumber("I (distance)", 0.03);
-	double D = SmartDashboard.getNumber("D (distance)", 0);
-	double F = SmartDashboard.getNumber("F (distance)", 0);
+//	double P = SmartDashboard.getNumber("P (distance)", 0.17);
+//	double I = SmartDashboard.getNumber("I (distance)", 0.001);
+//	double D = SmartDashboard.getNumber("D (distance)", 0.1);
+//	double F = SmartDashboard.getNumber("F (distance)", 0);
 	
-	double ret_val;
-	double redVal;
-	double greenVal;
-	double blueVal;
-	double clearVal;
+	double P = .2125;
+	double I = 0.003;
+	double D = 0;
+	double F = 0;
 	
 	
     public ScaleAutoCommand() {
@@ -45,41 +43,25 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	
     	source.reset();
     	source.setPIDSourceType(PIDSourceType.kDisplacement);
     	pid.setInputRange(0f,  setpoint*1.1);
     	pid.setOutputRange(0f, maxSpeed);
-    	pid.setAbsoluteTolerance(0.1);
+    	//pid.setAbsoluteTolerance(0.1);
+    	pid.setPercentTolerance(2.0);
     	pid.setContinuous(false);
     	pid.setPID(P, I, D, F);
     	pid.setSetpoint(setpoint);
     	//Robot.robotLogger.info("This logger comes BEFORE PID Enable.");
     	pid.enable();
     	//Robot.robotLogger.info("This logger comes AFTER PID Enable.");
-    	//ret_val = colorSen.init();
-    	
-    	//Robot.robotLogger.info("Initialized" + ret_val);
-    	
-    	
-    	
+
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
-    	//ret_val = colorSen.readColors();
-    	
-    	//Robot.robotLogger.info("Read Colors Value" + ret_val);
-    	
-    	/*
-    	SmartDashboard.putNumber("Red sensor", colorSen.getRedVal());
-    	SmartDashboard.putNumber("Green sensor", colorSen.getGreenVal());
-    	SmartDashboard.putNumber("Blue sensor", colorSen.getBlueVal());
-    	SmartDashboard.putNumber("Clear sensor", colorSen.getClearVal()); 
-    	*/
-
-
-    	// Robot.drivetrainSubsystem.readColor();
+    	//Noelle waz here
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -107,7 +89,10 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
     	SmartDashboard.putNumber("Right Encoder Distance", Robot.drivetrainSubsystem.getRightEncoder());
     	SmartDashboard.putNumber("Total Distance Travelled", Robot.drivetrainSubsystem.getCountDistanceFeet());
     	System.out.println("Error is " + (setpoint - Robot.drivetrainSubsystem.getCountDistanceFeet()));
+    	SmartDashboard.putNumber("Average Encoder = ", Robot.drivetrainSubsystem.getAverageEncoder());
 		SmartDashboard.putNumber("Output (Distance)", output);
+		System.out.println("Left Encoder is " + Robot.drivetrainSubsystem.getLeftEncoder());
+		System.out.println("Right Encoder is " + Robot.drivetrainSubsystem.getRightEncoder() );
 		System.out.println("ScaleAuto.output = " + output);
     	Robot.drivetrainSubsystem.Drive(-output, 0);
 		//this.output = output;

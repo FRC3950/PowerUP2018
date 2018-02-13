@@ -21,8 +21,8 @@ public class DriveTurnPreciseCommand extends Command implements PIDOutput  {
 	//setpoint in degrees
 	double setpoint = 0;
 	
-	double P = SmartDashboard.getNumber("P (turn)", .05);
-	double I = SmartDashboard.getNumber("I (turn)", 0);
+	double P = SmartDashboard.getNumber("P (turn)", .02115);
+	double I = SmartDashboard.getNumber("I (turn)", 0.0);
 	double D = SmartDashboard.getNumber("D (turn)", 0);
 	double F = SmartDashboard.getNumber("F (turn)", 0);
 
@@ -57,7 +57,6 @@ public class DriveTurnPreciseCommand extends Command implements PIDOutput  {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	System.out.println("I am in DriveTurnPrecise Execute");
     }
 
     // Make this return true when this Command no longer needs to run execute()
