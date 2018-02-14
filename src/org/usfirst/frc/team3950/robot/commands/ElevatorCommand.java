@@ -82,7 +82,7 @@ public class ElevatorCommand extends Command {
     }
 
 	public void pidWrite(double output) {
-		SmartDashboard.putNumber("output", output);
+		SmartDashboard.putNumber("Elevator output", output);
 		RobotMap.elevatorMotor.set(output);
 		RobotMap.elevatorMotorFollower.set(output);
 		//Robot.elevatorSubsystem.MotionMagic();

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3950.robot.commands;
 
+import org.usfirst.frc.team3950.robot.Logger;
 import org.usfirst.frc.team3950.robot.PIDSourceYaw;
 import org.usfirst.frc.team3950.robot.Robot;
 
@@ -42,7 +43,7 @@ public class DriveTurnPreciseCommand extends Command implements PIDOutput  {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println("Drive Turn Precise init");
+		Logger.log(Logger.LogLevel.debug, "Drive Turn Precise init");
     	yaw = new PIDSourceYaw();
     	yaw.reset();
     	yaw.setPIDSourceType(PIDSourceType.kDisplacement);

@@ -87,7 +87,7 @@ public class EncoderNavX2AutoCommand extends Command {
 
       @Override
       public double pidGet() {
-    	 System.out.println("Count distance feet = " + Robot.drivetrainSubsystem.getCountDistanceFeet());
+    	 Logger.log(Logger.LogLevel.info, "Count distance feet = " + Robot.drivetrainSubsystem.getCountDistanceFeet());
         return Robot.drivetrainSubsystem.getCountDistanceFeet();
       }
        	
@@ -118,7 +118,8 @@ public class EncoderNavX2AutoCommand extends Command {
       @Override
       public void pidWrite(double output) {
     	  encOutput = output;
-    	  System.out.println("Output Enc = " + output);
+
+  		  Logger.log(Logger.LogLevel.info, "Output Enc = " + output);
     	  encSumError = encSumError + encPID.getError();
       }
     };
@@ -127,7 +128,7 @@ public class EncoderNavX2AutoCommand extends Command {
       @Override
       public void pidWrite(double output) {
     	  navxOutput = output;
-    	  System.out.println("Output NavX = " + output);
+    	  Logger.log(Logger.LogLevel.info, "Output NavX = " + output);
     	  navXSumError = navXSumError + navXPID.getError();
       }
     };
@@ -150,7 +151,7 @@ public class EncoderNavX2AutoCommand extends Command {
 	  navXSumError = 0;
     // Save distance at start (I don't like zeroing encoder counts - but this is
     // an option as well)
-	 System.out.println("I am in EncNavX2 Init");
+	 Logger.log(Logger.LogLevel.info, "I am in EncNavX2 Init");
 	 RobotMap.ahrs.reset();
 	 Robot.drivetrainSubsystem.resetEncoders();
 	  
@@ -181,7 +182,7 @@ public class EncoderNavX2AutoCommand extends Command {
   @Override
   protected void execute() {
 	  
-	  System.out.println("I am in EncNavX2 Execute");
+	  Logger.log(Logger.LogLevel.debug, "I am in EncNavX2 Execute");
 	  
 	  Logger.log(Logger.LogLevel.info, "nAVx Error is " + navXPID.getError());
 	  Logger.log(Logger.LogLevel.info, "Enc Error is " + encPID.getError());

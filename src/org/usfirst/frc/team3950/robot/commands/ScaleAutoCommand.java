@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3950.robot.commands;
 
+import org.usfirst.frc.team3950.robot.Logger;
 import org.usfirst.frc.team3950.robot.PIDSourceDistance;
 import org.usfirst.frc.team3950.robot.Robot;
 
@@ -88,12 +89,12 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
     	SmartDashboard.putNumber("Left Encoder Distance", Robot.drivetrainSubsystem.getLeftEncoder());
     	SmartDashboard.putNumber("Right Encoder Distance", Robot.drivetrainSubsystem.getRightEncoder());
     	SmartDashboard.putNumber("Total Distance Travelled", Robot.drivetrainSubsystem.getCountDistanceFeet());
-    	System.out.println("Error is " + (setpoint - Robot.drivetrainSubsystem.getCountDistanceFeet()));
+    	Logger.log(Logger.LogLevel.info, "Error is " + (setpoint - Robot.drivetrainSubsystem.getCountDistanceFeet()));
     	SmartDashboard.putNumber("Average Encoder = ", Robot.drivetrainSubsystem.getAverageEncoder());
 		SmartDashboard.putNumber("Output (Distance)", output);
-		System.out.println("Left Encoder is " + Robot.drivetrainSubsystem.getLeftEncoder());
-		System.out.println("Right Encoder is " + Robot.drivetrainSubsystem.getRightEncoder() );
-		System.out.println("ScaleAuto.output = " + output);
+		Logger.log(Logger.LogLevel.info, "Left Encoder is " + Robot.drivetrainSubsystem.getLeftEncoder());
+		Logger.log(Logger.LogLevel.info, "Right Encoder is " + Robot.drivetrainSubsystem.getRightEncoder());
+		Logger.log(Logger.LogLevel.info, "ScaleAuto.output = " + output);
     	Robot.drivetrainSubsystem.Drive(-output, 0);
 		//this.output = output;
 
