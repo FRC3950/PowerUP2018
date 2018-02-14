@@ -4,7 +4,6 @@ import org.usfirst.frc.team3950.robot.Logger;
 import org.usfirst.frc.team3950.robot.PIDSourceDistance;
 import org.usfirst.frc.team3950.robot.Robot;
 
-import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSourceType;
