@@ -47,7 +47,6 @@ public class DriveStraightCommand extends Command implements PIDOutput {
     // Called just before this Command runs the first time
     protected void initialize() {
 
-    	Robot.robotLogger.info("DriveStraightCommand.initialize");
 
 //    	double P = SmartDashboard.getNumber("P (drive straight)", .95);
 //    	double I = SmartDashboard.getNumber("I (drive straight)", 0.128);
@@ -115,7 +114,6 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 		//Robot.robotLogger.debug("Output = " + output);
     	Robot.drivetrainSubsystem.Drive(SmartDashboard.getNumber("Speed", -0.5), output);
 		// TODO Auto-generated method stub
-		Robot.robotLogger.debug("DriveStraightCommand.output = " + output);
     	Robot.drivetrainSubsystem.Drive(SmartDashboard.getNumber("Speed", -1), output);
 		this.output = output;
 

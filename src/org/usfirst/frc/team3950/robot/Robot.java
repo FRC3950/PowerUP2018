@@ -21,8 +21,8 @@ import org.usfirst.frc.team3950.robot.subsystems.ElevatorSubsystem;
 import org.usfirst.frc.team3950.robot.subsystems.IntakeSubsystem;
 import org.usfirst.frc.team3950.robot.subsystems.RampSubsystem;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 import org.usfirst.frc.team3950.robot.commands.*;
 //import org.usfirst.frc.team3950.robot.subsystems.*;
 
@@ -48,12 +48,13 @@ public class Robot extends TimedRobot {
 	
 	public static String ourFieldPosition = "";
 
-	public static Logger robotLogger = LoggerFactory.getLogger(Robot.class);
+	//public static Logger robotLogger = LoggerFactory.getLogger(Robot.class);
 	
 	public static FieldPositionAnalysis side = new FieldPositionAnalysis();
 	
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
+	SendableChooser<Logger.LogLevel> logChooser = new SendableChooser<>();
 	
 	public static DrivetrainSubsystem drivetrainSubsystem = new DrivetrainSubsystem();
 	public static IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
@@ -70,6 +71,11 @@ public class Robot extends TimedRobot {
 		oi = new OI();
 		
 		m_chooser = new SendableChooser<Command>();
+		logChooser = new SendableChooser<Logger.LogLevel>();
+		
+		logChooser.addObject("Info", Logger.LogLevel.info);
+		logChooser.addObject("Debug", Logger.LogLevel.debug);
+		logChooser.addObject("Trace", Logger.LogLevel.trace);
 		
 		m_chooser.addDefault("Turn Precise", new DriveTurnPreciseCommand(90));
 		m_chooser.addObject("Scale Auto", new ScaleAutoCommand());
@@ -213,13 +219,20 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
+		
+		Logger.loggerLogLevel = logChooser.getSelected();
+		if(Logger.loggerLogLevel == null) {
+			Logger.loggerLogLevel = Logger.LogLevel.info;
+		}
+		
+		Logger.log(Logger.LogLevel.info, "Hello World info");
+		Logger.log(Logger.LogLevel.debug, "Hello World debug");
+		Logger.log(Logger.LogLevel.trace, "Hello World trace");
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		robotLogger.info("I am in teleopInit (be careful this is an iStripper  virus)");
-		
-		System.out.println(SmartDashboard.getString("Test", "Test"));
+		//robotLogger.info("I am in teleopInit (be careful this is an iStripper  virus)");
 		
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();

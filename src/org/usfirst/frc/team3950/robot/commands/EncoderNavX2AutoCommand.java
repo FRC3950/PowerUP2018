@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3950.robot.commands;
 
+import org.usfirst.frc.team3950.robot.Logger;
 import org.usfirst.frc.team3950.robot.PIDOutputDistance;
 import org.usfirst.frc.team3950.robot.PIDOutputYaw;
 import org.usfirst.frc.team3950.robot.PIDSourceDistance;
@@ -31,7 +32,7 @@ public class EncoderNavX2AutoCommand extends Command {
 	
 	//straight drive values
 	double navxP = SmartDashboard.getNumber("P (drive straight)", 0.032);
-	double navxI = SmartDashboard.getNumber("I (drive straight)", 0.0001);
+	double navxI = SmartDashboard.getNumber("I (drive straight)", 0.0);
 	double navxD = SmartDashboard.getNumber("D (drive straight)", 0.0);
 	double navxF = SmartDashboard.getNumber("F (drive straight)", 0);
 
@@ -42,6 +43,9 @@ public class EncoderNavX2AutoCommand extends Command {
   private PIDController encPID;
 
   private PIDController navXPID;
+  
+  double encSumError = 0.0;
+  double navXSumError = 0.0;
 
   // Drive subsystem that will expose motor control and distrance traveled
 
@@ -52,7 +56,7 @@ public class EncoderNavX2AutoCommand extends Command {
   PIDSourceDistance encSource;
   PIDSourceYaw navxSource;
   
-	double maxSpeed = 1;
+	double maxSpeed = .75;
 	double setpoint = 0;
   /**
    * Command to use PID control to drive a fixed distance.
@@ -115,6 +119,7 @@ public class EncoderNavX2AutoCommand extends Command {
       public void pidWrite(double output) {
     	  encOutput = output;
     	  System.out.println("Output Enc = " + output);
+    	  encSumError = encSumError + encPID.getError();
       }
     };
 
@@ -123,14 +128,14 @@ public class EncoderNavX2AutoCommand extends Command {
       public void pidWrite(double output) {
     	  navxOutput = output;
     	  System.out.println("Output NavX = " + output);
+    	  navXSumError = navXSumError + navXPID.getError();
       }
     };
 
     // Initialize PID controllers
     encPID = new PIDController(encP, encI, encD, encF, encSource, encOut);
     navXPID = new PIDController(navxP, navxI, navxD, navxF, navxSource, navxOut);
-
-
+    
     // If debugging PID, then pollute dash board with some tuning values
 //    if (DEBUG) {
 //      SmartDashboard.putData("Left PID", encPID);
@@ -140,6 +145,9 @@ public class EncoderNavX2AutoCommand extends Command {
 
   @Override
   protected void initialize() {
+	  
+	  encSumError = 0;
+	  navXSumError = 0;
     // Save distance at start (I don't like zeroing encoder counts - but this is
     // an option as well)
 	 System.out.println("I am in EncNavX2 Init");
@@ -174,6 +182,9 @@ public class EncoderNavX2AutoCommand extends Command {
   protected void execute() {
 	  
 	  System.out.println("I am in EncNavX2 Execute");
+	  
+	  Logger.log(Logger.LogLevel.info, "nAVx Error is " + navXPID.getError());
+	  Logger.log(Logger.LogLevel.info, "Enc Error is " + encPID.getError());
 	  
 	  // do something with the encOuptut and navxOutput 
 	  if(encOutput != Double.MAX_VALUE && navxOutput != Double.MAX_VALUE) {
