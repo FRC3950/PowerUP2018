@@ -1,5 +1,8 @@
 package org.usfirst.frc.team3950.robot.commands;
 
+import org.usfirst.frc.team3950.robot.Logger;
+import org.usfirst.frc.team3950.robot.Robot;
+
 //import org.usfirst.frc.team3950.robot.FieldPositionAnalysis;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -34,7 +37,8 @@ public class ScalePositionLeftAutoCommandGroup extends CommandGroup {
     		addSequential(new EncoderNavX2AutoCommand(8));
     		addSequential(new OuttakeAutoCommand());
     	} else {
-    		System.out.println("ScalePositionLeftAutoCommand BIG ERROR - string passed in is equal to:" + location);
+
+    		Logger.log(Logger.LogLevel.info, "ScalePositionLeftAutoCommand BIG ERROR - string passed in is equal to:" + location);
     	}
     	
 	}
