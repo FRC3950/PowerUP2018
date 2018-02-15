@@ -39,7 +39,7 @@ public class ElevatorPIDCommand extends Command implements PIDOutput{
     	source.setPIDSourceType(PIDSourceType.kDisplacement);
     	pid.setInputRange(0,  79);
     	pid.setOutputRange(-1, 1);
-    	pid.setAbsoluteTolerance(0.3);
+    	pid.setPercentTolerance(2);
     	pid.setContinuous(false);
     	pid.setPID(P, I, D, F);
     	pid.setSetpoint(setpoint);
