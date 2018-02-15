@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3950.robot.commands;
 
+import org.usfirst.frc.team3950.robot.Logger;
+import org.usfirst.frc.team3950.robot.Logger.LogLevel;
 import org.usfirst.frc.team3950.robot.PIDSourceElevator;
 import org.usfirst.frc.team3950.robot.Robot;
 
@@ -75,5 +77,6 @@ public class ElevatorPIDCommand extends Command implements PIDOutput{
 	public void pidWrite(double output) {
 		// TODO Auto-generated method stub
 		Robot.elevatorSubsystem.elevatorControl(output);
+		Logger.log(LogLevel.info, "Encoder Height " + Robot.elevatorSubsystem.getElevatorHeight());
 	}
 }

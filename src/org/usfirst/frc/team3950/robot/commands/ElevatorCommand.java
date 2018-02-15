@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3950.robot.commands;
 
+import org.usfirst.frc.team3950.robot.Logger;
+import org.usfirst.frc.team3950.robot.Logger.LogLevel;
 import org.usfirst.frc.team3950.robot.Robot;
 import org.usfirst.frc.team3950.robot.RobotMap;
 
@@ -19,6 +21,10 @@ public class ElevatorCommand extends Command {
 	boolean bottom = false;
 	boolean top = false;
 	
+	double tolerance  = 0.1;
+	double getY = 0;
+	
+	
 	double P = SmartDashboard.getNumber("P (elevator)", .45);
 	double I = SmartDashboard.getNumber("I (elevator)", 0.128);
 	double D = SmartDashboard.getNumber("D (elevator)", 0.075);
@@ -37,18 +43,26 @@ public class ElevatorCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     //change code button to go to each specific height //bottom //switch //scale //high scale
     protected void execute() {
+    	getY = controller.getY(Hand.kLeft);
+    	
+    	Logger.log(LogLevel.info, "y axis is " + getY);
+    	
+    	if(getY >= -tolerance && getY <= tolerance) {
+    		getY = 0;
+    	}
+    	
     	if (bottom) {
     		Robot.elevatorSubsystem.resetEncoder();
-    		if (controller.getY(Hand.kLeft) >= 0) {
-    			Robot.elevatorSubsystem.elevatorControl(controller.getY(Hand.kLeft));
+    		if (getY >= 0) {
+    			Robot.elevatorSubsystem.elevatorControl(getY);
     		}
     	}
     	else if (top) {
-    		if (controller.getY(Hand.kLeft) <= 0) {
-    			Robot.elevatorSubsystem.elevatorControl(controller.getY(Hand.kLeft));
+    		if (getY <= 0) {
+    			Robot.elevatorSubsystem.elevatorControl(getY);
     		}
     	} else {
-    		Robot.elevatorSubsystem.elevatorControl(controller.getY(Hand.kLeft));
+    		Robot.elevatorSubsystem.elevatorControl(getY);
     	}
     	
     	if (Robot.elevatorSubsystem.getMotorValue() == 0) {
