@@ -15,9 +15,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class ElevatorPIDCommand extends Command implements PIDOutput{
- 	double P = SmartDashboard.getNumber("P (elevator)", .45);
-	double I = SmartDashboard.getNumber("I (elevator)", 0.128);
-	double D = SmartDashboard.getNumber("D (elevator)", 0.075);
+ 	double P = SmartDashboard.getNumber("P (elevator)", .002);
+	double I = SmartDashboard.getNumber("I (elevator)", 0.001);
+	double D = SmartDashboard.getNumber("D (elevator)", 0.0);
 	double F = SmartDashboard.getNumber("F (elevator)", 0);
 	
 	PIDSourceElevator source;
@@ -39,7 +39,7 @@ public class ElevatorPIDCommand extends Command implements PIDOutput{
     	source.setPIDSourceType(PIDSourceType.kDisplacement);
     	pid.setInputRange(0,  79);
     	pid.setOutputRange(-1, 1);
-    	pid.setPercentTolerance(2);
+    	pid.setPercentTolerance(3);
     	pid.setContinuous(false);
     	pid.setPID(P, I, D, F);
     	pid.setSetpoint(setpoint);

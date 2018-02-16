@@ -20,7 +20,7 @@ import org.usfirst.frc.team3950.robot.subsystems.ElevatorSubsystem;
 //import org.usfirst.frc.team3950.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team3950.robot.subsystems.IntakeSubsystem;
 import org.usfirst.frc.team3950.robot.subsystems.RampSubsystem;
-
+import org.usfirst.frc.team3950.robot.Logger.LogLevel;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 import org.usfirst.frc.team3950.robot.commands.*;
@@ -83,7 +83,7 @@ public class Robot extends TimedRobot {
 		//m_chooser.addObject("Straight + Scale Auto", new StraightScaleAutoCommand(27));
 		m_chooser.addObject("EncoderNavx Drive", new EncoderNavX2AutoCommand(6));
 		m_chooser.addObject("Command Group Auto Test", new TestAutoCommandGroup());
-		m_chooser.addObject("Elevator Auto", new ElevatorPIDCommand(50));
+		m_chooser.addObject("Elevator Auto", new ElevatorPIDCommand(38));
 		m_chooser.addObject("No Auto", null);
 		
 		SmartDashboard.putData("Auto mode", m_chooser);
@@ -248,6 +248,8 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 	//	robotLogger.info("I am in teleopPeriodic");
 		Scheduler.getInstance().run();
+		
+		Logger.log(Logger.LogLevel.info, "Limit switch pressed is " + RobotMap.elevatorBottomLimitSwitch.get());
 	}
 
 	/**

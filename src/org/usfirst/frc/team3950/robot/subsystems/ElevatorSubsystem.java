@@ -1,4 +1,4 @@
-package org.usfirst.frc.team3950.robot.subsystems;
+ package org.usfirst.frc.team3950.robot.subsystems;
 
 //import org.usfirst.frc.team3950.robot.Robot;
 import org.usfirst.frc.team3950.robot.RobotMap;
@@ -49,7 +49,7 @@ public class ElevatorSubsystem extends Subsystem {
     	elevatorMotor.setSensorPhase(false);
  
     	//distance per rotation in inches
-    	distancePerRotation = 0;
+    	distancePerRotation = (19 + (11/16));
     	
     	}
  

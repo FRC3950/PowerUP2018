@@ -25,9 +25,9 @@ public class ElevatorCommand extends Command {
 	double getY = 0;
 	
 	
-	double P = SmartDashboard.getNumber("P (elevator)", .45);
-	double I = SmartDashboard.getNumber("I (elevator)", 0.128);
-	double D = SmartDashboard.getNumber("D (elevator)", 0.075);
+	double P = SmartDashboard.getNumber("P (elevator)", .002);
+	double I = SmartDashboard.getNumber("I (elevator)", 0.001);
+	double D = SmartDashboard.getNumber("D (elevator)", 0.0);
 	double F = SmartDashboard.getNumber("F (elevator)", 0);
 
     public ElevatorCommand() {
@@ -41,11 +41,12 @@ public class ElevatorCommand extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    //change code button to go to each specific height //bottom //switch //scale //high scale
+    //change code button to go to each specific height //bottom //switch //scale //high scale //or not
     protected void execute() {
+    	System.out.println("I am in execute of el com");
     	getY = controller.getY(Hand.kLeft);
     	
-    	Logger.log(LogLevel.info, "y axis is " + getY);
+    	//Logger.log(LogLevel.info, "y axis is " + getY);
     	
     	if(getY >= -tolerance && getY <= tolerance) {
     		getY = 0;
@@ -83,7 +84,7 @@ public class ElevatorCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
