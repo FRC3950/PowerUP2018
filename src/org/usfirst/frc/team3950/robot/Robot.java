@@ -7,8 +7,10 @@
 
 package org.usfirst.frc.team3950.robot;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 //import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -37,6 +39,8 @@ import org.usfirst.frc.team3950.robot.commands.*;
 public class Robot extends TimedRobot {
 
 	public static OI oi;
+	
+	//XboxController controller;
 	
 	public static String switchClosePosition = "";
 	public static String scalePosition = "";
@@ -76,14 +80,14 @@ public class Robot extends TimedRobot {
 		teamScaleAuto.addObject("No", false);
 		teamScaleAuto.setName("teamScaleAuto");
 		SmartDashboard.putData("teamScaleAuto", teamScaleAuto);
-		SmartDashboard.putString("Can team do scale auto?", "");
+		//SmartDashboard.putString("Can team do scale auto?", "");
 		
 		teamSwitchRightAuto = new SendableChooser();
 		teamSwitchRightAuto.addDefault("Yes", true);
 		teamSwitchRightAuto.addObject("No", false);
 		teamSwitchRightAuto.setName("teamSwitchRightAuto");
 		SmartDashboard.putData("teamSwitchRightAuto", teamSwitchRightAuto);
-		SmartDashboard.putString("Can team do switch right auto?", "");
+		//SmartDashboard.putString("Can team do switch right auto?", "");
 		
 		fieldPosition = new SendableChooser();
 		fieldPosition.addDefault("Left", true);
@@ -91,7 +95,7 @@ public class Robot extends TimedRobot {
 		fieldPosition.addObject("Center", false);
 		fieldPosition.setName("fieldPosition");
 		SmartDashboard.putData("fieldPosition", fieldPosition);
-		SmartDashboard.putString("What is our field position?", "");
+		//SmartDashboard.putString("What is our field position?", "");
 		
 		autoChooser = new SendableChooser<Command>();
 		logChooser = new SendableChooser<Logger.LogLevel>();
@@ -107,6 +111,8 @@ public class Robot extends TimedRobot {
 		autoChooser.addObject("EncoderNavx Drive", new EncoderNavX2AutoCommand(6));
 		autoChooser.addObject("Command Group Auto Test", new TestAutoCommandGroup());
 		autoChooser.addObject("Elevator Auto", new ElevatorPIDCommand(38));
+		autoChooser.addObject("Outtake Auto Test", new IntakeOuttakeAutoCommand(-.5));
+		autoChooser.addObject("Intake Auto Test", new IntakeOuttakeAutoCommand(.5));
 		autoChooser.addObject("No Auto", null);
 		SmartDashboard.putData("Auto mode", autoChooser);
 		
@@ -116,6 +122,12 @@ public class Robot extends TimedRobot {
 		
 		SmartDashboard.putNumber("P (distance)", 0.278);
 		SmartDashboard.putNumber("I (distance)", 0.0001);
+		
+		
+		SmartDashboard.putNumber("P (elevator)", 0.008);
+		SmartDashboard.putNumber("I (elevator)", 0.00001);
+		SmartDashboard.putNumber("D (elevator)", 0.0001);
+		
 //		SmartDashboard.putNumber("D (drive straight)", 0);
 //		SmartDashboard.putNumber("F (drive straight)", 0);
 //		SmartDashboard.putNumber("Speed", -0.75);
@@ -269,6 +281,9 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 	//	robotLogger.info("I am in teleopPeriodic");
 		Scheduler.getInstance().run();
+		
+//		controller = new XboxController(1);
+//		System.out.println("controller value is " + controller.getTriggerAxis(Hand.kRight));
 		
 		//Logger.log(Logger.LogLevel.info, "Limit switch pressed is " + RobotMap.elevatorBottomLimitSwitch.get());
 	}

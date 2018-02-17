@@ -23,11 +23,11 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI 
-{ // OI master class begin
+{ 
 	
 		public Joystick driveStick = new Joystick(0);
 		public XboxController xboxcontroller = new XboxController(1);
-		//Begin import of 2017 steamwork 2017 input code
+		
 	    public Button driveStick3Button = new JoystickButton(driveStick, 3);
 	    public Button driveStick4Button = new JoystickButton(driveStick, 4);
 	    public Button driveStick1Button = new JoystickButton(driveStick, 1);
@@ -39,27 +39,26 @@ public class OI
 	    public Button driveStick9Button = new JoystickButton(driveStick, 9);
 	    public Button driveStick10Button = new JoystickButton(driveStick, 10);
 	    public Button driveStick11Button = new JoystickButton(driveStick, 11);
-	    public Button driveStick12Button = new JoystickButton(driveStick, 12);	
-	    // Xbox controls
+	    public Button xboxControllerXButton = new JoystickButton(xboxcontroller, 3);
+		public Button driveStick12Button = new JoystickButton(driveStick, 12);	
+
 	    public Button xboxControllerAButton = new JoystickButton(xboxcontroller, 1);
 	    public Button xboxControllerBButton = new JoystickButton(xboxcontroller, 2);
-	    public Button xboxControllerXButton = new JoystickButton(xboxcontroller, 3);
 	    public Button xboxControllerYButton = new JoystickButton(xboxcontroller, 4);
 	    public Button xboxControllerLBButton = new JoystickButton(xboxcontroller, 5);
 	    public Button xboxControllerRBButton = new JoystickButton(xboxcontroller, 6);
 	    public Button xboxControllerLeftStickButton = new JoystickButton(xboxcontroller, 7);
 	    
-	//End button assignment import
+
 	   // public Button xboxControllerLTButton = new JoystickButton(xboxcontroller, 7);
 	   // public Button xboxControllerRTButton = new JoystickButton(xboxcontroller, 8);
 	    
 	    
-	    //Begin 2017 steamwork control import, removed xbox controller input
 	    public OI() 
 	    {
 	    	System.out.println("Button assignment initialized.");
 	    	
-	    	//Joystick assignment
+
 	    	//driveStick3Button.whenPressed(new DriveStraightCommand());
 //	    	driveStick4Button.whenPressed(new   );
 //	    	driveStick1Button.whenPressed(new   );
@@ -68,13 +67,13 @@ public class OI
 //	    	driveStick6Button.whenPressed(new   );
 //	    	driveStick11Button.whenPressed(new   );
 //	    	driveStick12Button.whenPressed(new   );
-	    	//Joystick assignment end
+
 	    	
-	    	//Xbox assignment start
-	    	xboxControllerAButton.whenPressed(new ElevatorPIDCommand(21));
-	    	xboxControllerXButton.whenPressed(new ElevatorPIDCommand(50));
-	    	xboxControllerYButton.whenPressed(new ElevatorPIDCommand(55));
-	    	xboxControllerBButton.whenPressed(new ElevatorPIDCommand(74));
+
+	    	xboxControllerAButton.whenPressed(new ElevatorPIDCommand(29));
+	    	xboxControllerXButton.whenPressed(new ElevatorPIDCommand(58));
+	    	xboxControllerYButton.whenPressed(new ElevatorPIDCommand(61));
+	    	xboxControllerBButton.whenPressed(new ElevatorPIDCommand(79));
 
 	        //	xboxControllerBButton.whenPressed(new BallOuttakeCommand());
 	        //	xboxControllerYButton.whenPressed(new ShooterIndexerCommand());
@@ -82,13 +81,11 @@ public class OI
 	        //	xboxControllerXButton.whenPressed(new GearDistanceCommand());
 	       // xboxControllerLBButton.whenPressed(new RampCommand());
 	        // 	xboxControllerYButton.whenPressed(new GearIntakeStartCommand());
-	        xboxControllerXButton.whenPressed(new ElevatorPIDCommand(1));
-	       	xboxControllerAButton.whenPressed(new IntakeGrabCommand());
-	        //  Xbox end
+	       	//xboxControllerAButton.whenPressed(new IntakeGrabCommand());
 	        xboxControllerLeftStickButton.whenPressed(new ElevatorShiftCommand());
 	    }
-	    //End 2017 control import
-} // End OI master class
+	 
+} 
 
 
 	

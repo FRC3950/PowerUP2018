@@ -37,7 +37,8 @@ public class ScalePositionAutoCommandGroup extends CommandGroup {
         		addSequential(new EncoderNavX2AutoCommand(8));
         		addSequential(new DriveTurnPreciseCommand(90));
         		addSequential(new EncoderNavX2AutoCommand(8));
-        		addSequential(new OuttakeAutoCommand());
+        		addSequential(new ElevatorPIDCommand(79));
+        		addSequential(new IntakeOuttakeAutoCommand(-.5));
         	}
         	
         	//Command Group for when scale is on right side
@@ -49,7 +50,8 @@ public class ScalePositionAutoCommandGroup extends CommandGroup {
         		addSequential(new EncoderNavX2AutoCommand(8));
         		addSequential(new DriveTurnPreciseCommand(-90));
         		addSequential(new EncoderNavX2AutoCommand(8));
-        		addSequential(new OuttakeAutoCommand());
+        		addSequential(new ElevatorPIDCommand(79));
+        		addSequential(new IntakeOuttakeAutoCommand(-.5));
         	} else {
         		Logger.log(Logger.LogLevel.info, "ScalePositionLeftAutoCommand BIG ERROR - string passed in is equal to:" + scaleSide);
         	}
@@ -64,6 +66,8 @@ public class ScalePositionAutoCommandGroup extends CommandGroup {
     				addSequential(new EncoderNavX2AutoCommand(8));
     				addSequential(new DriveTurnPreciseCommand(90));
     				addSequential(new EncoderNavX2AutoCommand(8));
+    				addSequential(new ElevatorPIDCommand(79));
+            		addSequential(new IntakeOuttakeAutoCommand(-.5));
     			}
 	    	
     			//Command Group for when scale is on right side
@@ -75,6 +79,8 @@ public class ScalePositionAutoCommandGroup extends CommandGroup {
     				addSequential(new EncoderNavX2AutoCommand(8));
     				addSequential(new DriveTurnPreciseCommand(-90));
     				addSequential(new EncoderNavX2AutoCommand(8));
+    				addSequential(new ElevatorPIDCommand(79));
+            		addSequential(new IntakeOuttakeAutoCommand(-.5));
     			}
     		}
     	}

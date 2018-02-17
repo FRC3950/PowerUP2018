@@ -8,21 +8,21 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class OuttakeAutoCommand extends Command {
+public class IntakeOuttakeAutoCommand extends Command {
 	
 	double speed = 0;
 	Timer timer;
 	
-    public OuttakeAutoCommand() {
+    public IntakeOuttakeAutoCommand(double input) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	
     	requires(Robot.intakeSubsystem);
+    	
+    	speed = input;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	speed = 0.5;
     	timer = new Timer();
     	timer.start();
     }
@@ -30,10 +30,10 @@ public class OuttakeAutoCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(timer.get() <= 5) {
-    		Robot.intakeSubsystem.Outtake(speed);
+    		Robot.intakeSubsystem.Intake(speed);
     	} else {
     		timer.stop();
-    		Robot.intakeSubsystem.Outtake(0);
+    		Robot.intakeSubsystem.Intake(0);
     	}
     	
     }

@@ -26,6 +26,5 @@ public class BaselineAutoCommandGroup extends CommandGroup {
         // arm.
     	
     	addSequential(new EncoderNavX2AutoCommand(8));
-    	addSequential(new OuttakeAutoCommand());
     }
 }

@@ -56,6 +56,7 @@ public class ElevatorCommand extends Command {
     	
     	if(RobotMap.elevatorBottomLimitSwitch.get() /*|| RobotMap.elevatorTopLimitSwitch.get()*/) {
     		getY = 0;
+    		Robot.elevatorSubsystem.resetEncoder();
     	}
     	
     	if (bottom) {

@@ -23,7 +23,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class EncoderNavX2AutoCommand extends Command { 
   // You will need to adjust your PID constants
-	
+	//This is not a joke this is a last cry for help as everyday I code I come closer and closer to ending it all.
+	//Every command prompt, every semi-colon, every click of the keyboard is one step closer to me leaving
+	//The next person that tells me to code is coming with me
+	//From Bryce
 	//encoder values
 	double encP = SmartDashboard.getNumber("P (distance)", .278);
 	double encI = SmartDashboard.getNumber("I (distance)", 0.0001);

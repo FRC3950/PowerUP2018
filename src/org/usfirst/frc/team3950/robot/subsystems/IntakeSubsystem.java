@@ -71,11 +71,6 @@ public class IntakeSubsystem extends Subsystem {
     	right.set(-trigger);    	
     }
     
-    public void Outtake(double speed) {
-    	left.set(-speed);
-    	right.set(speed);
-    }
-    
     public void intakeVertical(double speed) {
     	vertical.set(speed);
     }

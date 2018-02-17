@@ -20,7 +20,8 @@ public class SwitchPositionAutoCommandGroup extends CommandGroup {
     		addSequential(new EncoderNavX2AutoCommand(8));
     		addSequential(new DriveTurnPreciseCommand(90));
     		addSequential(new EncoderNavX2AutoCommand(8));
-    		addSequential(new OuttakeAutoCommand());
+    		addSequential(new ElevatorPIDCommand(29));
+    		addSequential(new IntakeOuttakeAutoCommand(-.5));
     	}
     	
     	//Command Group for when switch is on right side
@@ -32,7 +33,8 @@ public class SwitchPositionAutoCommandGroup extends CommandGroup {
     		addSequential(new EncoderNavX2AutoCommand(8));
     		addSequential(new DriveTurnPreciseCommand(-90));
     		addSequential(new EncoderNavX2AutoCommand(8));
-    		addSequential(new OuttakeAutoCommand());
+    		addSequential(new ElevatorPIDCommand(29));
+    		addSequential(new IntakeOuttakeAutoCommand(-.5));
     	}
     }
     
@@ -46,6 +48,8 @@ public class SwitchPositionAutoCommandGroup extends CommandGroup {
     		addSequential(new EncoderNavX2AutoCommand(8));
     		addSequential(new DriveTurnPreciseCommand(90));
     		addSequential(new EncoderNavX2AutoCommand(8));
+    		addSequential(new ElevatorPIDCommand(29));
+    		addSequential(new IntakeOuttakeAutoCommand(-.5));
     	} else {
     		
     		//write right position to right switch code in here
@@ -54,6 +58,8 @@ public class SwitchPositionAutoCommandGroup extends CommandGroup {
     		addSequential(new EncoderNavX2AutoCommand(8));
     		addSequential(new DriveTurnPreciseCommand(-90));
     		addSequential(new EncoderNavX2AutoCommand(8));
+    		addSequential(new ElevatorPIDCommand(29));
+    		addSequential(new IntakeOuttakeAutoCommand(-.5));
     		
     	}
     	
