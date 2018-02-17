@@ -71,7 +71,11 @@ public class OI
 	    	//Joystick assignment end
 	    	
 	    	//Xbox assignment start
-	    	//  xboxControllerBButton.whenPressed(new BallIntakeCommand());
+	    	xboxControllerAButton.whenPressed(new ElevatorPIDCommand(21));
+	    	xboxControllerXButton.whenPressed(new ElevatorPIDCommand(50));
+	    	xboxControllerYButton.whenPressed(new ElevatorPIDCommand(55));
+	    	xboxControllerBButton.whenPressed(new ElevatorPIDCommand(74));
+
 	        //	xboxControllerBButton.whenPressed(new BallOuttakeCommand());
 	        //	xboxControllerYButton.whenPressed(new ShooterIndexerCommand());
 	        xboxControllerRBButton.whenPressed(new IntakeVerticalCommand());

@@ -46,8 +46,6 @@ public class Robot extends TimedRobot {
 	public static String teamSwitchRight = "";
 	public static String teamSwitchLeft = "";
 	
-	public static String ourFieldPosition = "";
-
 	//public static Logger robotLogger = LoggerFactory.getLogger(Robot.class);
 	
 	public static FieldPositionAnalysis side = new FieldPositionAnalysis();
@@ -55,6 +53,9 @@ public class Robot extends TimedRobot {
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 	SendableChooser<Logger.LogLevel> logChooser = new SendableChooser<>();
+	SendableChooser teamScaleAuto = null;
+	SendableChooser teamSwitchRightAuto = null;
+	SendableChooser fieldPosition = null;
 	
 	public static DrivetrainSubsystem drivetrainSubsystem = new DrivetrainSubsystem();
 	public static IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
@@ -69,6 +70,28 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
+		
+		teamScaleAuto = new SendableChooser();
+		teamScaleAuto.addDefault("Yes", true);
+		teamScaleAuto.addObject("No", false);
+		teamScaleAuto.setName("teamScaleAuto");
+		SmartDashboard.putData("teamScaleAuto", teamScaleAuto);
+		SmartDashboard.putString("Can team do scale auto?", "");
+		
+		teamSwitchRightAuto = new SendableChooser();
+		teamSwitchRightAuto.addDefault("Yes", true);
+		teamSwitchRightAuto.addObject("No", false);
+		teamSwitchRightAuto.setName("teamSwitchRightAuto");
+		SmartDashboard.putData("teamSwitchRightAuto", teamSwitchRightAuto);
+		SmartDashboard.putString("Can team do switch right auto?", "");
+		
+		fieldPosition = new SendableChooser();
+		fieldPosition.addDefault("Left", true);
+		fieldPosition.addObject("Right", false);
+		fieldPosition.addObject("Center", false);
+		fieldPosition.setName("fieldPosition");
+		SmartDashboard.putData("fieldPosition", fieldPosition);
+		SmartDashboard.putString("What is our field position?", "");
 		
 		m_chooser = new SendableChooser<Command>();
 		logChooser = new SendableChooser<Logger.LogLevel>();
@@ -88,10 +111,6 @@ public class Robot extends TimedRobot {
 		
 		SmartDashboard.putData("Auto mode", m_chooser);
 		
-		Robot.teamScale = SmartDashboard.getString("Can team do Scale Auto (Y/N)", null);
-		Robot.teamSwitchRight = SmartDashboard.getString("Can team do Switch Right (Y/N)", null);
-		
-		Robot.ourFieldPosition = SmartDashboard.getString("Which position are we at (L/R/C)", null);
 		
 //		SmartDashboard.putNumber("P (drive straight)", 1);
 //		SmartDashboard.putNumber("I (drive straight)", 0);
@@ -249,7 +268,7 @@ public class Robot extends TimedRobot {
 	//	robotLogger.info("I am in teleopPeriodic");
 		Scheduler.getInstance().run();
 		
-		Logger.log(Logger.LogLevel.info, "Limit switch pressed is " + RobotMap.elevatorBottomLimitSwitch.get());
+		//Logger.log(Logger.LogLevel.info, "Limit switch pressed is " + RobotMap.elevatorBottomLimitSwitch.get());
 	}
 
 	/**

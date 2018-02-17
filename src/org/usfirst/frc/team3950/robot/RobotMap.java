@@ -12,6 +12,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SerialPort;
 
 //import edu.wpi.first.wpilibj.Solenoid;
@@ -62,7 +63,7 @@ public class RobotMap {
 	public static DoubleSolenoid elevatorShiftSolenoid = new DoubleSolenoid(1, 0, 1);
 
 	
-	public static AHRS ahrs = new AHRS(SerialPort.Port.kMXP);
+	public static AHRS ahrs = new AHRS(SPI.Port.kMXP);
 	
 	public static SpeedControllerGroup left = new SpeedControllerGroup(frontLeft,backLeft);
 	public static SpeedControllerGroup right = new SpeedControllerGroup(frontRight,backRight);

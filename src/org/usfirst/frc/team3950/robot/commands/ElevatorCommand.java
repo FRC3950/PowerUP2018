@@ -43,12 +43,18 @@ public class ElevatorCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     //change code button to go to each specific height //bottom //switch //scale //high scale //or not
     protected void execute() {
-    	System.out.println("I am in execute of el com");
+    	//System.out.println("I am in execute of el com");
     	getY = controller.getY(Hand.kLeft);
     	
     	//Logger.log(LogLevel.info, "y axis is " + getY);
     	
+    	
+    	
     	if(getY >= -tolerance && getY <= tolerance) {
+    		getY = 0;
+    	}
+    	
+    	if(RobotMap.elevatorBottomLimitSwitch.get() /*|| RobotMap.elevatorTopLimitSwitch.get()*/) {
     		getY = 0;
     	}
     	
@@ -66,12 +72,14 @@ public class ElevatorCommand extends Command {
     		Robot.elevatorSubsystem.elevatorControl(getY);
     	}
     	
-    	if (Robot.elevatorSubsystem.getMotorValue() == 0) {
+    	if (Robot.elevatorSubsystem.getMotorValue() == 0 /*|| RobotMap.elevatorBottomLimitSwitch.get()
+    			|| RobotMap.elevatorTopLimitSwitch.get()*/) {
     		Robot.elevatorSubsystem.elevatorBrake();
     		}
     	else {
     		Robot.elevatorSubsystem.undoBrake();
     	}
+    	
     }
     		
     		// if (y<0) {
