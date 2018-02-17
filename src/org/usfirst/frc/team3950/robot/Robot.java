@@ -51,7 +51,7 @@ public class Robot extends TimedRobot {
 	public static FieldPositionAnalysis side = new FieldPositionAnalysis();
 	
 	Command m_autonomousCommand;
-	SendableChooser<Command> m_chooser = new SendableChooser<>();
+	SendableChooser<Command> autoChooser = new SendableChooser<>();
 	SendableChooser<Logger.LogLevel> logChooser = new SendableChooser<>();
 	SendableChooser teamScaleAuto = null;
 	SendableChooser teamSwitchRightAuto = null;
@@ -93,27 +93,29 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("fieldPosition", fieldPosition);
 		SmartDashboard.putString("What is our field position?", "");
 		
-		m_chooser = new SendableChooser<Command>();
+		autoChooser = new SendableChooser<Command>();
 		logChooser = new SendableChooser<Logger.LogLevel>();
 		
 		logChooser.addObject("Info", Logger.LogLevel.info);
 		logChooser.addObject("Debug", Logger.LogLevel.debug);
 		logChooser.addObject("Trace", Logger.LogLevel.trace);
 		
-		m_chooser.addDefault("Turn Precise", new DriveTurnPreciseCommand(90));
-		m_chooser.addObject("Scale Auto", new ScaleAutoCommand());
-		m_chooser.addObject("Drive Straight", new DriveStraightCommand());
+		autoChooser.addDefault("Turn Precise", new DriveTurnPreciseCommand(90));
+		autoChooser.addObject("Scale Auto", new ScaleAutoCommand());
+		autoChooser.addObject("Drive Straight", new DriveStraightCommand());
 		//m_chooser.addObject("Straight + Scale Auto", new StraightScaleAutoCommand(27));
-		m_chooser.addObject("EncoderNavx Drive", new EncoderNavX2AutoCommand(6));
-		m_chooser.addObject("Command Group Auto Test", new TestAutoCommandGroup());
-		m_chooser.addObject("Elevator Auto", new ElevatorPIDCommand(38));
-		m_chooser.addObject("No Auto", null);
+		autoChooser.addObject("EncoderNavx Drive", new EncoderNavX2AutoCommand(6));
+		autoChooser.addObject("Command Group Auto Test", new TestAutoCommandGroup());
+		autoChooser.addObject("Elevator Auto", new ElevatorPIDCommand(38));
+		autoChooser.addObject("No Auto", null);
+		SmartDashboard.putData("Auto mode", autoChooser);
 		
-		SmartDashboard.putData("Auto mode", m_chooser);
 		
+		SmartDashboard.putNumber("P (drive straight)", 0.032);
+		SmartDashboard.putNumber("I (drive straight)", 0);
 		
-//		SmartDashboard.putNumber("P (drive straight)", 1);
-//		SmartDashboard.putNumber("I (drive straight)", 0);
+		SmartDashboard.putNumber("P (distance)", 0.278);
+		SmartDashboard.putNumber("I (distance)", 0.0001);
 //		SmartDashboard.putNumber("D (drive straight)", 0);
 //		SmartDashboard.putNumber("F (drive straight)", 0);
 //		SmartDashboard.putNumber("Speed", -0.75);
@@ -183,7 +185,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		//fieldPositionAnalysis();
-		m_autonomousCommand = m_chooser.getSelected();//new ScaleAutoCommand();//m_chooser.getSelected();
+		m_autonomousCommand = autoChooser.getSelected();//new ScaleAutoCommand();//m_chooser.getSelected();
 		/*
 		try {
 			if (m_autonomousCommand.getClass() == Class.forName("org.usfirst.frc.team3950.robot.commands.ScalePositionLeftAutoCommandGroup")) {
