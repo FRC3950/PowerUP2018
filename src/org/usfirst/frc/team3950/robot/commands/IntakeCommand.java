@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3950.robot.commands;
 
 import org.usfirst.frc.team3950.robot.Robot;
+import org.usfirst.frc.team3950.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController;
@@ -27,15 +28,30 @@ public class IntakeCommand extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
+		double trigger = -controller.getTriggerAxis(Hand.kRight) + controller.getTriggerAxis(Hand.kLeft);
+		/*
 		if (!boxIn) {
 			Robot.intakeSubsystem.Intake(-controller.getTriggerAxis(Hand.kRight) + controller.getTriggerAxis(Hand.kLeft));
 			boxIn = Robot.intakeSubsystem.boxIn();
-		} else {
+		} else { 
 			Robot.intakeSubsystem.Intake(controller.getTriggerAxis(Hand.kLeft));
 		}
 		if (controller.getTriggerAxis(Hand.kLeft) >= .5) {
 			boxIn = false;
 		}
+		*/
+		//create limit switch if statement for intake after learning function and heat of volcano
+		
+		if(!boxIn && Robot.intakeSubsystem.boxIn()) {
+			Robot.intakeSubsystem.Intake(0);
+		} else if (Robot.intakeSubsystem.boxIn() && trigger >= 0) {
+			return;
+		} else {
+			Robot.intakeSubsystem.Intake(trigger);
+		}
+	
+
+		boxIn = Robot.intakeSubsystem.boxIn();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

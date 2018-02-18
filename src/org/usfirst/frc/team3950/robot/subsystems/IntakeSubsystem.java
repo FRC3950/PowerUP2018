@@ -43,7 +43,7 @@ public class IntakeSubsystem extends Subsystem {
     	vertical = RobotMap.intakeVerticalMotor;
     	horizontalLeft = RobotMap.intakeHorizontalLeft;
     	horizontalRight = RobotMap.intakeHorizontalRight;
-    	cubeSwitch = RobotMap.intakeCubeLimitSwitch;
+    	cubeSwitch = RobotMap.intakeCubeOneOptical;
     	bottomSwitch = RobotMap.intakeBottomLimitSwitch;
     	topSwitch = RobotMap.intakeTopLimitSwitch;
     }
@@ -55,7 +55,7 @@ public class IntakeSubsystem extends Subsystem {
     }
     
     public boolean boxIn() {
-    	return cubeSwitch.get();
+    	return !cubeSwitch.get();
     }
     
     public boolean atBottom() {
@@ -67,8 +67,8 @@ public class IntakeSubsystem extends Subsystem {
     }
     
     public void Intake(double trigger) {
-    	left.set(trigger);
-    	right.set(-trigger);    	
+    	left.set(-trigger);
+    	right.set(trigger);    	
     }
     
     public void intakeVertical(double speed) {

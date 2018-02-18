@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team3950.robot;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 //import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -127,6 +128,12 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("P (elevator)", 0.008);
 		SmartDashboard.putNumber("I (elevator)", 0.00001);
 		SmartDashboard.putNumber("D (elevator)", 0.0001);
+		
+		RobotMap.elevatorBrakeSolenoid.set(DoubleSolenoid.Value.kOff);
+		RobotMap.intakeHorizontalLeft.set(DoubleSolenoid.Value.kOff);
+		RobotMap.intakeHorizontalRight.set(DoubleSolenoid.Value.kOff);
+		RobotMap.rampSolenoid.set(DoubleSolenoid.Value.kOff);
+		RobotMap.elevatorShiftSolenoid.set(DoubleSolenoid.Value.kOff);
 		
 //		SmartDashboard.putNumber("D (drive straight)", 0);
 //		SmartDashboard.putNumber("F (drive straight)", 0);
@@ -282,6 +289,14 @@ public class Robot extends TimedRobot {
 	//	robotLogger.info("I am in teleopPeriodic");
 		Scheduler.getInstance().run();
 		
+//		System.out.println("limit switch bottom elevator " + RobotMap.elevatorBottomLimitSwitch.get());
+//		System.out.println("limit switch top elevator " + RobotMap.elevatorTopLimitSwitch.get());
+//		System.out.println("limit switch bottom intake " + RobotMap.intakeBottomLimitSwitch.get()); 
+//		System.out.println("limit switch top intake " + RobotMap.intakeTopLimitSwitch.get());
+		
+		
+		//System.out.println("digital io two is " + RobotMap.intakeCubeTwoOptical.get());
+		
 //		controller = new XboxController(1);
 //		System.out.println("controller value is " + controller.getTriggerAxis(Hand.kRight));
 		
@@ -291,6 +306,7 @@ public class Robot extends TimedRobot {
 	/**
 	 * This function is called periodically during test mode.
 	 */
+	
 	@Override
 	public void testPeriodic() {
 	}

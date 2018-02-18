@@ -39,21 +39,17 @@ public class OI
 	    public Button driveStick9Button = new JoystickButton(driveStick, 9);
 	    public Button driveStick10Button = new JoystickButton(driveStick, 10);
 	    public Button driveStick11Button = new JoystickButton(driveStick, 11);
-	    public Button xboxControllerXButton = new JoystickButton(xboxcontroller, 3);
 		public Button driveStick12Button = new JoystickButton(driveStick, 12);	
 
 	    public Button xboxControllerAButton = new JoystickButton(xboxcontroller, 1);
 	    public Button xboxControllerBButton = new JoystickButton(xboxcontroller, 2);
+	    public Button xboxControllerXButton = new JoystickButton(xboxcontroller, 3);
 	    public Button xboxControllerYButton = new JoystickButton(xboxcontroller, 4);
 	    public Button xboxControllerLBButton = new JoystickButton(xboxcontroller, 5);
 	    public Button xboxControllerRBButton = new JoystickButton(xboxcontroller, 6);
 	    public Button xboxControllerLeftStickButton = new JoystickButton(xboxcontroller, 7);
 	    
 
-	   // public Button xboxControllerLTButton = new JoystickButton(xboxcontroller, 7);
-	   // public Button xboxControllerRTButton = new JoystickButton(xboxcontroller, 8);
-	    
-	    
 	    public OI() 
 	    {
 	    	System.out.println("Button assignment initialized.");
@@ -75,13 +71,9 @@ public class OI
 	    	xboxControllerYButton.whenPressed(new ElevatorPIDCommand(61));
 	    	xboxControllerBButton.whenPressed(new ElevatorPIDCommand(79));
 
-	        //	xboxControllerBButton.whenPressed(new BallOuttakeCommand());
-	        //	xboxControllerYButton.whenPressed(new ShooterIndexerCommand());
 	        xboxControllerRBButton.whenPressed(new IntakeVerticalCommand());
-	        //	xboxControllerXButton.whenPressed(new GearDistanceCommand());
 	       // xboxControllerLBButton.whenPressed(new RampCommand());
-	        // 	xboxControllerYButton.whenPressed(new GearIntakeStartCommand());
-	       	//xboxControllerAButton.whenPressed(new IntakeGrabCommand());
+	       	xboxControllerLBButton.whenPressed(new IntakeGrabCommand());
 	        xboxControllerLeftStickButton.whenPressed(new ElevatorShiftCommand());
 	    }
 	 

@@ -39,7 +39,7 @@ public class ElevatorPIDCommand extends Command implements PIDOutput{
     protected void initialize() {
     	Robot.elevatorSubsystem.resetEncoder();
     	source.setPIDSourceType(PIDSourceType.kDisplacement);
-    	pid.setInputRange(0,  setpoint*1.1);
+    	pid.setInputRange(0,  setpoint);
     	pid.setOutputRange(-.5, .5);
     	pid.setPercentTolerance(5.0);
     	pid.setContinuous(false);
@@ -70,7 +70,7 @@ public class ElevatorPIDCommand extends Command implements PIDOutput{
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.elevatorSubsystem.elevatorBrake();
+    	Robot.elevatorSubsystem.elevatorControl(0);
     	pid.disable();
     	System.out.println("done end");
     }
@@ -78,7 +78,7 @@ public class ElevatorPIDCommand extends Command implements PIDOutput{
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.elevatorSubsystem.elevatorBrake();
+    	Robot.elevatorSubsystem.elevatorControl(0);;
     	pid.disable();
     	System.out.println("done intr");
     }
