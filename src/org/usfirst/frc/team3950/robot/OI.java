@@ -48,7 +48,7 @@ public class OI
 	    public Button xboxControllerLBButton = new JoystickButton(xboxcontroller, 5);
 	    public Button xboxControllerRBButton = new JoystickButton(xboxcontroller, 6);
 	    public Button xboxControllerLeftStickButton = new JoystickButton(xboxcontroller, 7);
-	    
+	    public Button xboxControllerRightStickButton = new JoystickButton(xboxcontroller, 8);
 
 	    public OI() 
 	    {
@@ -72,8 +72,9 @@ public class OI
 	    	xboxControllerBButton.whenPressed(new ElevatorPIDCommand(79));
 
 	        xboxControllerRBButton.whenPressed(new IntakeVerticalCommand());
-	       // xboxControllerLBButton.whenPressed(new RampCommand());
-	       	xboxControllerLBButton.whenPressed(new IntakeGrabCommand());
+	        xboxControllerLBButton.whenPressed(new IntakeGrabCommand());
+	        
+	        xboxControllerRightStickButton.whenPressed(new RampCommand());	
 	        xboxControllerLeftStickButton.whenPressed(new ElevatorShiftCommand());
 	    }
 	 

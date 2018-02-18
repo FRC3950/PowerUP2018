@@ -40,8 +40,10 @@ public class DoubleCubeCrazyCommandGroup extends CommandGroup {
         		addSequential(new ElevatorPIDCommand(79));
         		addSequential(new IntakeOuttakeAutoCommand(-.5));
         		addSequential(new ElevatorPIDCommand(29));
+        		addSequential(new IntakeGrabCommand());
         		addSequential(new DriveTurnPreciseCommand(45));
         		addSequential(new EncoderNavX2AutoCommand(8));
+        		addParallel(new IntakeGrabCommand());
         		addSequential(new IntakeOuttakeAutoCommand(.5));
         		addSequential(new DriveTurnPreciseCommand(-45));
         		addSequential(new EncoderNavX2AutoCommand(8));
@@ -61,8 +63,10 @@ public class DoubleCubeCrazyCommandGroup extends CommandGroup {
         		addSequential(new ElevatorPIDCommand(79));
         		addSequential(new IntakeOuttakeAutoCommand(-.5));
         		addSequential(new ElevatorPIDCommand(29));
+        		addSequential(new IntakeGrabCommand());
         		addSequential(new DriveTurnPreciseCommand(45));
         		addSequential(new EncoderNavX2AutoCommand(8));
+        		addParallel(new IntakeGrabCommand());
         		addSequential(new IntakeOuttakeAutoCommand(.5));
         		addSequential(new DriveTurnPreciseCommand(-45));
         		addSequential(new EncoderNavX2AutoCommand(8));
@@ -85,8 +89,10 @@ public class DoubleCubeCrazyCommandGroup extends CommandGroup {
             		addSequential(new ElevatorPIDCommand(79));
             		addSequential(new IntakeOuttakeAutoCommand(-.5));
             		addSequential(new ElevatorPIDCommand(29));
+            		addSequential(new IntakeGrabCommand());
             		addSequential(new DriveTurnPreciseCommand(45));
             		addSequential(new EncoderNavX2AutoCommand(8));
+            		addParallel(new IntakeGrabCommand());
             		addSequential(new IntakeOuttakeAutoCommand(.5));
             		addSequential(new DriveTurnPreciseCommand(-45));
             		addSequential(new EncoderNavX2AutoCommand(8));
@@ -106,8 +112,10 @@ public class DoubleCubeCrazyCommandGroup extends CommandGroup {
             		addSequential(new ElevatorPIDCommand(79));
             		addSequential(new IntakeOuttakeAutoCommand(-.5));
             		addSequential(new ElevatorPIDCommand(29));
+            		addSequential(new IntakeGrabCommand());
             		addSequential(new DriveTurnPreciseCommand(45));
             		addSequential(new EncoderNavX2AutoCommand(8));
+            		addParallel(new IntakeGrabCommand());
             		addSequential(new IntakeOuttakeAutoCommand(.5));
             		addSequential(new DriveTurnPreciseCommand(-45));
             		addSequential(new EncoderNavX2AutoCommand(8));

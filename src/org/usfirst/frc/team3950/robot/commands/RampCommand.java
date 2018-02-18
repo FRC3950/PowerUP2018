@@ -27,7 +27,7 @@ public class RampCommand extends Command {
 
 
     protected void execute() {
-    	/*
+    	/* Just saying this superior if statement does the EXACT SAME THING as the one below ;)
     	if (Robot.rampSubsystem.getRampStatus().toString().compareTo("kForward")==0) {
     		Robot.rampSubsystem.rampUp();
     	}
