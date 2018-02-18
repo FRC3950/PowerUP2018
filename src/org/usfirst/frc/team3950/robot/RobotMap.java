@@ -50,12 +50,12 @@ public class RobotMap {
 	public static WPI_VictorSPX intakeLeftMotor = new WPI_VictorSPX(4);
 	public static WPI_VictorSPX intakeRightMotor = new WPI_VictorSPX(5);
 	
-	public static DigitalInput elevatorBottomLimitSwitch = new DigitalInput(0); //
-	public static DigitalInput elevatorTopLimitSwitch = new DigitalInput(1); //
-	public static DigitalInput intakeCubeOneOptical = new DigitalInput(2); //
+	public static DigitalInput elevatorBottomLimitSwitch = new DigitalInput(0); 
+	public static DigitalInput elevatorTopLimitSwitch = new DigitalInput(1); 
+	public static DigitalInput intakeCubeOneOptical = new DigitalInput(2); 
 	public static DigitalInput intakeBottomLimitSwitch = new DigitalInput(3); 
 	public static DigitalInput intakeTopLimitSwitch = new DigitalInput(4);
-	public static DigitalInput intakeCubeTwoOptical = new DigitalInput(5);
+	//public static DigitalInput intakeCubeTwoOptical = new DigitalInput(5);
 	
 	public static DoubleSolenoid elevatorBrakeSolenoid = new DoubleSolenoid(0, 1);
 	public static DoubleSolenoid intakeHorizontalLeft = new DoubleSolenoid (2, 3);

@@ -46,6 +46,9 @@ public class ElevatorCommand extends Command {
     	//System.out.println("I am in execute of el com");
     	getY = controller.getY(Hand.kLeft);
     	
+    	bottom = RobotMap.elevatorBottomLimitSwitch.get();
+    	top = RobotMap.elevatorTopLimitSwitch.get();
+    	
     	//Logger.log(LogLevel.info, "y axis is " + getY);
     	
     	
@@ -53,19 +56,16 @@ public class ElevatorCommand extends Command {
     	if(getY >= -tolerance && getY <= tolerance) {
     		getY = 0;
     	}
-    	
-    	if(RobotMap.elevatorBottomLimitSwitch.get() || RobotMap.elevatorTopLimitSwitch.get()) {
-    		getY = 0;
-    		Robot.elevatorSubsystem.resetEncoder();
-    	}
-    	
+
     	if (bottom) {
     		Robot.elevatorSubsystem.resetEncoder();
+    		getY = 0;
     		if (getY >= 0) {
     			Robot.elevatorSubsystem.elevatorControl(getY);
     		}
     	}
     	else if (top) {
+    		getY = 0;
     		if (getY <= 0) {
     			Robot.elevatorSubsystem.elevatorControl(getY);
     		}
