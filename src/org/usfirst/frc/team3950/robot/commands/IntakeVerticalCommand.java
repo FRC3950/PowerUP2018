@@ -20,7 +20,6 @@ public class IntakeVerticalCommand extends Command {
         // eg. requires(chassis);
     	requires(Robot.intakeSubsystem);
     }
-
     // Called just before this Command runs the first time
     protected void initialize() {
     	if (Robot.intakeSubsystem.atTop()) {

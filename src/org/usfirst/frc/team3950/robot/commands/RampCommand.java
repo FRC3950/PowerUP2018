@@ -5,6 +5,7 @@ import org.usfirst.frc.team3950.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -36,13 +37,13 @@ public class RampCommand extends Command {
     	}
     	*/
     	
-    	if(controller.getBButtonPressed()) {
+    	if(controller.getStickButtonPressed(Hand.kRight)) {
     		if(RobotMap.rampSolenoid.get() == DoubleSolenoid.Value.kForward) {
 		   		Robot.rampSubsystem.rampDown();
         	} else if(RobotMap.rampSolenoid.get() == DoubleSolenoid.Value.kReverse) {
         		Robot.rampSubsystem.rampUp();
         	}
-    	} 
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
