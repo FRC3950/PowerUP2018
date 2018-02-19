@@ -70,12 +70,13 @@ public class OI
 	    	xboxControllerXButton.whenPressed(new ElevatorPIDCommand(58));
 	    	xboxControllerYButton.whenPressed(new ElevatorPIDCommand(61));
 	    	xboxControllerBButton.whenPressed(new ElevatorPIDCommand(79));
-
 	        xboxControllerRBButton.whenPressed(new IntakeVerticalCommand());
 	        xboxControllerLBButton.whenPressed(new IntakeGrabCommand());
-	        
 	        //xboxControllerRightStickButton.whenPressed(new RampCommand());	
 	        xboxControllerLeftStickButton.whenPressed(new ElevatorShiftCommand());
+	        
+	        driveStick3Button.whenPressed(new IntakeFakeCommand(.75));
+	        driveStick4Button.whenPressed(new OuttakeFakeCommand(-.75));
 	    }
 	 
 } 
