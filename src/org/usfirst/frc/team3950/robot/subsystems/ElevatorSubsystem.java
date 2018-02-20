@@ -31,6 +31,24 @@ public class ElevatorSubsystem extends Subsystem {
 	
 	double distancePerRotation;
 	
+	double switchHeight = 29;
+	double scaleLowHeight = 58;
+	double scaleMidHeight = 61;
+	double scaleTopHeight = 79;
+	
+	public double getSwitchHeight() {
+		return switchHeight;
+	}
+	public double getScaleLowHeight() {
+		return scaleLowHeight;
+	}
+	public double getScaleMidHeight() {
+		return scaleMidHeight;
+	}
+	public double getScaleTopHeight() {
+		return scaleTopHeight;
+	}
+	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());

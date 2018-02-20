@@ -32,11 +32,16 @@ public class IntakeSubsystem extends Subsystem {
 	DoubleSolenoid horizontalLeft;
 	DoubleSolenoid horizontalRight;
 	
+	double speed = 0.75;
+	
+	public double getIntakeSpeed() {
+		return speed;
+	}
+	
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
-    	setDefaultCommand(new IntakeCommand());
+        setDefaultCommand(new IntakeCommand());
     	//setDefaultCommand(new IntakeFakeStopCommand());
     	
     	left = RobotMap.intakeLeftMotor;
