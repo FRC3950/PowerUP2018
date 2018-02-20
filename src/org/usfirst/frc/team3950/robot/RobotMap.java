@@ -39,16 +39,16 @@ public class RobotMap {
 	// public static int rangefinderModule = 1;
 	
 
-	public static WPI_TalonSRX frontLeft = new WPI_TalonSRX(1);
-	public static WPI_TalonSRX frontRight = new WPI_TalonSRX(2);
-	public static WPI_TalonSRX elevatorMotor = new WPI_TalonSRX(3);
-	public static WPI_VictorSPX intakeVerticalMotor = new WPI_VictorSPX(4);
+	public static WPI_TalonSRX frontLeft = new WPI_TalonSRX(15);
+	public static WPI_TalonSRX frontRight = new WPI_TalonSRX(0);
+	public static WPI_TalonSRX elevatorMotor = new WPI_TalonSRX(2);
 	
-	public static WPI_VictorSPX backLeft = new WPI_VictorSPX(1); 
-	public static WPI_VictorSPX backRight = new WPI_VictorSPX(2);
+	public static WPI_VictorSPX backLeft = new WPI_VictorSPX(14); 
+	public static WPI_VictorSPX backRight = new WPI_VictorSPX(1);
 	public static WPI_VictorSPX elevatorMotorFollower = new WPI_VictorSPX (3);
-	public static WPI_VictorSPX intakeLeftMotor = new WPI_VictorSPX(4);
-	public static WPI_VictorSPX intakeRightMotor = new WPI_VictorSPX(5);
+	public static WPI_VictorSPX intakeLeftMotor = new WPI_VictorSPX(13);
+	public static WPI_VictorSPX intakeRightMotor = new WPI_VictorSPX(10);
+	public static WPI_VictorSPX intakeVerticalMotor = new WPI_VictorSPX(12);
 	
 	public static DigitalInput elevatorBottomLimitSwitch = new DigitalInput(0); 
 	public static DigitalInput elevatorTopLimitSwitch = new DigitalInput(1); 
