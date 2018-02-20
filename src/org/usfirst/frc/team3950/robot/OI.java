@@ -72,7 +72,7 @@ public class OI
 	    	xboxControllerBButton.whenPressed(new ElevatorPIDCommand(Robot.elevatorSubsystem.getScaleTopHeight()));
 	        xboxControllerRBButton.whenPressed(new IntakeVerticalCommand());
 	        xboxControllerLBButton.whenPressed(new IntakeGrabCommand());
-	        //xboxControllerRightStickButton.whenPressed(new RampCommand());	
+	        xboxControllerRightStickButton.whenPressed(new RampCommand());	
 	        xboxControllerLeftStickButton.whenPressed(new ElevatorShiftCommand());
 	        
 	        driveStick3Button.whenPressed(new IntakeFakeCommand(Robot.intakeSubsystem.getIntakeSpeed()));

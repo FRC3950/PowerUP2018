@@ -51,6 +51,7 @@ public class ElevatorPIDCommand extends Command implements PIDOutput{
     
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	
     		
     	}
 
@@ -64,8 +65,9 @@ public class ElevatorPIDCommand extends Command implements PIDOutput{
         //return pid.onTarget();
     	System.out.println("velocity is " + velocity);
     	System.out.println("pid on target is " + pid.onTarget());
-    	return pid.onTarget() && velocity >= -range && 
-    			velocity <= range;
+    	return (pid.onTarget() && (velocity >= -range) && 
+    			(velocity <= range)) || (Robot.elevatorSubsystem.bottomGetter()) || 
+    			(Robot.elevatorSubsystem.topGetter());
     }
 
     // Called once after isFinished returns true
