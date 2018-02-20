@@ -21,7 +21,7 @@ public class ElevatorCommand extends Command {
 	boolean bottom = false;
 	boolean top = false;
 	
-	double tolerance  = 0.1;
+	double tolerance  = 0.08;
 	double getY = 0;
 	
 	
@@ -46,7 +46,7 @@ public class ElevatorCommand extends Command {
     	//System.out.println("I am in execute of el com");
     	getY = controller.getY(Hand.kLeft);
     	
-    	bottom = RobotMap.elevatorBottomLimitSwitch.get();
+    	//bottom = RobotMap.elevatorBottomLimitSwitch.get();
     	top = RobotMap.elevatorTopLimitSwitch.get();
     	
     	//Logger.log(LogLevel.info, "y axis is " + getY);
@@ -56,25 +56,51 @@ public class ElevatorCommand extends Command {
     	if(getY >= -tolerance && getY <= tolerance) {
     		getY = 0;
     	}
+    	
+    	//Robot.elevatorSubsystem.elevatorControl(getY);
 
-    	if (bottom) {
+    	/*
+    	if (!bottom && Robot.elevatorSubsystem.bottomGetter()) {
     		Robot.elevatorSubsystem.resetEncoder();
+    		System.out.println("I am in bottom position in the elevator.");
     		getY = 0;
     		if (getY >= 0) {
     			Robot.elevatorSubsystem.elevatorControl(getY);
+    		} else {
+    			getY = 0;
     		}
     	}
     	else if (top) {
-    		getY = 0;
+    		System.out.println("I am in Elevator Top Position");
     		if (getY <= 0) {
     			Robot.elevatorSubsystem.elevatorControl(getY);
+    		} else {
+        		getY = 0;
     		}
     	} else {
     		Robot.elevatorSubsystem.elevatorControl(getY);
     	}
     	
-    	if (Robot.elevatorSubsystem.getMotorValue() == 0 /*|| RobotMap.elevatorBottomLimitSwitch.get()
-    			|| RobotMap.elevatorTopLimitSwitch.get()*/) {
+    	if (Robot.elevatorSubsystem.getMotorValue() == 0) {
+    		Robot.elevatorSubsystem.elevatorBrake();
+    		}
+    	else {
+    		Robot.elevatorSubsystem.undoBrake();
+    	}
+    	
+    	bottom = Robot.elevatorSubsystem.bottomGetter();
+    	//top = Robot.elevatorSubsystem.topGetter();
+    	*/
+    	
+    	if(Robot.elevatorSubsystem.bottomGetter() && getY < 0) {
+    		Robot.elevatorSubsystem.resetEncoder();
+    		Robot.elevatorSubsystem.elevatorControl(0);
+    	} else if (Robot.elevatorSubsystem.topGetter() && getY > 0) {
+    		Robot.elevatorSubsystem.elevatorControl(0);
+    	} else {
+    		Robot.elevatorSubsystem.elevatorControl(getY);
+    	}
+    	if (Robot.elevatorSubsystem.getMotorValue() == 0) {
     		Robot.elevatorSubsystem.elevatorBrake();
     		}
     	else {
@@ -82,6 +108,10 @@ public class ElevatorCommand extends Command {
     	}
     	
     }
+    //if()
+    	
+    	//bottom = Robot.elevatorSubsystem.bottomGetter();
+    //	top = Robot.elevatorSubsystem.topGetter();
     		
     		// if (y<0) {
     		// elevatorMotor.set(0);
@@ -89,7 +119,6 @@ public class ElevatorCommand extends Command {
         	// if (y>0) {
         		// elevatorMotor.set(1);
         	
-    		
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {

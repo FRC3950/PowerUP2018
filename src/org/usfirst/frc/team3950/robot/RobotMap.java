@@ -57,7 +57,7 @@ public class RobotMap {
 	public static DigitalInput intakeTopLimitSwitch = new DigitalInput(4);
 	//public static DigitalInput intakeCubeTwoOptical = new DigitalInput(5);
 	
-	public static DoubleSolenoid elevatorBrakeSolenoid = new DoubleSolenoid(0, 1);
+	public static DoubleSolenoid elevatorBrakeSolenoid = new DoubleSolenoid(1, 0);
 	public static DoubleSolenoid intakeHorizontalLeft = new DoubleSolenoid (2, 3);
 	public static DoubleSolenoid intakeHorizontalRight = new DoubleSolenoid (4, 5);
 	public static DoubleSolenoid rampSolenoid = new DoubleSolenoid(6, 7);

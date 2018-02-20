@@ -77,6 +77,7 @@ public class OI
 	        
 	        driveStick3Button.whenPressed(new IntakeFakeCommand(Robot.intakeSubsystem.getIntakeSpeed()));
 	        driveStick4Button.whenPressed(new OuttakeFakeCommand(-Robot.intakeSubsystem.getIntakeSpeed()));
+	        driveStick2Button.whenPressed(new ElevatorUndoBrakeCommand());
 	    }
 	 
 } 

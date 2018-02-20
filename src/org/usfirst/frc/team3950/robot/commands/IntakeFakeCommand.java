@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class IntakeFakeCommand extends Command {
-	Joystick controller = Robot.oi.driveStick;
+	//Joystick controller = Robot.oi.driveStick;
 	boolean boxIn = false;
 	double trigger;
 	
