@@ -8,6 +8,7 @@
 package org.usfirst.frc.team3950.robot;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 //import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -66,6 +67,8 @@ public class Robot extends TimedRobot {
 	public static IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 	public static ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
 	public static RampSubsystem rampSubsystem = new RampSubsystem();
+	
+	public static String[] sides = {"L", "R"};
 
 
 	/**
@@ -75,6 +78,11 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
+		
+		//String str = DriverStation.getInstance().getGameSpecificMessage();
+		switchClosePosition = DSSimulation.getSide(sides);//str.substring(0,1);
+		scalePosition = DSSimulation.getSide(sides);//str.substring(1,2);
+		switchFarPosition = DSSimulation.getSide(sides);//str.substring(2,3);
 		
 		teamScaleAuto = new SendableChooser();
 		teamScaleAuto.addDefault("Yes", true);
@@ -159,14 +167,7 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 	}
 	
-	/*
-
-	private static void fieldPositionAnalysis() {
-		String str = DriverStation.getInstance().getGameSpecificMessage();
-		switchClosePosition = str.substring(0,1);
-		scalePosition = str.substring(1,2);
-		switchFarPosition = str.substring(2,3);
-	}
+	
 	
 	public static Command chooseAutoMode(String leftRightCenter, String rightSwitchAbility, String scaleAbility) {
 		if(leftRightCenter.compareTo("C") == 0) {
@@ -187,7 +188,7 @@ public class Robot extends TimedRobot {
 			}
 		} 
 	}
-	*/
+	
 	
 	
 	/**
