@@ -34,7 +34,7 @@ public class ScalePositionAutoCommandGroup extends CommandGroup {
         		//write left position to left scale code in here
         		
         		//These values are complete B.S. I made them up. Please change them during calibration.
-        		addSequential(new EncoderNavX2AutoCommand(8));
+        		addSequential(new EncoderNavX2AutoCommand(27));
         		addSequential(new DriveTurnPreciseCommand(90));
         		addSequential(new EncoderNavX2AutoCommand(8));
         		addSequential(new ElevatorPIDCommand(79));
@@ -47,7 +47,7 @@ public class ScalePositionAutoCommandGroup extends CommandGroup {
         		//write left position to right scale code in here
         		
         		//These values are complete B.S. I made them up. Please change them during calibration.
-        		addSequential(new EncoderNavX2AutoCommand(8));
+        		addSequential(new EncoderNavX2AutoCommand(27));
         		addSequential(new DriveTurnPreciseCommand(-90));
         		addSequential(new EncoderNavX2AutoCommand(8));
         		addSequential(new ElevatorPIDCommand(79));
@@ -63,7 +63,7 @@ public class ScalePositionAutoCommandGroup extends CommandGroup {
     				//write right position to left scale code in here
 	    		
     				//These values are complete B.S. I made them up. Please change them during calibration.
-    				addSequential(new EncoderNavX2AutoCommand(8));
+    				addSequential(new EncoderNavX2AutoCommand(27));
     				addSequential(new DriveTurnPreciseCommand(90));
     				addSequential(new EncoderNavX2AutoCommand(8));
     				addSequential(new ElevatorPIDCommand(79));
@@ -76,7 +76,7 @@ public class ScalePositionAutoCommandGroup extends CommandGroup {
     				//write right position to right scale code in here
 	    		
     				//These values are complete B.S. I made them up. Please change them during calibration.
-    				addSequential(new EncoderNavX2AutoCommand(8));
+    				addSequential(new EncoderNavX2AutoCommand(27));
     				addSequential(new DriveTurnPreciseCommand(-90));
     				addSequential(new EncoderNavX2AutoCommand(8));
     				addSequential(new ElevatorPIDCommand(79));

@@ -17,7 +17,7 @@ public class SwitchPositionAutoCommandGroup extends CommandGroup {
     		//write right position to left switch code in here
     		
     		//These values are complete B.S. I made them up. Please change them during calibration.
-    		addSequential(new EncoderNavX2AutoCommand(8));
+    		addSequential(new EncoderNavX2AutoCommand(14));
     		addSequential(new DriveTurnPreciseCommand(90));
     		addSequential(new EncoderNavX2AutoCommand(8));
     		addSequential(new ElevatorPIDCommand(29));
@@ -30,7 +30,7 @@ public class SwitchPositionAutoCommandGroup extends CommandGroup {
     		//write right position to right switch code in here
     		
     		//These values are complete B.S. I made them up. Please change them during calibration.
-    		addSequential(new EncoderNavX2AutoCommand(8));
+    		addSequential(new EncoderNavX2AutoCommand(14));
     		addSequential(new DriveTurnPreciseCommand(-90));
     		addSequential(new EncoderNavX2AutoCommand(8));
     		addSequential(new ElevatorPIDCommand(29));
@@ -45,7 +45,7 @@ public class SwitchPositionAutoCommandGroup extends CommandGroup {
     		//write right position to left switch code in here
     		
     		//These values are complete B.S. I made them up. Please change them during calibration.
-    		addSequential(new EncoderNavX2AutoCommand(8));
+    		addSequential(new EncoderNavX2AutoCommand(14));
     		addSequential(new DriveTurnPreciseCommand(90));
     		addSequential(new EncoderNavX2AutoCommand(8));
     		addSequential(new ElevatorPIDCommand(29));
@@ -55,7 +55,7 @@ public class SwitchPositionAutoCommandGroup extends CommandGroup {
     		//write right position to right switch code in here
     		
     		//These values are complete B.S. I made them up. Please change them during calibration.
-    		addSequential(new EncoderNavX2AutoCommand(8));
+    		addSequential(new EncoderNavX2AutoCommand(14));
     		addSequential(new DriveTurnPreciseCommand(-90));
     		addSequential(new EncoderNavX2AutoCommand(8));
     		addSequential(new ElevatorPIDCommand(29));
