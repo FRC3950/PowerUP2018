@@ -52,6 +52,8 @@ public class Robot extends TimedRobot {
 	public static String teamSwitchRight = "";
 	public static String teamSwitchLeft = "";
 	
+	//public static String intakeIn = "Cube is not Intook";
+	
 	//public static Logger robotLogger = LoggerFactory.getLogger(Robot.class);
 	
 	public static FieldPositionAnalysis side = new FieldPositionAnalysis();
@@ -288,7 +290,14 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 	//	robotLogger.info("I am in teleopPeriodic");
+		
 		Scheduler.getInstance().run();
+		
+		
+		SmartDashboard.putBoolean("Is Cube Intooken", Robot.intakeSubsystem.boxIn()); 
+		
+		SmartDashboard.putBoolean("Is Elevator at Top", Robot.elevatorSubsystem.topGetter());
+		SmartDashboard.putBoolean("Is Elevator at Bottom", Robot.elevatorSubsystem.bottomGetter());
 		
 //		System.out.println("limit switch bottom elevator " + RobotMap.elevatorBottomLimitSwitch.get());
 //		System.out.println("limit switch top elevator " + RobotMap.elevatorTopLimitSwitch.get());
