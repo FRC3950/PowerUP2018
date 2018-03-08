@@ -2,6 +2,8 @@ package org.usfirst.frc.team3950.robot.commands;
 
 import org.usfirst.frc.team3950.robot.Robot;
 
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 //import edu.wpi.first.wpilibj.DoubleSolenoid;
 //import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
@@ -11,7 +13,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class IntakeVerticalCommand extends Command {
 
-	double speed = .5;
+	XboxController controller = new XboxController(1);
+	double speed = 0;
 	boolean start; //true if starting from top, false if starting from bottom
 	boolean finish = false;
 	
@@ -22,6 +25,7 @@ public class IntakeVerticalCommand extends Command {
     }
     // Called just before this Command runs the first time
     protected void initialize() {
+    	/*
     	if (Robot.intakeSubsystem.atTop()) {
     		Robot.intakeSubsystem.intakeVertical(speed);
     		start = true;
@@ -32,11 +36,24 @@ public class IntakeVerticalCommand extends Command {
     		Robot.intakeSubsystem.intakeVertical(speed);
     		start = true;
     	}
-    	
+    	*/
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	speed = controller.getY(Hand.kRight);
+    	
+    	/*
+    	if (Robot.intakeSubsystem.atTop()) {
+    		Robot.intakeSubsystem.intakeVertical(controller.getY(Hand.kRight));
+    		start = true;
+    	} else if (Robot.intakeSubsystem.atBottom()) {
+    		Robot.intakeSubsystem.intakeVertical(-controller.getY(Hand.kRight));
+    		start = false;
+    	} else {
+    		Robot.intakeSubsystem.intakeVertical(controller.getY(Hand.kRight));
+    		start = true;
+    	}
 
     	if (start) {
     		if (Robot.intakeSubsystem.atBottom()) {
@@ -47,11 +64,20 @@ public class IntakeVerticalCommand extends Command {
     			finish = true; 
     		}
     	}
+    	*/
+    	
+    	if(Robot.intakeSubsystem.atBottom() && speed < 0) {
+    		Robot.intakeSubsystem.intakeVertical(0);
+    	} else if (Robot.intakeSubsystem.atTop() && speed > 0) {
+    		Robot.intakeSubsystem.intakeVertical(0);
+    	} else {
+    		Robot.intakeSubsystem.intakeVertical(controller.getY(Hand.kRight));
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (finish);
+        return false;
     }
 
     // Called once after isFinished returns true
