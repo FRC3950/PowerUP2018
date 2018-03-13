@@ -24,7 +24,8 @@ public class IntakeSubsystem extends Subsystem {
     // here. Call these from Commands
 	
 	WPI_VictorSPX left;
-	WPI_VictorSPX right;
+	//WPI_VictorSPX right;
+	WPI_TalonSRX right;
 	WPI_VictorSPX vertical;
 	DigitalInput cubeSwitch;
 	DigitalInput bottomSwitch;
@@ -64,6 +65,7 @@ public class IntakeSubsystem extends Subsystem {
     	return !cubeSwitch.get();
     }
     
+    /*
     public boolean atBottom() {
     	return bottomSwitch.get();
     }
@@ -71,15 +73,18 @@ public class IntakeSubsystem extends Subsystem {
     public boolean atTop() {
     	return topSwitch.get();
     }
+    */
     
     public void Intake(double trigger) {
     	left.set(-trigger);
     	right.set(trigger);    	
     }
     
+    /*
     public void intakeVertical(double speed) {
     	vertical.set(speed);
     }
+    */
 
     public void horizontalOut() {
     	horizontalLeft.set(DoubleSolenoid.Value.kReverse);

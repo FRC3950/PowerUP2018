@@ -42,12 +42,13 @@ public class RobotMap {
 	public static WPI_TalonSRX frontLeft = new WPI_TalonSRX(15);
 	public static WPI_TalonSRX frontRight = new WPI_TalonSRX(0);
 	public static WPI_TalonSRX elevatorMotor = new WPI_TalonSRX(2);
+	public static WPI_TalonSRX intakeRightMotor = new WPI_TalonSRX(10);
 	
 	public static WPI_VictorSPX backLeft = new WPI_VictorSPX(14); 
 	public static WPI_VictorSPX backRight = new WPI_VictorSPX(1);
 	public static WPI_VictorSPX elevatorMotorFollower = new WPI_VictorSPX (3);
 	public static WPI_VictorSPX intakeLeftMotor = new WPI_VictorSPX(13);
-	public static WPI_VictorSPX intakeRightMotor = new WPI_VictorSPX(10);
+	//public static WPI_VictorSPX intakeRightMotor = new WPI_VictorSPX(10);
 	public static WPI_VictorSPX intakeVerticalMotor = new WPI_VictorSPX(12);
 	
 	public static DigitalInput elevatorBottomLimitSwitch = new DigitalInput(0); 
@@ -64,7 +65,6 @@ public class RobotMap {
 	public static DoubleSolenoid elevatorShiftSolenoid = new DoubleSolenoid(1, 0, 1);
 	
 
-	
 	public static AHRS ahrs = new AHRS(SPI.Port.kMXP);
 	
 	public static SpeedControllerGroup left = new SpeedControllerGroup(frontLeft,backLeft);

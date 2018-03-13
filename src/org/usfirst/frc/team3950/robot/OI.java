@@ -70,7 +70,7 @@ public class OI
 	    	xboxControllerXButton.whenPressed(new ElevatorPIDCommand(Robot.elevatorSubsystem.getScaleLowHeight()));
 	    	xboxControllerYButton.whenPressed(new ElevatorPIDCommand(Robot.elevatorSubsystem.getScaleMidHeight()));
 	    	xboxControllerBButton.whenPressed(new ElevatorPIDCommand(Robot.elevatorSubsystem.getScaleTopHeight()));
-	        xboxControllerRBButton.whenPressed(new IntakeVerticalCommand());
+	        //xboxControllerRBButton.whenPressed(new IntakeVerticalCommand());
 	        xboxControllerLBButton.whenPressed(new IntakeGrabCommand());
 	        //xboxControllerRightStickButton.whenPressed(new RampCommand());	
 	        xboxControllerLeftStickButton.whenPressed(new ElevatorShiftCommand());

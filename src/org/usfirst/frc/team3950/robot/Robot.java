@@ -23,6 +23,7 @@ import org.usfirst.frc.team3950.robot.subsystems.DrivetrainSubsystem;
 import org.usfirst.frc.team3950.robot.subsystems.ElevatorSubsystem;
 //import org.usfirst.frc.team3950.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team3950.robot.subsystems.IntakeSubsystem;
+import org.usfirst.frc.team3950.robot.subsystems.IntakeVerticalSubsystem;
 import org.usfirst.frc.team3950.robot.subsystems.RampSubsystem;
 import org.usfirst.frc.team3950.robot.Logger.LogLevel;
 //import org.slf4j.Logger;
@@ -67,6 +68,7 @@ public class Robot extends TimedRobot {
 	
 	public static DrivetrainSubsystem drivetrainSubsystem = new DrivetrainSubsystem();
 	public static IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+	public static IntakeVerticalSubsystem intakeVerticalSubsystem = new IntakeVerticalSubsystem();
 	public static ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
 	public static RampSubsystem rampSubsystem = new RampSubsystem();
 	

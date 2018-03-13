@@ -21,10 +21,12 @@ public class IntakeVerticalCommand extends Command {
     public IntakeVerticalCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.intakeSubsystem);
+    	requires(Robot.intakeVerticalSubsystem);
     }
     // Called just before this Command runs the first time
     protected void initialize() {
+    	
+    	System.out.print("In intake vertical init");
     	/*
     	if (Robot.intakeSubsystem.atTop()) {
     		Robot.intakeSubsystem.intakeVertical(speed);
@@ -66,12 +68,14 @@ public class IntakeVerticalCommand extends Command {
     	}
     	*/
     	
-    	if(Robot.intakeSubsystem.atBottom() && speed < 0) {
-    		Robot.intakeSubsystem.intakeVertical(0);
-    	} else if (Robot.intakeSubsystem.atTop() && speed > 0) {
-    		Robot.intakeSubsystem.intakeVertical(0);
+    	System.out.println("Intake Vertical Speed is " + speed);
+    	
+    	if((Robot.intakeVerticalSubsystem.atBottom()) && (speed < 0)) {
+    		Robot.intakeVerticalSubsystem.intakeVertical(0);
+    	} else if (Robot.intakeVerticalSubsystem.atTop() && speed > 0) {
+    		Robot.intakeVerticalSubsystem.intakeVertical(0);
     	} else {
-    		Robot.intakeSubsystem.intakeVertical(controller.getY(Hand.kRight));
+    		Robot.intakeVerticalSubsystem.intakeVertical(controller.getY(Hand.kRight));
     	}
     }
 
@@ -82,12 +86,12 @@ public class IntakeVerticalCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.intakeSubsystem.intakeVertical(0);
+    	Robot.intakeVerticalSubsystem.intakeVertical(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.intakeSubsystem.intakeVertical(0);
+    	Robot.intakeVerticalSubsystem.intakeVertical(0);
     }
 }
