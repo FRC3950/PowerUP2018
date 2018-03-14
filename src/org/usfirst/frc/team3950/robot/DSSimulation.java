@@ -7,7 +7,7 @@ public class DSSimulation {
 	public static String getSide(String[] side) {
 		int sideNum = 0;
 		Random random = new Random();
-		sideNum = random.nextInt(1);
+		sideNum = random.nextInt(2);
 		
 		return side[sideNum];
 		

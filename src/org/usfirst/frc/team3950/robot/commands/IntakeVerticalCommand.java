@@ -17,6 +17,7 @@ public class IntakeVerticalCommand extends Command {
 	double speed = 0;
 	boolean start; //true if starting from top, false if starting from bottom
 	boolean finish = false;
+	double tolerance = 0.07;
 	
     public IntakeVerticalCommand() {
         // Use requires() here to declare subsystem dependencies
@@ -43,8 +44,10 @@ public class IntakeVerticalCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	speed = controller.getY(Hand.kRight);
+    	speed = -controller.getY(Hand.kRight);
     	
+    	if(speed <= tolerance && speed >= -tolerance)
+    		speed = 0;
     	/*
     	if (Robot.intakeSubsystem.atTop()) {
     		Robot.intakeSubsystem.intakeVertical(controller.getY(Hand.kRight));
