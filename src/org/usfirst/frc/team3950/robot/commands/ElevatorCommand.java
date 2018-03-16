@@ -21,7 +21,7 @@ public class ElevatorCommand extends Command {
 	boolean bottom = false;
 	boolean top = false;
 	
-	double tolerance  = 0.08;
+	double tolerance = 0.12;
 	double getY = 0;
 	
 	
@@ -49,11 +49,11 @@ public class ElevatorCommand extends Command {
     	//bottom = RobotMap.elevatorBottomLimitSwitch.get();
     	top = RobotMap.elevatorTopLimitSwitch.get();
     	
-    	//Logger.log(LogLevel.info, "y axis is " + getY);
+    	Logger.log(LogLevel.info, "y axis is " + getY);
     	
     	
     	
-    	if(getY >= -tolerance && getY <= tolerance) {
+    	if(getY <= tolerance && getY >= -tolerance) {
     		getY = 0;
     	}
     	

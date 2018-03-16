@@ -53,6 +53,8 @@ public class Robot extends TimedRobot {
 	public static String teamSwitchRight = "";
 	public static String teamSwitchLeft = "";
 	
+	public static String ourFieldPosition = "";
+	
 	//public static String intakeIn = "Cube is not Intook";
 	
 	//public static Logger robotLogger = LoggerFactory.getLogger(Robot.class);
@@ -90,6 +92,8 @@ public class Robot extends TimedRobot {
 		System.out.println(scalePosition);
 		switchFarPosition = DSSimulation.getSide(sides);//str.substring(2,3);
 		System.out.println(switchFarPosition);
+		
+		
 		
 		teamScaleAuto = new SendableChooser();
 		teamScaleAuto.addDefault("Yes", true);

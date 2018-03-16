@@ -162,7 +162,7 @@ public class EncoderNavX2AutoCommand extends Command {
 	encSource.setPIDSourceType(PIDSourceType.kDisplacement);
 	encPID.setInputRange(0f,  setpoint*1.1);
   	encPID.setOutputRange(0f, maxSpeed);
-  	encPID.setPercentTolerance(2);
+  	encPID.setPercentTolerance(5);
   	encPID.setContinuous(false);
   	encPID.setPID(encP, encI, encD, encF);
   	encPID.setSetpoint(setpoint);
@@ -173,7 +173,7 @@ public class EncoderNavX2AutoCommand extends Command {
 	RobotMap.ahrs.zeroYaw();
   	navXPID.setInputRange(-5.0f, 5.0f);
   	navXPID.setOutputRange(-0.5, 0.5);
-  	navXPID.setPercentTolerance(2);
+  	navXPID.setPercentTolerance(5);
   	navXPID.setContinuous(false);
   	navXPID.setPID(navxP, navxI, navxD, navxF);
   	navXPID.setSetpoint(0);

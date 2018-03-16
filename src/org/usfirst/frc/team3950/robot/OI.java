@@ -49,6 +49,7 @@ public class OI
 	    public Button xboxControllerRBButton = new JoystickButton(xboxcontroller, 6);
 	    public Button xboxControllerLeftStickButton = new JoystickButton(xboxcontroller, 7);
 	    public Button xboxControllerRightStickButton = new JoystickButton(xboxcontroller, 8);
+	    public Button xboxControllerBackButton = new JoystickButton(xboxcontroller, 10);
 
 	    public OI() 
 	    {
@@ -66,12 +67,12 @@ public class OI
 
 	    	
 
-	    	xboxControllerAButton.whenPressed(new ElevatorPIDCommand(Robot.elevatorSubsystem.getSwitchHeight()));
-	    	xboxControllerXButton.whenPressed(new ElevatorPIDCommand(Robot.elevatorSubsystem.getScaleLowHeight()));
-	    	xboxControllerYButton.whenPressed(new ElevatorPIDCommand(Robot.elevatorSubsystem.getScaleMidHeight()));
-	    	xboxControllerBButton.whenPressed(new ElevatorPIDCommand(Robot.elevatorSubsystem.getScaleTopHeight()));
+	    	xboxControllerXButton.whenPressed(new ElevatorPIDCommand(Robot.elevatorSubsystem.getSwitchHeight()));
+	    	xboxControllerAButton.whenPressed(new ElevatorPIDCommand(Robot.elevatorSubsystem.getScaleLowHeight()));
+	    	xboxControllerBButton.whenPressed(new ElevatorPIDCommand(Robot.elevatorSubsystem.getScaleMidHeight()));
+	    	xboxControllerYButton.whenPressed(new ElevatorPIDCommand(Robot.elevatorSubsystem.getScaleTopHeight()));
 	        //xboxControllerRBButton.whenPressed(new IntakeVerticalCommand());
-	        xboxControllerLBButton.whenPressed(new IntakeGrabCommand());
+	        xboxControllerRBButton.whenPressed(new IntakeGrabCommand());
 	        //xboxControllerRightStickButton.whenPressed(new RampCommand());	
 	        xboxControllerLeftStickButton.whenPressed(new ElevatorShiftCommand());
 	        

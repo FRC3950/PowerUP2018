@@ -28,7 +28,7 @@ public class IntakeCommand extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		double trigger = -controller.getTriggerAxis(Hand.kRight) + controller.getTriggerAxis(Hand.kLeft);
+		double trigger = controller.getTriggerAxis(Hand.kRight) - controller.getTriggerAxis(Hand.kLeft);
 		/*
 		if (!boxIn) {
 			Robot.intakeSubsystem.Intake(-controller.getTriggerAxis(Hand.kRight) + controller.getTriggerAxis(Hand.kLeft));

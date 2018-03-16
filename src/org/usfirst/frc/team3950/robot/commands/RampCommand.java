@@ -37,7 +37,7 @@ public class RampCommand extends Command {
     	}
     	*/
     	
-    	if(controller.getStickButtonPressed(Hand.kRight)) {
+    	if(controller.getBackButtonPressed()) {
     		if(RobotMap.rampSolenoid.get() == DoubleSolenoid.Value.kForward) {
 		   		Robot.rampSubsystem.rampDown();
         	} else if(RobotMap.rampSolenoid.get() == DoubleSolenoid.Value.kReverse) {

@@ -71,7 +71,7 @@ public class IntakeVerticalCommand extends Command {
     	}
     	*/
     	
-    	System.out.println("Intake Vertical Speed is " + speed);
+    	//System.out.println("Intake Vertical Speed is " + speed);
     	
     	if((Robot.intakeVerticalSubsystem.atBottom()) && (speed < 0)) {
     		Robot.intakeVerticalSubsystem.intakeVertical(0);
