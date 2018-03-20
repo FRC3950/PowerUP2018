@@ -49,11 +49,11 @@ public class Robot extends TimedRobot {
 	public static String scalePosition = "";
 	public static String switchFarPosition = "";
 	
-	public static String teamScale = "";
-	public static String teamSwitchRight = "";
+	public static Object teamScale = false;
+	public static Object teamSwitchRight = false;
 	public static String teamSwitchLeft = "";
 	
-	public static String ourFieldPosition = "";
+	public static int ourFieldPosition = 0;
 	
 	//public static String intakeIn = "Cube is not Intook";
 	
@@ -62,10 +62,11 @@ public class Robot extends TimedRobot {
 	public static FieldPositionAnalysis side = new FieldPositionAnalysis();
 	
 	Command m_autonomousCommand;
-	SendableChooser<Command> autoChooser = new SendableChooser<>();
+	//SendableChooser<Command> autoChooser = new SendableChooser<>();
 	SendableChooser<Logger.LogLevel> logChooser = new SendableChooser<>();
 	SendableChooser teamScaleAuto = null;
 	SendableChooser teamSwitchRightAuto = null;
+	SendableChooser teamSwitchAuto = null;
 	SendableChooser fieldPosition = null;
 	
 	public static DrivetrainSubsystem drivetrainSubsystem = new DrivetrainSubsystem();
@@ -86,20 +87,22 @@ public class Robot extends TimedRobot {
 		oi = new OI();
 		
 		//String str = DriverStation.getInstance().getGameSpecificMessage();
-		switchClosePosition = DSSimulation.getSide(sides);//str.substring(0,1);
+		switchClosePosition = DriverStation.getInstance().getGameSpecificMessage().substring(0, 1);//DSSimulation.getSide(sides);//str.substring(0,1);
 		System.out.println(switchClosePosition);
-		scalePosition = DSSimulation.getSide(sides);//str.substring(1,2);
+		scalePosition = DriverStation.getInstance().getGameSpecificMessage().substring(1, 2);//str.substring(1,2);
 		System.out.println(scalePosition);
-		switchFarPosition = DSSimulation.getSide(sides);//str.substring(2,3);
+		switchFarPosition = DriverStation.getInstance().getGameSpecificMessage().substring(2, 3);//str.substring(2,3);
 		System.out.println(switchFarPosition);
 		
-		
+		ourFieldPosition = DriverStation.getInstance().getLocation();
 		
 		teamScaleAuto = new SendableChooser();
 		teamScaleAuto.addDefault("Yes", true);
 		teamScaleAuto.addObject("No", false);
 		teamScaleAuto.setName("teamScaleAuto");
 		SmartDashboard.putData("teamScaleAuto", teamScaleAuto);
+		teamScale = teamScaleAuto.getSelected();
+		System.out.println(teamScale);
 		//SmartDashboard.putString("Can team do scale auto?", "");
 		
 		teamSwitchRightAuto = new SendableChooser();
@@ -107,7 +110,16 @@ public class Robot extends TimedRobot {
 		teamSwitchRightAuto.addObject("No", false);
 		teamSwitchRightAuto.setName("teamSwitchRightAuto");
 		SmartDashboard.putData("teamSwitchRightAuto", teamSwitchRightAuto);
+		teamSwitchRight = teamSwitchRightAuto.getSelected();
+		System.out.println(teamSwitchRight);
 		//SmartDashboard.putString("Can team do switch right auto?", "");
+		
+		teamSwitchAuto = new SendableChooser();
+		teamSwitchAuto.addDefault("Yes", true);
+		teamSwitchAuto.addObject("No", false);
+		teamSwitchAuto.setName("teamSwitchAuto");
+		SmartDashboard.putData("teamSwitchAuto", teamSwitchAuto);
+		
 		
 		fieldPosition = new SendableChooser();
 		fieldPosition.addDefault("Left", true);
@@ -115,15 +127,19 @@ public class Robot extends TimedRobot {
 		fieldPosition.addObject("Center", false);
 		fieldPosition.setName("fieldPosition");
 		SmartDashboard.putData("fieldPosition", fieldPosition);
+		//ourFieldPosition = (String) fieldPosition.getSelected();
 		//SmartDashboard.putString("What is our field position?", "");
 		
-		autoChooser = new SendableChooser<Command>();
+		//
+		
+		//autoChooser = new SendableChooser<Command>();
 		logChooser = new SendableChooser<Logger.LogLevel>();
 		
 		logChooser.addObject("Info", Logger.LogLevel.info);
 		logChooser.addObject("Debug", Logger.LogLevel.debug);
 		logChooser.addObject("Trace", Logger.LogLevel.trace);
 		
+		/*
 		autoChooser.addDefault("Turn Precise", new DriveTurnPreciseCommand(90));
 		autoChooser.addObject("Scale Auto", new ScaleAutoCommand());
 		autoChooser.addObject("Drive Straight", new DriveStraightCommand());
@@ -135,7 +151,7 @@ public class Robot extends TimedRobot {
 		autoChooser.addObject("Intake Auto Test", new IntakeOuttakeAutoCommand(.5));
 		autoChooser.addObject("No Auto", null);
 		SmartDashboard.putData("Auto mode", autoChooser);
-		
+		*/
 		
 		SmartDashboard.putNumber("P (drive straight)", 0.032);
 		SmartDashboard.putNumber("I (drive straight)", 0);
@@ -180,19 +196,43 @@ public class Robot extends TimedRobot {
 	
 	
 	
-	public static Command chooseAutoMode(String leftRightCenter, String rightSwitchAbility, String scaleAbility) {
-		if(leftRightCenter.compareTo("C") == 0) {
-			if(rightSwitchAbility.compareTo("N") == 0) {
+	public static Command chooseAutoModeElim(int leftRightCenter, Object rightSwitchAbility, Object scaleAbility) {
+		System.out.println("in the method elim");
+		if(leftRightCenter == 2) {
+			if(rightSwitchAbility.equals(false)) {
 				return new SwitchPositionAutoCommandGroup(Robot.switchClosePosition); //switch right auto
 			} else {
 				return new BaselineAutoCommandGroup();
 			}
 		} else {
-			if (leftRightCenter.compareTo(Robot.scalePosition) == 0 || scaleAbility.compareTo("N") == 0) {
+			if ((leftRightCenter == 1 && Robot.scalePosition.compareTo("L") == 0 || leftRightCenter == 3 && Robot.scalePosition.compareTo("R") == 0) || (scaleAbility.equals(false))) {
 				return new ScalePositionAutoCommandGroup(leftRightCenter, Robot.scalePosition); //make one over-arching and pass in robotPOs and scalePos
 			} else {
-				if(leftRightCenter.compareTo(Robot.switchClosePosition) == 0) {
+				if((leftRightCenter == 1 && Robot.switchClosePosition.compareTo("L") == 0) || 
+						(leftRightCenter == 3 && Robot.switchClosePosition.compareTo("R") == 0)) {
 					return new SwitchPositionAutoCommandGroup(Robot.switchClosePosition); //pass in switch side AND robotPos
+				} else {
+					return new BaselineAutoCommandGroup();
+				}		 
+			}
+		} 
+	}
+	
+	public static Command chooseAutoModeQual(int leftRightCenter, Object rightSwitchAbility, Object scaleAbility, Object switchAbility) {
+		System.out.println("in the method qual");
+		if(leftRightCenter == 2) {
+			if(rightSwitchAbility.equals(false)) {
+				return new SwitchPositionAutoCommandGroup(Robot.switchClosePosition); //switch right auto
+			} else {
+				return new BaselineAutoCommandGroup();
+			}
+		} else {
+			if ((leftRightCenter == 1 && Robot.switchClosePosition.compareTo("L") == 0 || leftRightCenter == 3 && Robot.switchClosePosition.compareTo("R") == 0) || (switchAbility.equals(false))) {
+				return new SwitchPositionAutoCommandGroup(Robot.switchClosePosition); //make one over-arching and pass in robotPOs and scalePos
+			} else {
+				if((leftRightCenter == 1 && Robot.scalePosition.compareTo("L") == 0) || 
+						(leftRightCenter == 3 && Robot.scalePosition.compareTo("R") == 0)) {
+					return new ScalePositionAutoCommandGroup(leftRightCenter, Robot.scalePosition); //pass in switch side AND robotPos
 				} else {
 					return new BaselineAutoCommandGroup();
 				}		 
@@ -216,7 +256,12 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		//fieldPositionAnalysis();
-		m_autonomousCommand = autoChooser.getSelected();//new ScaleAutoCommand();//m_chooser.getSelected();
+		//m_autonomousCommand = autoChooser.getSelected();//new ScaleAutoCommand();//m_chooser.getSelected();
+		
+		System.out.println(teamScale);
+		System.out.println(teamSwitchRight);
+		System.out.println(fieldPosition);
+		
 		/*
 		try {
 			if (m_autonomousCommand.getClass() == Class.forName("org.usfirst.frc.team3950.robot.commands.ScalePositionLeftAutoCommandGroup")) {
@@ -235,7 +280,7 @@ public class Robot extends TimedRobot {
 		}
 		*/
 		
-		//m_autonomousCommand = Robot.chooseAutoMode(Robot.ourFieldPosition, Robot.teamSwitchRight, Robot.teamScale);
+		m_autonomousCommand = chooseAutoModeElim(Robot.ourFieldPosition, Robot.teamSwitchRight, Robot.teamScale);
 		
 		//m_autonomousCommand = new EncoderNavX2AutoCommand();
 		/*
@@ -330,3 +375,4 @@ public class Robot extends TimedRobot {
 	public void testPeriodic() {
 	}
 }
+

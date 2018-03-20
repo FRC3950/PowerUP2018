@@ -34,7 +34,7 @@ public class EncoderNavX2AutoCommand extends Command {
 	double encF = SmartDashboard.getNumber("F (distance)", 0);
 	
 	//straight drive values
-	double navxP = SmartDashboard.getNumber("P (drive straight)", 0.032);
+	double navxP = SmartDashboard.getNumber("P (drive straight)", 0.025);
 	double navxI = SmartDashboard.getNumber("I (drive straight)", 0.0);
 	double navxD = SmartDashboard.getNumber("D (drive straight)", 0.0);
 	double navxF = SmartDashboard.getNumber("F (drive straight)", 0);

@@ -24,7 +24,7 @@ public class BaselineAutoCommandGroup extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	
+    	System.out.println("I am in baseline");
     	addSequential(new EncoderNavX2AutoCommand(8));
     }
 }

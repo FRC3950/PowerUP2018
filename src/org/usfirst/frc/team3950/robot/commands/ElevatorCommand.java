@@ -49,7 +49,7 @@ public class ElevatorCommand extends Command {
     	//bottom = RobotMap.elevatorBottomLimitSwitch.get();
     	top = RobotMap.elevatorTopLimitSwitch.get();
     	
-    	Logger.log(LogLevel.info, "y axis is " + getY);
+    	//Logger.log(LogLevel.info, "y axis is " + getY);
     	
     	
     	

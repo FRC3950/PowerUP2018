@@ -46,7 +46,7 @@ public class DriveStraightCommand extends Command implements PIDOutput {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-
+    	System.out.println("I am in drive turn PRECISE");
 
 //    	double P = SmartDashboard.getNumber("P (drive straight)", .95);
 //    	double I = SmartDashboard.getNumber("I (drive straight)", 0.128);

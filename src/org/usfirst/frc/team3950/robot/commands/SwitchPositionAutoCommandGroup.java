@@ -8,11 +8,13 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  */
 public class SwitchPositionAutoCommandGroup extends CommandGroup {
-    	
+   
     
-    public void setLocation(String location) {
+    public void setLocation(int location) {
+    	
+    	System.out.println("I am in switch");
     	//Command Group for when switch is on left side
-    	if (location.compareTo("L") == 0) {
+    	if (location == 1) {
     		
     		//write right position to left switch code in here
     		
@@ -25,20 +27,20 @@ public class SwitchPositionAutoCommandGroup extends CommandGroup {
     	}
     	
     	//Command Group for when switch is on right side
-    	if (location.compareTo("R") == 0) {
+    	if (location == 3) {
     		
     		//write right position to right switch code in here
     		
     		//These values are complete B.S. I made them up. Please change them during calibration.
     		addSequential(new EncoderNavX2AutoCommand(14));
-    		addSequential(new DriveTurnPreciseCommand(-90));
-    		addSequential(new EncoderNavX2AutoCommand(8));
-    		addSequential(new ElevatorPIDCommand(29));
-    		addSequential(new IntakeOuttakeAutoCommand(-.5));
+    		addSequential(new DriveTurnPreciseCommand(-45));
+    		addSequential(new EncoderNavX2AutoCommand(3));
     	}
     }
     
     public SwitchPositionAutoCommandGroup(String switchPos) {
+    	
+    	System.out.println("I am in switch");
     	
     	if(switchPos.compareTo("L") == 0) {
     		

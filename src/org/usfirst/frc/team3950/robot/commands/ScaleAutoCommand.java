@@ -44,6 +44,8 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
     // Called just before this Command runs the first time
     protected void initialize() {
     	
+    	System.out.println("I am in SCALE AUTO");
+    	
     	source.reset();
     	source.setPIDSourceType(PIDSourceType.kDisplacement);
     	pid.setInputRange(0f,  setpoint*1.1);

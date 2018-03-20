@@ -9,7 +9,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class ScalePositionAutoCommandGroup extends CommandGroup {
 
-    public ScalePositionAutoCommandGroup(String fieldPosition, String scaleSide) {
+    public ScalePositionAutoCommandGroup(int fieldPosition, String scaleSide) {
+    	
+    	System.out.println("In scale position auto command noelle suks ");
+    	
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -27,12 +30,12 @@ public class ScalePositionAutoCommandGroup extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	if(fieldPosition.compareTo("L") == 0) {
+    	if(fieldPosition == 1) {
     		
     		if (scaleSide.compareTo("L") == 0) {
         		
         		//write left position to left scale code in here
-        		
+    			System.out.println("left scale");
         		//These values are complete B.S. I made them up. Please change them during calibration.
         		addSequential(new EncoderNavX2AutoCommand(27));
         		addSequential(new DriveTurnPreciseCommand(90));
@@ -44,6 +47,7 @@ public class ScalePositionAutoCommandGroup extends CommandGroup {
         	//Command Group for when scale is on right side
         	else if (scaleSide.compareTo("R") == 0) {
         		
+        		System.out.println("right scale");
         		//write left position to right scale code in here
         		
         		//These values are complete B.S. I made them up. Please change them during calibration.
@@ -51,12 +55,12 @@ public class ScalePositionAutoCommandGroup extends CommandGroup {
         		addSequential(new DriveTurnPreciseCommand(-90));
         		addSequential(new EncoderNavX2AutoCommand(8));
         		addSequential(new ElevatorPIDCommand(79));
-        		addSequential(new IntakeOuttakeAutoCommand(-.5));
+        		//addSequential(new IntakeOuttakeAutoCommand(-.5));
         	} else {
         		Logger.log(Logger.LogLevel.info, "ScalePositionLeftAutoCommand BIG ERROR - string passed in is equal to:" + scaleSide);
         	}
         
-    	} else if (fieldPosition.compareTo("R") == 0) {
+    	} else if (fieldPosition == 3) {
     		
     			if (scaleSide.compareTo("L") == 0) {
 	    		
