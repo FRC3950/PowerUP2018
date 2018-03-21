@@ -65,6 +65,7 @@ public class Robot extends TimedRobot {
 	Command m_autonomousCommand;
 	//SendableChooser<Command> autoChooser = new SendableChooser<>();
 	SendableChooser<Logger.LogLevel> logChooser = new SendableChooser<>();
+	SendableChooser<Command> typeChooser = new SendableChooser<>();
 	SendableChooser teamScaleAuto = null;
 	SendableChooser teamSwitchRightAuto = null;
 	SendableChooser teamSwitchAuto = null;
@@ -123,6 +124,8 @@ public class Robot extends TimedRobot {
 		teamSwitch = teamSwitchAuto.getSelected();
 		
 		
+		
+		
 		fieldPosition = new SendableChooser();
 		fieldPosition.addDefault("Left", true);
 		fieldPosition.addObject("Right", false);
@@ -140,6 +143,10 @@ public class Robot extends TimedRobot {
 		logChooser.addObject("Info", Logger.LogLevel.info);
 		logChooser.addObject("Debug", Logger.LogLevel.debug);
 		logChooser.addObject("Trace", Logger.LogLevel.trace);
+		
+		//typeChooser.addObject("Switch", object);
+		//typeChooser.addObject("Scale", object);
+		typeChooser.addObject("Baseline", new BaselineAutoCommandGroup());
 		
 		/*
 		autoChooser.addDefault("Turn Precise", new DriveTurnPreciseCommand(90));
@@ -198,6 +205,8 @@ public class Robot extends TimedRobot {
 	
 	
 	
+	//for elimination / final matches only
+	
 	public static Command chooseAutoModeElim(int leftRightCenter, Object rightSwitchAbility, Object scaleAbility) {
 		System.out.println("in the method elim");
 		if(leftRightCenter == 2) {
@@ -219,6 +228,8 @@ public class Robot extends TimedRobot {
 			}
 		} 
 	}
+	
+	//for qualification matches only
 	
 	public static Command chooseAutoModeQual(int leftRightCenter, Object rightSwitchAbility, Object scaleAbility, Object switchAbility) {
 		System.out.println("in the method qual");
