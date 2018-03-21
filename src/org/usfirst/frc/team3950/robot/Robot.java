@@ -144,9 +144,10 @@ public class Robot extends TimedRobot {
 		logChooser.addObject("Debug", Logger.LogLevel.debug);
 		logChooser.addObject("Trace", Logger.LogLevel.trace);
 		
-		//typeChooser.addObject("Switch", object);
-		//typeChooser.addObject("Scale", object);
+		typeChooser.addObject("Switch", new SwitchPriorityCommand());
+		typeChooser.addObject("Scale", new ScalePriorityCommand());
 		typeChooser.addObject("Baseline", new BaselineAutoCommandGroup());
+		SmartDashboard.putData("Auto Mode", typeChooser);
 		
 		/*
 		autoChooser.addDefault("Turn Precise", new DriveTurnPreciseCommand(90));
@@ -269,7 +270,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		//fieldPositionAnalysis();
-		//m_autonomousCommand = autoChooser.getSelected();//new ScaleAutoCommand();//m_chooser.getSelected();
+		m_autonomousCommand = typeChooser.getSelected();//new ScaleAutoCommand();//m_chooser.getSelected();
 		
 		System.out.println(teamScale);
 		System.out.println(teamSwitchRight);
@@ -293,7 +294,7 @@ public class Robot extends TimedRobot {
 		}
 		*/
 		
-		m_autonomousCommand = chooseAutoModeElim(Robot.ourFieldPosition, Robot.teamSwitchRight, Robot.teamScale);
+		//m_autonomousCommand = chooseAutoModeElim(Robot.ourFieldPosition, Robot.teamSwitchRight, Robot.teamScale);
 		//m_autonomousCommand = chooseAutoModeQual(Robot.ourFieldPosition, Robot.teamSwitchRight, Robot.teamScale, Robot.teamSwitch);
 		
 		//m_autonomousCommand = new EncoderNavX2AutoCommand();
