@@ -52,6 +52,7 @@ public class Robot extends TimedRobot {
 	public static Object teamScale = false;
 	public static Object teamSwitchRight = false;
 	public static String teamSwitchLeft = "";
+	public static Object teamSwitch = false;
 	
 	public static int ourFieldPosition = 0;
 	
@@ -119,6 +120,7 @@ public class Robot extends TimedRobot {
 		teamSwitchAuto.addObject("No", false);
 		teamSwitchAuto.setName("teamSwitchAuto");
 		SmartDashboard.putData("teamSwitchAuto", teamSwitchAuto);
+		teamSwitch = teamSwitchAuto.getSelected();
 		
 		
 		fieldPosition = new SendableChooser();
@@ -281,6 +283,7 @@ public class Robot extends TimedRobot {
 		*/
 		
 		m_autonomousCommand = chooseAutoModeElim(Robot.ourFieldPosition, Robot.teamSwitchRight, Robot.teamScale);
+		//m_autonomousCommand = chooseAutoModeQual(Robot.ourFieldPosition, Robot.teamSwitchRight, Robot.teamScale, Robot.teamSwitch);
 		
 		//m_autonomousCommand = new EncoderNavX2AutoCommand();
 		/*
