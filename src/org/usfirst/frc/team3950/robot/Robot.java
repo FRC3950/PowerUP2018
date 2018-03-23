@@ -144,8 +144,8 @@ public class Robot extends TimedRobot {
 		logChooser.addObject("Debug", Logger.LogLevel.debug);
 		logChooser.addObject("Trace", Logger.LogLevel.trace);
 		
-		typeChooser.addObject("Switch", new SwitchPriorityCommand());
-		typeChooser.addObject("Scale", new ScalePriorityCommand());
+		typeChooser.addObject("Switch", new SwitchPositionAutoCommandGroup(Robot.ourFieldPosition, Robot.switchClosePosition));
+		typeChooser.addObject("Scale", new ScalePositionAutoCommandGroup(Robot.ourFieldPosition, Robot.scalePosition));
 		typeChooser.addObject("Baseline", new BaselineAutoCommandGroup());
 		SmartDashboard.putData("Auto Mode", typeChooser);
 		
@@ -208,11 +208,12 @@ public class Robot extends TimedRobot {
 	
 	//for elimination / final matches only
 	
+	/*
 	public static Command chooseAutoModeElim(int leftRightCenter, Object rightSwitchAbility, Object scaleAbility) {
 		System.out.println("in the method elim");
 		if(leftRightCenter == 2) {
 			if(rightSwitchAbility.equals(false)) {
-				return new SwitchPositionAutoCommandGroup(Robot.switchClosePosition); //switch right auto
+				return new SwitchPositionAutoCommandGroup(leftRightCenter, Robot.switchClosePosition); //switch right auto
 			} else {
 				return new BaselineAutoCommandGroup();
 			}
@@ -222,7 +223,7 @@ public class Robot extends TimedRobot {
 			} else {
 				if((leftRightCenter == 1 && Robot.switchClosePosition.compareTo("L") == 0) || 
 						(leftRightCenter == 3 && Robot.switchClosePosition.compareTo("R") == 0)) {
-					return new SwitchPositionAutoCommandGroup(Robot.switchClosePosition); //pass in switch side AND robotPos
+					return new SwitchPositionAutoCommandGroup(leftRightCenter, Robot.switchClosePosition); //pass in switch side AND robotPos
 				} else {
 					return new BaselineAutoCommandGroup();
 				}		 
@@ -236,13 +237,13 @@ public class Robot extends TimedRobot {
 		System.out.println("in the method qual");
 		if(leftRightCenter == 2) {
 			if(rightSwitchAbility.equals(false)) {
-				return new SwitchPositionAutoCommandGroup(Robot.switchClosePosition); //switch right auto
+				return new SwitchPositionAutoCommandGroup(leftRightCenter, Robot.switchClosePosition); //switch right auto
 			} else {
 				return new BaselineAutoCommandGroup();
 			}
 		} else {
 			if ((leftRightCenter == 1 && Robot.switchClosePosition.compareTo("L") == 0 || leftRightCenter == 3 && Robot.switchClosePosition.compareTo("R") == 0) || (switchAbility.equals(false))) {
-				return new SwitchPositionAutoCommandGroup(Robot.switchClosePosition); //make one over-arching and pass in robotPOs and scalePos
+				return new SwitchPositionAutoCommandGroup(leftRightCenter, Robot.switchClosePosition); //make one over-arching and pass in robotPOs and scalePos
 			} else {
 				if((leftRightCenter == 1 && Robot.scalePosition.compareTo("L") == 0) || 
 						(leftRightCenter == 3 && Robot.scalePosition.compareTo("R") == 0)) {
@@ -254,7 +255,7 @@ public class Robot extends TimedRobot {
 		} 
 	}
 	
-	
+
 	
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
@@ -390,4 +391,3 @@ public class Robot extends TimedRobot {
 	public void testPeriodic() {
 	}
 }
-

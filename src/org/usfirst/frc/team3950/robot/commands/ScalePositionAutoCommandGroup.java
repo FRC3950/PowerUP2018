@@ -86,6 +86,32 @@ public class ScalePositionAutoCommandGroup extends CommandGroup {
     				addSequential(new ElevatorPIDCommand(79));
             		addSequential(new IntakeOuttakeAutoCommand(-.5));
     			}
+    		} else if(fieldPosition == 2) {
+    			if (scaleSide.compareTo("L") == 0) {
+    	    		
+    				//write right position to left scale code in here
+	    		
+    				//These values are complete B.S. I made them up. Please change them during calibration.
+    				addSequential(new EncoderNavX2AutoCommand(27));
+    				addSequential(new DriveTurnPreciseCommand(90));
+    				addSequential(new EncoderNavX2AutoCommand(8));
+    				addSequential(new ElevatorPIDCommand(79));
+            		addSequential(new IntakeOuttakeAutoCommand(-.5));
+    			}
+	    	
+    			//Command Group for when scale is on right side
+    			if (scaleSide.compareTo("R") == 0) {
+	    		
+    				//write right position to right scale code in here
+	    		
+    				//These values are complete B.S. I made them up. Please change them during calibration.
+    				addSequential(new EncoderNavX2AutoCommand(27));
+    				addSequential(new DriveTurnPreciseCommand(-90));
+    				addSequential(new EncoderNavX2AutoCommand(8));
+    				addSequential(new ElevatorPIDCommand(79));
+            		addSequential(new IntakeOuttakeAutoCommand(-.5));
+    			}
+
     		}
     	}
 	}
