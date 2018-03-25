@@ -44,7 +44,7 @@ public class IntakeVerticalCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	speed = -controller.getY(Hand.kRight);
+    	speed = controller.getY(Hand.kRight);
     	
     	if(speed <= tolerance && speed >= -tolerance)
     		speed = 0;

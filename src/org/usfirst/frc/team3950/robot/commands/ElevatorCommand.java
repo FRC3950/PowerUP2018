@@ -44,7 +44,7 @@ public class ElevatorCommand extends Command {
     //change code button to go to each specific height //bottom //switch //scale //high scale //or not
     protected void execute() {
     	//System.out.println("I am in execute of el com");
-    	getY = controller.getY(Hand.kLeft);
+    	getY = -controller.getY(Hand.kLeft);
     	
     	//bottom = RobotMap.elevatorBottomLimitSwitch.get();
     	top = RobotMap.elevatorTopLimitSwitch.get();
@@ -127,11 +127,13 @@ public class ElevatorCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	//Robot.elevatorSubsystem.elevatorBrake();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
-    protected void interrupted() {    
+    protected void interrupted() { 
+    	//Robot.elevatorSubsystem.elevatorBrake();
     }
 
 	public void pidWrite(double output) {

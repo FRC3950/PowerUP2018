@@ -2,6 +2,7 @@ package org.usfirst.frc.team3950.robot.subsystems;
 
 import org.usfirst.frc.team3950.robot.RobotMap;
 import org.usfirst.frc.team3950.robot.commands.IntakeVerticalCommand;
+import org.usfirst.frc.team3950.robot.commands.NoLimitSwIntakeCommand;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
@@ -28,7 +29,7 @@ public class IntakeVerticalSubsystem extends Subsystem {
     	topSwitch = RobotMap.intakeTopLimitSwitch;
     	vertical = RobotMap.intakeVerticalMotor;
     	
-    	setDefaultCommand(new IntakeVerticalCommand());
+    	setDefaultCommand(new NoLimitSwIntakeCommand());
     }
     
     public boolean atBottom() {

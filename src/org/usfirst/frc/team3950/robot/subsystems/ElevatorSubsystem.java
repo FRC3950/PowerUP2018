@@ -31,7 +31,7 @@ public class ElevatorSubsystem extends Subsystem {
 	
 	double distancePerRotation;
 	
-	double switchHeight = 29;
+	double switchHeight = 24;
 	double scaleLowHeight = 58;
 	double scaleMidHeight = 61;
 	double scaleTopHeight = 79;

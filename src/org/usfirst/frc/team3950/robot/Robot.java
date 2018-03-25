@@ -65,7 +65,7 @@ public class Robot extends TimedRobot {
 	Command m_autonomousCommand;
 	//SendableChooser<Command> autoChooser = new SendableChooser<>();
 	SendableChooser<Logger.LogLevel> logChooser = new SendableChooser<>();
-	SendableChooser<Command> typeChooser = new SendableChooser<>();
+	SendableChooser<String> typeChooser = new SendableChooser<>();
 	SendableChooser teamScaleAuto = null;
 	SendableChooser teamSwitchRightAuto = null;
 	SendableChooser teamSwitchAuto = null;
@@ -89,14 +89,14 @@ public class Robot extends TimedRobot {
 		oi = new OI();
 		
 		//String str = DriverStation.getInstance().getGameSpecificMessage();
-		switchClosePosition = DriverStation.getInstance().getGameSpecificMessage().substring(0, 1);//DSSimulation.getSide(sides);//str.substring(0,1);
-		System.out.println(switchClosePosition);
-		scalePosition = DriverStation.getInstance().getGameSpecificMessage().substring(1, 2);//str.substring(1,2);
-		System.out.println(scalePosition);
-		switchFarPosition = DriverStation.getInstance().getGameSpecificMessage().substring(2, 3);//str.substring(2,3);
-		System.out.println(switchFarPosition);
-		
-		ourFieldPosition = DriverStation.getInstance().getLocation();
+//		switchClosePosition = DriverStation.getInstance().getGameSpecificMessage().substring(0, 1);//DSSimulation.getSide(sides);//str.substring(0,1);
+//		System.out.println(switchClosePosition);
+//		scalePosition = DriverStation.getInstance().getGameSpecificMessage().substring(1, 2);//str.substring(1,2);
+//		System.out.println(scalePosition);
+//		switchFarPosition = DriverStation.getInstance().getGameSpecificMessage().substring(2, 3);//str.substring(2,3);
+//		System.out.println(switchFarPosition);
+//		
+//		ourFieldPosition = DriverStation.getInstance().getLocation();
 		
 		teamScaleAuto = new SendableChooser();
 		teamScaleAuto.addDefault("Yes", true);
@@ -123,31 +123,28 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("teamSwitchAuto", teamSwitchAuto);
 		teamSwitch = teamSwitchAuto.getSelected();
 		
+		typeChooser = new SendableChooser<String>();
+		typeChooser.addDefault("Switch", new String("Switch"));
+		typeChooser.addObject("Scale", new String("Scale"));
+		typeChooser.addObject("Baseline", new String("Baseline"));
+		typeChooser.addObject("No Auto", new String("No Auto"));
+		SmartDashboard.putData("Auto Mode", typeChooser);
 		
-		
-		
+		/*
 		fieldPosition = new SendableChooser();
 		fieldPosition.addDefault("Left", true);
 		fieldPosition.addObject("Right", false);
 		fieldPosition.addObject("Center", false);
 		fieldPosition.setName("fieldPosition");
 		SmartDashboard.putData("fieldPosition", fieldPosition);
+		*/
 		//ourFieldPosition = (String) fieldPosition.getSelected();
 		//SmartDashboard.putString("What is our field position?", "");
 		
 		//
 		
 		//autoChooser = new SendableChooser<Command>();
-		logChooser = new SendableChooser<Logger.LogLevel>();
 		
-		logChooser.addObject("Info", Logger.LogLevel.info);
-		logChooser.addObject("Debug", Logger.LogLevel.debug);
-		logChooser.addObject("Trace", Logger.LogLevel.trace);
-		
-		typeChooser.addObject("Switch", new SwitchPositionAutoCommandGroup(Robot.ourFieldPosition, Robot.switchClosePosition));
-		typeChooser.addObject("Scale", new ScalePositionAutoCommandGroup(Robot.ourFieldPosition, Robot.scalePosition));
-		typeChooser.addObject("Baseline", new BaselineAutoCommandGroup());
-		SmartDashboard.putData("Auto Mode", typeChooser);
 		
 		/*
 		autoChooser.addDefault("Turn Precise", new DriveTurnPreciseCommand(90));
@@ -196,7 +193,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
 	}
 
 	@Override
@@ -271,11 +267,34 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		//fieldPositionAnalysis();
-		m_autonomousCommand = typeChooser.getSelected();//new ScaleAutoCommand();//m_chooser.getSelected();
+		switchClosePosition = DriverStation.getInstance().getGameSpecificMessage().substring(0, 1);//DSSimulation.getSide(sides);//str.substring(0,1);
+		System.out.println(switchClosePosition);
+		scalePosition = DriverStation.getInstance().getGameSpecificMessage().substring(1, 2);//str.substring(1,2);
+		System.out.println(scalePosition);
+		switchFarPosition = DriverStation.getInstance().getGameSpecificMessage().substring(2, 3);//str.substring(2,3);
+		System.out.println(switchFarPosition);
 		
-		System.out.println(teamScale);
-		System.out.println(teamSwitchRight);
-		System.out.println(fieldPosition);
+		ourFieldPosition = DriverStation.getInstance().getLocation();
+		
+		/*
+		if(typeChooser.getSelected().compareTo("Switch") == 0) {
+			m_autonomousCommand = new SwitchPositionAutoCommandGroup(Robot.ourFieldPosition, Robot.switchClosePosition);
+		} else if(typeChooser.getSelected().compareTo("Scale") == 0) {
+			m_autonomousCommand = new ScalePositionAutoCommandGroup(Robot.ourFieldPosition, Robot.scalePosition);
+		} else if(typeChooser.getSelected().compareTo("Baseline") == 0) {
+			m_autonomousCommand = new BaselineAutoCommandGroup();
+		} else if(typeChooser.getSelected().compareTo("No Auto") == 0) {
+			m_autonomousCommand = null;
+		}
+		
+	*/
+		
+		m_autonomousCommand = new DriveTurnPreciseCommand(90);
+		//m_autonomousCommand = typeChooser.getSelected();//new ScaleAutoCommand();//m_chooser.getSelected();
+		
+		//System.out.println(teamScale);
+		//System.out.println(teamSwitchRight);
+		//System.out.println(fieldPosition);
 		
 		/*
 		try {
@@ -361,6 +380,7 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 	//	robotLogger.info("I am in teleopPeriodic");
 		
+		//System.out.println("type chooser = " + typeChooser.getSelected());
 		Scheduler.getInstance().run();
 		
 		

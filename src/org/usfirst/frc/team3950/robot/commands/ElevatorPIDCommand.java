@@ -40,7 +40,7 @@ public class ElevatorPIDCommand extends Command implements PIDOutput{
     	Robot.elevatorSubsystem.resetEncoder();
     	source.setPIDSourceType(PIDSourceType.kDisplacement);
     	pid.setInputRange(0,  setpoint);
-    	pid.setOutputRange(-.5, .5);
+    	pid.setOutputRange(-.2, .2);
     	pid.setPercentTolerance(5.0);
     	pid.setContinuous(false);
     	pid.setPID(P, I, D, F);
@@ -89,6 +89,8 @@ public class ElevatorPIDCommand extends Command implements PIDOutput{
 	public void pidWrite(double output) {
 		// TODO Auto-generated method stub
 		Robot.elevatorSubsystem.elevatorControl(output);
+		if(Robot.elevatorSubsystem.topGetter())
+			Robot.elevatorSubsystem.elevatorControl(0);
 		Logger.log(LogLevel.info, "Encoder Height " + Robot.elevatorSubsystem.getElevatorHeight());
 		Logger.log(Logger.LogLevel.info, "elevator enc counts" + RobotMap.elevatorMotor.getSelectedSensorPosition(0));
 		

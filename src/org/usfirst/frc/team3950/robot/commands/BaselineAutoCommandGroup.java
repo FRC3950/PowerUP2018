@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3950.robot.commands;
 
+import org.usfirst.frc.team3950.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -25,6 +27,7 @@ public class BaselineAutoCommandGroup extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	System.out.println("I am in baseline");
-    	addSequential(new EncoderNavX2AutoCommand(8));
+    	RobotMap.ahrs.reset();
+    	addSequential(new EncoderNavX2AutoCommand(5));
     }
 }

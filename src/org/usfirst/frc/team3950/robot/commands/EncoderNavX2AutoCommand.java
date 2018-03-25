@@ -34,7 +34,7 @@ public class EncoderNavX2AutoCommand extends Command {
 	double encF = SmartDashboard.getNumber("F (distance)", 0);
 	
 	//straight drive values
-	double navxP = SmartDashboard.getNumber("P (drive straight)", 0.025);
+	double navxP = SmartDashboard.getNumber("P (drive straight)", 0.0025);
 	double navxI = SmartDashboard.getNumber("I (drive straight)", 0.0);
 	double navxD = SmartDashboard.getNumber("D (drive straight)", 0.0);
 	double navxF = SmartDashboard.getNumber("F (drive straight)", 0);
@@ -109,6 +109,7 @@ public class EncoderNavX2AutoCommand extends Command {
 
       @Override
       public double pidGet() {
+    	  System.out.println(RobotMap.ahrs.getYaw());
     	  return RobotMap.ahrs.getYaw();
       }
       
@@ -132,7 +133,6 @@ public class EncoderNavX2AutoCommand extends Command {
       public void pidWrite(double output) {
     	  navxOutput = output;
     	  Logger.log(Logger.LogLevel.info, "Output NavX = " + output);
-    	  navXSumError = navXSumError + navXPID.getError();
       }
     };
 
@@ -185,7 +185,7 @@ public class EncoderNavX2AutoCommand extends Command {
   @Override
   protected void execute() {
 	  
-	  Logger.log(Logger.LogLevel.debug, "I am in EncNavX2 Execute");
+	  //Logger.log(Logger.LogLevel.debug, "I am in EncNavX2 Execute");
 	  
 	  Logger.log(Logger.LogLevel.info, "nAVx Error is " + navXPID.getError());
 	  Logger.log(Logger.LogLevel.info, "Enc Error is " + encPID.getError());

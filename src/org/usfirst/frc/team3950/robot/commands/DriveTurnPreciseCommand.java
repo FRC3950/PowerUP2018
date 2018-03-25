@@ -27,7 +27,7 @@ public class DriveTurnPreciseCommand extends Command implements PIDOutput  {
 //	double D = SmartDashboard.getNumber("D (turn)", 0);
 //	double F = SmartDashboard.getNumber("F (turn)", 0);
 	
-	double P = .025;
+	double P = .06;
 	double I = 0;
 	double D = 0;
 	double F = 0;
@@ -53,7 +53,7 @@ public class DriveTurnPreciseCommand extends Command implements PIDOutput  {
     	pid.setInputRange(setpoint>0?0:setpoint*1.1, setpoint<0?0:setpoint*1.1);
 		//pid.setInputRange(SmartDashboard.getNumber("Setpoint Begin", 0), (SmartDashboard.getNumber("Setpoint End", 45))*1.1);
     	pid.setOutputRange(-.75,.75);
-    	pid.setPercentTolerance(2);
+    	pid.setPercentTolerance(4);
     	pid.setContinuous(false);
     	pid.setPID(P, I, D, F);
     	pid.setSetpoint(setpoint);

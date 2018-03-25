@@ -24,8 +24,8 @@ public class IntakeSubsystem extends Subsystem {
     // here. Call these from Commands
 	
 	WPI_VictorSPX left;
-	//WPI_VictorSPX right;
-	WPI_TalonSRX right;
+	WPI_VictorSPX right;
+	//WPI_TalonSRX right;
 	WPI_VictorSPX vertical;
 	DigitalInput cubeSwitch;
 	DigitalInput bottomSwitch;
