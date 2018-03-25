@@ -274,6 +274,7 @@ public class Robot extends TimedRobot {
 		switchFarPosition = DriverStation.getInstance().getGameSpecificMessage().substring(2, 3);//str.substring(2,3);
 		System.out.println(switchFarPosition);
 		
+		
 		ourFieldPosition = DriverStation.getInstance().getLocation();
 		
 		/*

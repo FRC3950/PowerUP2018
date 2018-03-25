@@ -58,6 +58,7 @@ public class SwitchPositionAutoCommandGroup extends CommandGroup {
         		addSequential(new ElevatorPIDCommand(18));
         		addSequential(new IntakeOuttakeAutoCommand(-.5));
         		//addSequential(new IntakeOuttakeAutoCommand(-.5));
+
         	} else {
         		Logger.log(Logger.LogLevel.info, "SwitchPositionLeftAutoCommand BIG ERROR - string passed in is equal to:" + switchSide);
         	}
@@ -69,10 +70,11 @@ public class SwitchPositionAutoCommandGroup extends CommandGroup {
     				//write right position to left scale code in here
 	    		
     				//These values are complete B.S. I made them up. Please change them during calibration.
-    				addSequential(new EncoderNavX2AutoCommand(2.2)); //10.2
-            		addSequential(new DriveTurnPreciseCommand(90));
+    				addSequential(new EncoderNavX2AutoCommand(19.58));
+            		addSequential(new DriveTurnPreciseCommand(-90));
+            		addSequential(new EncoderNavX2AutoCommand(14.5));
+            		addSequential(new DriveTurnPreciseCommand(-90));
             		addSequential(new ElevatorPIDCommand(18));
-            		addSequential(new EncoderNavX2AutoCommand(0.1)); //.5
             		addSequential(new IntakeOuttakeAutoCommand(-.5));
     			}
 	    	
@@ -83,8 +85,6 @@ public class SwitchPositionAutoCommandGroup extends CommandGroup {
 	    		
     				//These values are complete B.S. I made them up. Please change them during calibration.
     				addSequential(new EncoderNavX2AutoCommand(8.25));
-            		addSequential(new DriveTurnPreciseCommand(90));
-            		addSequential(new EncoderNavX2AutoCommand(3.2));
             		addSequential(new DriveTurnPreciseCommand(90));
             		addSequential(new ElevatorPIDCommand(18));
             		addSequential(new IntakeOuttakeAutoCommand(-.5));
