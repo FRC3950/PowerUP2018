@@ -1,15 +1,15 @@
 package org.usfirst.frc.team3950.robot.commands;
 
-import org.usfirst.frc.team3950.robot.RobotMap;
+import org.usfirst.frc.team3950.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class BaselineAutoCommandGroup extends CommandGroup {
+public class TestTestAutoCommandGroup extends CommandGroup {
 
-    public BaselineAutoCommandGroup() {
+    public TestTestAutoCommandGroup() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -26,8 +26,7 @@ public class BaselineAutoCommandGroup extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	System.out.println("I am in baseline");
-    	RobotMap.ahrs.reset();
-    	addSequential(new EncoderNavX2AutoCommand(8.25));
+    	addSequential(new ElevatorPIDCommand(Robot.elevatorSubsystem.getSwitchHeight()));
+    	addSequential(new IntakeOuttakeAutoCommand(-.5));
     }
 }

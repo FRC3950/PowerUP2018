@@ -2,6 +2,7 @@
 
 import org.usfirst.frc.team3950.robot.RobotMap;
  //import org.usfirst.frc.team3950.robot.commands.RampStopCommand;
+import org.usfirst.frc.team3950.robot.commands.RampCommand;
 
 //import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
@@ -23,6 +24,7 @@ public class RampSubsystem extends Subsystem {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand())
     	rampSolenoid = RobotMap.rampSolenoid;
+    	
     }
     
     public void rampUp() {

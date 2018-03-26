@@ -21,7 +21,7 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
 	//constants
 	double maxSpeed = 0.75;
 	//setpoint is in feet
-	double setpoint = 10f;
+	double setpoint = 8.3f;
 	
 	
 //	double P = SmartDashboard.getNumber("P (distance)", 0.17);

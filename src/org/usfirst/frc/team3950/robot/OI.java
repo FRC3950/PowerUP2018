@@ -47,9 +47,10 @@ public class OI
 	    public Button xboxControllerYButton = new JoystickButton(xboxcontroller, 4);
 	    public Button xboxControllerLBButton = new JoystickButton(xboxcontroller, 5);
 	    public Button xboxControllerRBButton = new JoystickButton(xboxcontroller, 6);
-	    public Button xboxControllerLeftStickButton = new JoystickButton(xboxcontroller, 7);
-	    public Button xboxControllerRightStickButton = new JoystickButton(xboxcontroller, 8);
-	    public Button xboxControllerBackButton = new JoystickButton(xboxcontroller, 10);
+	    public Button xboxControllerLeftStickButton = new JoystickButton(xboxcontroller, 9);
+	    public Button xboxControllerRightStickButton = new JoystickButton(xboxcontroller, 10);
+	    public Button xboxControllerBackButton = new JoystickButton(xboxcontroller, 7);
+	    public Button xboxControllerStartButton = new JoystickButton(xboxcontroller, 8);
 
 	    public OI() 
 	    {
@@ -62,7 +63,6 @@ public class OI
 //	    	driveStick2Button.whenPressed(new   );
 //	    	driveStick5Button.whenPressed(new   );
 //	    	driveStick6Button.whenPressed(new   );
-//	    	driveStick11Button.whenPressed(new   );
 //	    	driveStick12Button.whenPressed(new   );
 
 	    	
@@ -74,9 +74,10 @@ public class OI
 	        //xboxControllerRBButton.whenPressed(new IntakeVerticalCommand());
 	        xboxControllerRBButton.whenPressed(new IntakeGrabCommand());
 	        //xboxControllerRightStickButton.whenPressed(new RampCommand());	
-	        xboxControllerLeftStickButton.whenPressed(new ElevatorShiftCommand());
+	        xboxControllerBackButton.whenPressed(new ElevatorShiftCommand());
 	        
 	        //driveStick5Button.whenPressed(new RampCommand());
+	        driveStick7Button.whenPressed(new RampCommand());
 	        driveStick3Button.whenPressed(new IntakeFakeCommand(Robot.intakeSubsystem.getIntakeSpeed()));
 	        driveStick4Button.whenPressed(new OuttakeFakeCommand(-Robot.intakeSubsystem.getIntakeSpeed()));
 	        driveStick2Button.whenPressed(new ElevatorUndoBrakeCommand());

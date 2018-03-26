@@ -34,14 +34,13 @@ public class SwitchPositionAutoCommandGroup extends CommandGroup {
     		
     		if (switchSide.compareTo("L") == 0) {
         		
-        		//write left position to left scale code in here
+        		//left field left switch
     			System.out.println("left switch");
-        		//These values are complete B.S. I made them up. Please change them during calibration.
-        		addSequential(new EncoderNavX2AutoCommand(2.2)); //10.2
-        		addSequential(new DriveTurnPreciseCommand(90));
-        		addSequential(new ElevatorPIDCommand(18));
-        		addSequential(new EncoderNavX2AutoCommand(0.1)); //.5
-        		addSequential(new IntakeOuttakeAutoCommand(-.5));
+        		addSequential(new EncoderNavX2AutoCommand(2.2)); //10.2 //move up to side of switch approx middle
+        		addSequential(new DriveTurnPreciseCommand(90)); //turn 90 degrees right toward switch
+        		addSequential(new ElevatorPIDCommand(18)); //move elevator up 18 inches
+        		addSequential(new EncoderNavX2AutoCommand(0.1)); //.5 //move forward a bit more
+        		addSequential(new IntakeOuttakeAutoCommand(-.5)); //outtake the cube into the switch
         	}
         	
         	//Command Group for when scale is on right side

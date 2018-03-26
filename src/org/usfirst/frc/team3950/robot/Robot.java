@@ -66,10 +66,11 @@ public class Robot extends TimedRobot {
 	//SendableChooser<Command> autoChooser = new SendableChooser<>();
 	SendableChooser<Logger.LogLevel> logChooser = new SendableChooser<>();
 	SendableChooser<String> typeChooser = new SendableChooser<>();
+	SendableChooser<String> fieldPosition = new SendableChooser<>();
 	SendableChooser teamScaleAuto = null;
 	SendableChooser teamSwitchRightAuto = null;
 	SendableChooser teamSwitchAuto = null;
-	SendableChooser fieldPosition = null;
+	
 	
 	public static DrivetrainSubsystem drivetrainSubsystem = new DrivetrainSubsystem();
 	public static IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
@@ -87,17 +88,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		
-		//String str = DriverStation.getInstance().getGameSpecificMessage();
-//		switchClosePosition = DriverStation.getInstance().getGameSpecificMessage().substring(0, 1);//DSSimulation.getSide(sides);//str.substring(0,1);
-//		System.out.println(switchClosePosition);
-//		scalePosition = DriverStation.getInstance().getGameSpecificMessage().substring(1, 2);//str.substring(1,2);
-//		System.out.println(scalePosition);
-//		switchFarPosition = DriverStation.getInstance().getGameSpecificMessage().substring(2, 3);//str.substring(2,3);
-//		System.out.println(switchFarPosition);
-//		
-//		ourFieldPosition = DriverStation.getInstance().getLocation();
-		
+
+		/*
 		teamScaleAuto = new SendableChooser();
 		teamScaleAuto.addDefault("Yes", true);
 		teamScaleAuto.addObject("No", false);
@@ -122,6 +114,7 @@ public class Robot extends TimedRobot {
 		teamSwitchAuto.setName("teamSwitchAuto");
 		SmartDashboard.putData("teamSwitchAuto", teamSwitchAuto);
 		teamSwitch = teamSwitchAuto.getSelected();
+		*/
 		
 		typeChooser = new SendableChooser<String>();
 		typeChooser.addDefault("Switch", new String("Switch"));
@@ -130,14 +123,14 @@ public class Robot extends TimedRobot {
 		typeChooser.addObject("No Auto", new String("No Auto"));
 		SmartDashboard.putData("Auto Mode", typeChooser);
 		
-		/*
-		fieldPosition = new SendableChooser();
-		fieldPosition.addDefault("Left", true);
-		fieldPosition.addObject("Right", false);
-		fieldPosition.addObject("Center", false);
-		fieldPosition.setName("fieldPosition");
+		
+		fieldPosition = new SendableChooser<String>();
+		fieldPosition.addDefault("Left", new String("Left"));
+		fieldPosition.addObject("Right", new String("Right"));
+		fieldPosition.addObject("Center", new String("Center"));
+		//fieldPosition.setName("fieldPosition");
 		SmartDashboard.putData("fieldPosition", fieldPosition);
-		*/
+		
 		//ourFieldPosition = (String) fieldPosition.getSelected();
 		//SmartDashboard.putString("What is our field position?", "");
 		
@@ -290,7 +283,7 @@ public class Robot extends TimedRobot {
 		
 	*/
 		
-		m_autonomousCommand = new DriveTurnPreciseCommand(90);
+		m_autonomousCommand = new DriveTurnPreciseCommand(45);
 		//m_autonomousCommand = typeChooser.getSelected();//new ScaleAutoCommand();//m_chooser.getSelected();
 		
 		//System.out.println(teamScale);
@@ -353,6 +346,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
+		//RobotMap.ahrs.reset();
 		
 		Logger.loggerLogLevel = logChooser.getSelected();
 		if(Logger.loggerLogLevel == null) {
@@ -381,7 +375,7 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 	//	robotLogger.info("I am in teleopPeriodic");
 		
-		//System.out.println("type chooser = " + typeChooser.getSelected());
+		//System.out.println("field chooser = " + fieldPosition.getSelected());
 		Scheduler.getInstance().run();
 		
 		
@@ -389,6 +383,9 @@ public class Robot extends TimedRobot {
 		
 		SmartDashboard.putBoolean("Is Elevator at Top", Robot.elevatorSubsystem.topGetter());
 		SmartDashboard.putBoolean("Is Elevator at Bottom", Robot.elevatorSubsystem.bottomGetter());
+		
+		//System.out.println("yaw " + RobotMap.ahrs.getYaw());
+		
 		
 //		System.out.println("limit switch bottom elevator " + RobotMap.elevatorBottomLimitSwitch.get());
 //		System.out.println("limit switch top elevator " + RobotMap.elevatorTopLimitSwitch.get());

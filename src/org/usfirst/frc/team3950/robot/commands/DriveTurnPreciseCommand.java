@@ -3,6 +3,7 @@ package org.usfirst.frc.team3950.robot.commands;
 import org.usfirst.frc.team3950.robot.Logger;
 import org.usfirst.frc.team3950.robot.PIDSourceYaw;
 import org.usfirst.frc.team3950.robot.Robot;
+import org.usfirst.frc.team3950.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -27,9 +28,9 @@ public class DriveTurnPreciseCommand extends Command implements PIDOutput  {
 //	double D = SmartDashboard.getNumber("D (turn)", 0);
 //	double F = SmartDashboard.getNumber("F (turn)", 0);
 	
-	double P = .06;
-	double I = 0;
-	double D = 0;
+	double P = .0105;
+	double I = 0.0005;
+	double D = 0.15;
 	double F = 0;
 
     public DriveTurnPreciseCommand(double input) {
@@ -45,7 +46,7 @@ public class DriveTurnPreciseCommand extends Command implements PIDOutput  {
     protected void initialize() {
 		Logger.log(Logger.LogLevel.debug, "Drive Turn Precise init");
     	yaw = new PIDSourceYaw();
-    	yaw.reset();
+    	RobotMap.ahrs.reset();
     	yaw.setPIDSourceType(PIDSourceType.kDisplacement);
     	pid = new PIDController(P, I, D, F, yaw, this);
 //    	SmartDashboard.putNumber("Setpoint End", 45);
@@ -87,7 +88,7 @@ public class DriveTurnPreciseCommand extends Command implements PIDOutput  {
 	@Override
 	public void pidWrite(double output) {
 		// TODO Auto-generated method stub
-		SmartDashboard.putNumber("YAW", yaw.pidGet());
+		SmartDashboard.putNumber("YAW", RobotMap.ahrs.getYaw());
 		System.out.println("yaw " + yaw.pidGet());
 		SmartDashboard.putNumber("Output", pid.get());
     	Robot.drivetrainSubsystem.Drive(0, output);

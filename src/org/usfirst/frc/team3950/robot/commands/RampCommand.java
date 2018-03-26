@@ -6,24 +6,26 @@ import org.usfirst.frc.team3950.robot.RobotMap;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class RampCommand extends Command {
-	XboxController controller;
+	Joystick controller;
 
     public RampCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.rampSubsystem);
-    	controller = Robot.oi.xboxcontroller;
+    	//controller = Robot.oi.driveStick;
     	
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	System.out.println("in ramp init");
     }
 
 
@@ -37,13 +39,15 @@ public class RampCommand extends Command {
     	}
     	*/
     	
-    	if(controller.getBackButtonPressed()) {
     		if(RobotMap.rampSolenoid.get() == DoubleSolenoid.Value.kForward) {
-		   		Robot.rampSubsystem.rampDown();
+    			System.out.println("ramp going up");
+		   		Robot.rampSubsystem.rampUp();
         	} else if(RobotMap.rampSolenoid.get() == DoubleSolenoid.Value.kReverse) {
-        		Robot.rampSubsystem.rampUp();
+        		Robot.rampSubsystem.rampDown();
+        		System.out.println("ramp going down");
+        	} else {
+        		Robot.rampSubsystem.rampDown();
         	}
-    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
