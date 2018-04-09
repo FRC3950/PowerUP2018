@@ -80,7 +80,7 @@ public class ElevatorPIDCommand extends Command implements PIDOutput{
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.elevatorSubsystem.elevatorControl(0);;
+    	Robot.elevatorSubsystem.elevatorControl(0);
     	pid.disable();
     	System.out.println("done intr");
     }

@@ -67,7 +67,7 @@ public class ElevatorSubsystem extends Subsystem {
     	elevatorMotor.setSensorPhase(false);
  
     	//distance per rotation in inches
-    	distancePerRotation = (19 + (11/16));
+    	distancePerRotation = 4.5;
     	
     	}
  
@@ -111,9 +111,12 @@ public class ElevatorSubsystem extends Subsystem {
     	elevatorMotor.setSelectedSensorPosition(0, 0, 0);
     }
     
+    
+    //get elevator height is in inches
     public double getElevatorHeight() {
-    	return (getEncoder()/4096)*distancePerRotation;
+    	return (getEncoder()/4096.0)*distancePerRotation;
     }
+    
     public void elevatorBrake() {
     	brakeSolenoid.set(DoubleSolenoid.Value.kForward);
     	elevatorMotor.set(0);

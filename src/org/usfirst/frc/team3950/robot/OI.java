@@ -76,7 +76,7 @@ public class OI
 	        //xboxControllerRightStickButton.whenPressed(new RampCommand());	
 	        xboxControllerBackButton.whenPressed(new ElevatorShiftCommand());
 	        
-	        //driveStick5Button.whenPressed(new RampCommand());
+	        driveStick5Button.whenPressed(new BangBangElevatorCommand(23));
 	        driveStick7Button.whenPressed(new RampCommand());
 	        driveStick3Button.whenPressed(new IntakeFakeCommand(Robot.intakeSubsystem.getIntakeSpeed()));
 	        driveStick4Button.whenPressed(new OuttakeFakeCommand(-Robot.intakeSubsystem.getIntakeSpeed()));
