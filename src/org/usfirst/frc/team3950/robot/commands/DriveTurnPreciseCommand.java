@@ -28,7 +28,7 @@ public class DriveTurnPreciseCommand extends Command implements PIDOutput  {
 //	double D = SmartDashboard.getNumber("D (turn)", 0);
 //	double F = SmartDashboard.getNumber("F (turn)", 0);
 	
-	double P = .0105;
+	double P = .01;
 	double I = 0.0005;
 	double D = 0.15;
 	double F = 0;
