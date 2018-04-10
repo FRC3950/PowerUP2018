@@ -91,7 +91,7 @@ public class DrivetrainSubsystem extends Subsystem {
      * negating them? I negated the left one. Maybe it shouldn't be.
      * Hope this was helpful. See ya! 
      * 
-     * This is really strange, just saying. 
+     * This is really strange, just saying. like wtf dude 
      * 
      */
     
