@@ -36,10 +36,10 @@ public class SwitchPositionAutoCommandGroup extends CommandGroup {
         		
         		//left field left switch
     			System.out.println("left switch");
-        		addSequential(new EncoderNavX2AutoCommand(2.2)); //10.2 //move up to side of switch approx middle
+        		addSequential(new EncoderNavX2AutoCommand(10.2)); //10.2 //move up to side of switch approx middle
         		addSequential(new DriveTurnPreciseCommand(90)); //turn 90 degrees right toward switch
         		addSequential(new ElevatorPIDCommand(18)); //move elevator up 18 inches
-        		addSequential(new EncoderNavX2AutoCommand(0.1)); //.5 //move forward a bit more
+        		addSequential(new EncoderNavX2AutoCommand(0.5)); //.5 //move forward a bit more
         		addSequential(new IntakeOuttakeAutoCommand(-.5)); //outtake the cube into the switch
         	}
         	
@@ -50,11 +50,11 @@ public class SwitchPositionAutoCommandGroup extends CommandGroup {
         		//write left position to right scale code in here
         		
         		//These values are complete B.S. I made them up. Please change them during calibration.
-        		addSequential(new EncoderNavX2AutoCommand(8.25));
+        		addSequential(new EncoderNavX2AutoCommand(16.3));
         		addSequential(new DriveTurnPreciseCommand(90));
-        		addSequential(new EncoderNavX2AutoCommand(3.2));
+        		addSequential(new EncoderNavX2AutoCommand(7.91));
         		addSequential(new DriveTurnPreciseCommand(90));
-        		addSequential(new ElevatorPIDCommand(18));
+        		addSequential(new ElevatorPIDCommand(20));
         		addSequential(new IntakeOuttakeAutoCommand(-.5));
         		//addSequential(new IntakeOuttakeAutoCommand(-.5));
 
@@ -69,11 +69,11 @@ public class SwitchPositionAutoCommandGroup extends CommandGroup {
     				//write right position to left scale code in here
 	    		
     				//These values are complete B.S. I made them up. Please change them during calibration.
-    				addSequential(new EncoderNavX2AutoCommand(19.58));
-            		addSequential(new DriveTurnPreciseCommand(-90));
-            		addSequential(new EncoderNavX2AutoCommand(14.5));
-            		addSequential(new DriveTurnPreciseCommand(-90));
-            		addSequential(new ElevatorPIDCommand(18));
+    				addSequential(new EncoderNavX2AutoCommand(16.3));
+            		addSequential(new DriveTurnPreciseCommand(90));
+            		addSequential(new EncoderNavX2AutoCommand(7.91));
+            		addSequential(new DriveTurnPreciseCommand(90));
+            		addSequential(new ElevatorPIDCommand(20));
             		addSequential(new IntakeOuttakeAutoCommand(-.5));
     			}
 	    	
@@ -83,10 +83,11 @@ public class SwitchPositionAutoCommandGroup extends CommandGroup {
     				//write right position to right scale code in here
 	    		
     				//These values are complete B.S. I made them up. Please change them during calibration.
-    				addSequential(new EncoderNavX2AutoCommand(8.25));
-            		addSequential(new DriveTurnPreciseCommand(90));
-            		addSequential(new ElevatorPIDCommand(18));
-            		addSequential(new IntakeOuttakeAutoCommand(-.5));
+    				addSequential(new EncoderNavX2AutoCommand(10.2)); //10.2 //move up to side of switch approx middle
+            		addSequential(new DriveTurnPreciseCommand(90)); //turn 90 degrees right toward switch
+            		addSequential(new ElevatorPIDCommand(18)); //move elevator up 18 inches
+            		addSequential(new EncoderNavX2AutoCommand(0.5)); //.5 //move forward a bit more
+            		addSequential(new IntakeOuttakeAutoCommand(-.5)); 
     			}
     		} 
     	}

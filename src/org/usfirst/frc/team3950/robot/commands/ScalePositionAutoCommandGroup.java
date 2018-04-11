@@ -37,10 +37,10 @@ public class ScalePositionAutoCommandGroup extends CommandGroup {
         		//write left position to left scale code in here
     			System.out.println("left scale");
         		//These values are complete B.S. I made them up. Please change them during calibration.
-    			addSequential(new EncoderNavX2AutoCommand(24.54));
+    			addSequential(new EncoderNavX2AutoCommand(21.25));
         		addSequential(new DriveTurnPreciseCommand(40.8));
-        		addSequential(new EncoderNavX2AutoCommand(4.075));
         		addSequential(new ElevatorPIDCommand(79));
+        		addSequential(new EncoderNavX2AutoCommand(0.78));
         		addSequential(new IntakeOuttakeAutoCommand(-.5));
         	}
         	
@@ -51,12 +51,12 @@ public class ScalePositionAutoCommandGroup extends CommandGroup {
         		//write left position to right scale code in here
         		
         		//These values are complete B.S. I made them up. Please change them during calibration.
-        		addSequential(new EncoderNavX2AutoCommand(19.58));
+        		addSequential(new EncoderNavX2AutoCommand(16.3));
         		addSequential(new DriveTurnPreciseCommand(90));
-        		addSequential(new EncoderNavX2AutoCommand(19.25));
+        		addSequential(new EncoderNavX2AutoCommand(15.95));
         		addSequential(new DriveTurnPreciseCommand(-109));
-        		addSequential(new EncoderNavX2AutoCommand(6.35));
         		addSequential(new ElevatorPIDCommand(79));
+        		addSequential(new EncoderNavX2AutoCommand(3.05));
         		addSequential(new IntakeOuttakeAutoCommand(-.5));
         		//addSequential(new IntakeOuttakeAutoCommand(-.5));
         	} else {
@@ -70,12 +70,12 @@ public class ScalePositionAutoCommandGroup extends CommandGroup {
     				//write right position to left scale code in here
 	    		
     				//These values are complete B.S. I made them up. Please change them during calibration.
-    				addSequential(new EncoderNavX2AutoCommand(19.58));
+    				addSequential(new EncoderNavX2AutoCommand(16.3));
             		addSequential(new DriveTurnPreciseCommand(-90));
-            		addSequential(new EncoderNavX2AutoCommand(19.25));
+            		addSequential(new EncoderNavX2AutoCommand(15.95));
             		addSequential(new DriveTurnPreciseCommand(109));
-            		addSequential(new EncoderNavX2AutoCommand(6.35));
             		addSequential(new ElevatorPIDCommand(79));
+            		addSequential(new EncoderNavX2AutoCommand(3.05));
             		addSequential(new IntakeOuttakeAutoCommand(-.5));
     			}
 	    	
@@ -85,10 +85,10 @@ public class ScalePositionAutoCommandGroup extends CommandGroup {
     				//write right position to right scale code in here
 	    		
     				//These values are complete B.S. I made them up. Please change them during calibration.
-    				addSequential(new EncoderNavX2AutoCommand(24.54));
+    				addSequential(new EncoderNavX2AutoCommand(21.25));
             		addSequential(new DriveTurnPreciseCommand(-40.8));
-            		addSequential(new EncoderNavX2AutoCommand(4.075));
             		addSequential(new ElevatorPIDCommand(79));
+            		addSequential(new EncoderNavX2AutoCommand(0.78));
             		addSequential(new IntakeOuttakeAutoCommand(-.5));
     			}
     		} 
