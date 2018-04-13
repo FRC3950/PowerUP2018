@@ -29,6 +29,7 @@ public class ElevatorSubsystem extends Subsystem {
 	DigitalInput topLimitSwitch;
 	DoubleSolenoid brakeSolenoid;
 	DoubleSolenoid shiftSolenoid;
+	DoubleSolenoid brake2Solenoid;
 	
 	double distancePerRotation;
 	
@@ -61,6 +62,7 @@ public class ElevatorSubsystem extends Subsystem {
     	topLimitSwitch = RobotMap.elevatorTopLimitSwitch;
     	brakeSolenoid = RobotMap.elevatorBrakeSolenoid;
     	shiftSolenoid = RobotMap.elevatorShiftSolenoid;
+    	brake2Solenoid = RobotMap.elevatorSecondaryBrakeSolenoid;
     	
     	elevatorMotorFollower.follow(elevatorMotor);
     	
@@ -140,6 +142,16 @@ public class ElevatorSubsystem extends Subsystem {
     
     public void undoBrake(){
     	brakeSolenoid.set(DoubleSolenoid.Value.kReverse);
+    }
+    
+    public void elevatorSecondaryBrake() {
+    	brake2Solenoid.set(DoubleSolenoid.Value.kReverse);
+    	elevatorMotor.set(0);
+    	elevatorMotorFollower.set(0);
+    }
+    
+    public void undoSecondaryBrake(){
+    	brake2Solenoid.set(DoubleSolenoid.Value.kForward);
     }
     
 } 

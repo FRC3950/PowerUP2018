@@ -63,7 +63,7 @@ public class RobotMap {
 	public static DoubleSolenoid intakeHorizontalRight = new DoubleSolenoid (4, 5);
 	public static DoubleSolenoid rampSolenoid = new DoubleSolenoid(6, 7);
 	public static DoubleSolenoid elevatorShiftSolenoid = new DoubleSolenoid(1, 0, 1);
-	
+	public static DoubleSolenoid elevatorSecondaryBrakeSolenoid = new DoubleSolenoid(1, 4, 5);
 
 	public static AHRS ahrs = new AHRS(SPI.Port.kMXP);
 	

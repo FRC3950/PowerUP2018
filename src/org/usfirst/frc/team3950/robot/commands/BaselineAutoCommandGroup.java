@@ -28,6 +28,6 @@ public class BaselineAutoCommandGroup extends CommandGroup {
         // arm.
     	System.out.println("I am in baseline");
     	RobotMap.ahrs.reset();
-    	addSequential(new EncoderNavX2AutoCommand(8.25));
+    	addSequential(new EncoderNavX2AutoCommand(8.35));
     }
 }

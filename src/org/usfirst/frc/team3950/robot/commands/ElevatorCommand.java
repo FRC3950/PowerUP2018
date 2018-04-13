@@ -94,13 +94,13 @@ public class ElevatorCommand extends Command {
     	}
     	
     	bottom = Robot.elevatorSubsystem.bottomGetter();
-    	//top = Robot.elevatorSubsystem.topGetter();
+    	//top = Robot.elevatorSubsystem.topGetter();	
     	*/
     	
     	if(Robot.elevatorSubsystem.bottomGetter() && getY < 0) {
     		Robot.elevatorSubsystem.resetEncoder();
     		Robot.elevatorSubsystem.elevatorControl(0);
-    	} else if (Robot.elevatorSubsystem.topGetter() && getY > 0) {
+    	} else if (Robot.elevatorSubsystem.topGetter() && getY > 0 && false) {
     		Robot.elevatorSubsystem.elevatorControl(0);
     	} else {
     		Robot.elevatorSubsystem.elevatorControl(getY);
