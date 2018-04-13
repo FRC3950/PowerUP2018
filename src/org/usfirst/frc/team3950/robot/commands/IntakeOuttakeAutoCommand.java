@@ -11,7 +11,8 @@ import edu.wpi.first.wpilibj.command.Command;
 public class IntakeOuttakeAutoCommand extends Command {
 	
 	double speed = 0;
-	Timer timer;
+	Timer timer = new Timer();
+	boolean finished = false;
 	
     public IntakeOuttakeAutoCommand(double input) {
         // Use requires() here to declare subsystem dependencies
@@ -23,7 +24,6 @@ public class IntakeOuttakeAutoCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	timer = new Timer();
     	timer.start();
     }
 
@@ -31,16 +31,19 @@ public class IntakeOuttakeAutoCommand extends Command {
     protected void execute() {
     	if(timer.get() <= 5) {
     		Robot.intakeSubsystem.Intake(speed);
+    		System.out.println("I am in intakeauto execute");
+    		finished = false;
     	} else {
     		timer.stop();
     		Robot.intakeSubsystem.Intake(0);
+    		finished = true;
     	}
     	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return finished;
     }
 
     // Called once after isFinished returns true

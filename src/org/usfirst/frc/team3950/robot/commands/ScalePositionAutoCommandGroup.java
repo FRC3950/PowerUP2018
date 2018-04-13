@@ -35,28 +35,29 @@ public class ScalePositionAutoCommandGroup extends CommandGroup {
     		if (scaleSide.compareTo("L") == 0) {
         		
         		//write left position to left scale code in here
-    			System.out.println("left scale");
+    			System.out.println("left scale, left field");
         		//These values are complete B.S. I made them up. Please change them during calibration.
-    			addSequential(new EncoderNavX2AutoCommand(21.25));
-        		addSequential(new DriveTurnPreciseCommand(40.8));
-        		addSequential(new ElevatorPIDCommand(79));
-        		addSequential(new EncoderNavX2AutoCommand(0.78));
+    			addSequential(new EncoderNavX2AutoCommand(24.5));
+    			addSequential(new BangBangElevatorCommand(75));
+        		addSequential(new DriveTurnPreciseCommand(90));
+        		//addSequential(new EncoderNavX2AutoCommand(0.78));
         		addSequential(new IntakeOuttakeAutoCommand(-.5));
         	}
         	
         	//Command Group for when scale is on right side
         	else if (scaleSide.compareTo("R") == 0) {
         		
-        		System.out.println("right scale");
+        		System.out.println("right scale, left field");
         		//write left position to right scale code in here
         		
         		//These values are complete B.S. I made them up. Please change them during calibration.
-        		addSequential(new EncoderNavX2AutoCommand(16.3));
+        		addSequential(new EncoderNavX2AutoCommand(17.04));
         		addSequential(new DriveTurnPreciseCommand(90));
-        		addSequential(new EncoderNavX2AutoCommand(15.95));
-        		addSequential(new DriveTurnPreciseCommand(-109));
-        		addSequential(new ElevatorPIDCommand(79));
-        		addSequential(new EncoderNavX2AutoCommand(3.05));
+        		addSequential(new EncoderNavX2AutoCommand(17.5));
+        		addSequential(new DriveTurnPreciseCommand(-90));
+        		addSequential(new EncoderNavX2AutoCommand(5.45));
+        		addSequential(new BangBangElevatorCommand(79));
+        		addSequential(new DriveTurnPreciseCommand(-90));
         		addSequential(new IntakeOuttakeAutoCommand(-.5));
         		//addSequential(new IntakeOuttakeAutoCommand(-.5));
         	} else {
@@ -67,28 +68,32 @@ public class ScalePositionAutoCommandGroup extends CommandGroup {
     		
     			if (scaleSide.compareTo("L") == 0) {
 	    		
+    				System.out.println("left scale, right field");
     				//write right position to left scale code in here
 	    		
     				//These values are complete B.S. I made them up. Please change them during calibration.
-    				addSequential(new EncoderNavX2AutoCommand(16.3));
+    				addSequential(new EncoderNavX2AutoCommand(17.04));
             		addSequential(new DriveTurnPreciseCommand(-90));
-            		addSequential(new EncoderNavX2AutoCommand(15.95));
-            		addSequential(new DriveTurnPreciseCommand(109));
-            		addSequential(new ElevatorPIDCommand(79));
-            		addSequential(new EncoderNavX2AutoCommand(3.05));
+            		addSequential(new EncoderNavX2AutoCommand(17.5));
+            		addSequential(new DriveTurnPreciseCommand(90));
+            		addSequential(new EncoderNavX2AutoCommand(5.45));
+            		addSequential(new BangBangElevatorCommand(75));
+            		addSequential(new DriveTurnPreciseCommand(90));
             		addSequential(new IntakeOuttakeAutoCommand(-.5));
     			}
 	    	
     			//Command Group for when scale is on right side
     			if (scaleSide.compareTo("R") == 0) {
+    				
+    				System.out.println("right scale, right field");
 	    		
     				//write right position to right scale code in here
 	    		
     				//These values are complete B.S. I made them up. Please change them during calibration.
-    				addSequential(new EncoderNavX2AutoCommand(21.25));
-            		addSequential(new DriveTurnPreciseCommand(-40.8));
-            		addSequential(new ElevatorPIDCommand(79));
-            		addSequential(new EncoderNavX2AutoCommand(0.78));
+    				addSequential(new EncoderNavX2AutoCommand  (24.5));
+        			addSequential(new BangBangElevatorCommand(75));
+            		addSequential(new DriveTurnPreciseCommand(-90));
+            		//addSequential(new EncoderNavX2AutoCommand(0.78));
             		addSequential(new IntakeOuttakeAutoCommand(-.5));
     			}
     		} 

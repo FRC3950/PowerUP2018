@@ -28,15 +28,15 @@ public class EncoderNavX2AutoCommand extends Command {
 	//The next person that tells me to code is coming with me
 	//From Bryce
 	//encoder values
-	double encP = SmartDashboard.getNumber("P (distance)", .278);
+	double encP = SmartDashboard.getNumber("P (distance)", .27);
 	double encI = SmartDashboard.getNumber("I (distance)", 0.0001);
 	double encD = SmartDashboard.getNumber("D (distance)", 0);
 	double encF = SmartDashboard.getNumber("F (distance)", 0);
 	
 	//straight drive values
-	double navxP = SmartDashboard.getNumber("P (drive straight)", 0.0025);
-	double navxI = SmartDashboard.getNumber("I (drive straight)", 0.0);
-	double navxD = SmartDashboard.getNumber("D (drive straight)", 0.0);
+	double navxP = SmartDashboard.getNumber("P (drive straight)", .01);
+	double navxI = SmartDashboard.getNumber("I (drive straight)", 0.0005);
+	double navxD = SmartDashboard.getNumber("D (drive straight)", 0.15);
 	double navxF = SmartDashboard.getNumber("F (drive straight)", 0);
 
   // Set to false once you are done tuning the PID

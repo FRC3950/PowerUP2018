@@ -21,7 +21,7 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
 	//constants
 	double maxSpeed = 0.75;
 	//setpoint is in feet
-	double setpoint = 6f;
+	double setpoint = 0;
 	
 	
 //	double P = SmartDashboard.getNumber("P (distance)", 0.17);
@@ -35,10 +35,11 @@ public class ScaleAutoCommand extends Command implements PIDOutput{
 	double F = 0;
 	
 	
-    public ScaleAutoCommand() {
+    public ScaleAutoCommand(double input) {
     	requires(Robot.drivetrainSubsystem);
     	source = new PIDSourceDistance();
     	pid = new PIDController(P, I, D, F, source, this);
+    	setpoint = input;
     }
 
     // Called just before this Command runs the first time

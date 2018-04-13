@@ -30,6 +30,14 @@ public class BangBangElevatorCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
+    	if(Robot.elevatorSubsystem.bottomGetter()) {
+    		Robot.elevatorSubsystem.resetEncoder();
+    	}
+    	  
+    	if(Robot.elevatorSubsystem.topGetter()) {
+    		Robot.elevatorSubsystem.elevatorControl(0);
+    	}
+    	
     	if(Robot.elevatorSubsystem.getElevatorHeight() < (elHeight - offset)) {
     		System.out.println("it is below");
     		Robot.elevatorSubsystem.undoBrake();

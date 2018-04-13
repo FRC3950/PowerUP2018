@@ -48,6 +48,7 @@ public class Robot extends TimedRobot {
 	public static String switchClosePosition = "";
 	public static String scalePosition = "";
 	public static String switchFarPosition = "";
+	public static String fieldPos = "";
 	
 	public static Object teamScale = false;
 	public static Object teamSwitchRight = false;
@@ -244,6 +245,7 @@ public class Robot extends TimedRobot {
 		} 
 	}
 	
+	
 
 	
 	/**
@@ -268,9 +270,16 @@ public class Robot extends TimedRobot {
 		System.out.println(switchFarPosition);
 		
 		
-		ourFieldPosition = DriverStation.getInstance().getLocation();
+		if(fieldPosition.getSelected().compareTo("Left") == 0) {
+			Robot.ourFieldPosition = 1;
+		} else if(fieldPosition.getSelected().compareTo("Center") == 0) {
+			Robot.ourFieldPosition = 2;
+		} else {
+			Robot.ourFieldPosition = 3;
+		}
 		
-		/*
+		
+		
 		if(typeChooser.getSelected().compareTo("Switch") == 0) {
 			m_autonomousCommand = new SwitchPositionAutoCommandGroup(Robot.ourFieldPosition, Robot.switchClosePosition);
 		} else if(typeChooser.getSelected().compareTo("Scale") == 0) {
@@ -281,9 +290,11 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand = null;
 		}
 		
-	*/
 		
-		m_autonomousCommand = new DriveTurnPreciseCommand(45);
+		//m_autonomousCommand = new IntakeOuttakeAutoCommand(-.5);
+	
+		
+		//m_autonomousCommand = new EncoderNavX2AutoCommand(24.5);
 		//m_autonomousCommand = typeChooser.getSelected();//new ScaleAutoCommand();//m_chooser.getSelected();
 		
 		//System.out.println(teamScale);
@@ -319,7 +330,8 @@ public class Robot extends TimedRobot {
 		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
 
-		// schedule the autonomous command (example)
+		// schedule
+		//the autonomous command (example)
 		//robotLogger.info("I am in autoInit yay");
 		
 		/*

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3950.robot.commands;
 
+
 import org.usfirst.frc.team3950.robot.Logger;
 import org.usfirst.frc.team3950.robot.Logger.LogLevel;
 import org.usfirst.frc.team3950.robot.Robot;
@@ -9,6 +10,7 @@ import org.usfirst.frc.team3950.robot.RobotMap;
 //import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+//import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -23,6 +25,8 @@ public class ElevatorCommand extends Command {
 	
 	double tolerance = 0.12;
 	double getY = 0;
+	double test = 0;
+	//Timer timer = new Timer();
 	
 	
 	double P = SmartDashboard.getNumber("P (elevator)", .002);
@@ -56,6 +60,7 @@ public class ElevatorCommand extends Command {
     	if(getY <= tolerance && getY >= -tolerance) {
     		getY = 0;
     	}
+    	
     	
     	//Robot.elevatorSubsystem.elevatorControl(getY);
 
@@ -100,13 +105,30 @@ public class ElevatorCommand extends Command {
     	} else {
     		Robot.elevatorSubsystem.elevatorControl(getY);
     	}
-    	if (Robot.elevatorSubsystem.getMotorValue() == 0) {
+    	
+    	if (test != 0 && getY == 0) {
+    		Robot.elevatorSubsystem.elevatorControl(0);
     		Robot.elevatorSubsystem.elevatorBrake();
-    		}
-    	else {
-    		Robot.elevatorSubsystem.undoBrake();
+    		} 
+    	else if (test == 0 && getY < 0) {
+    		Robot.elevatorSubsystem.undoBrake(); 
+    		try {
+				Thread.sleep(950);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	} else {
+    		Robot.elevatorSubsystem.undoBrake(); 
+    		try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
     	}
     	
+    	test = -controller.getY(Hand.kLeft);
     }
     //if()
     	
@@ -118,7 +140,7 @@ public class ElevatorCommand extends Command {
         // if (bottom) {
         	// if (y>0) {
         		// elevatorMotor.set(1);
-        	
+           	
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {

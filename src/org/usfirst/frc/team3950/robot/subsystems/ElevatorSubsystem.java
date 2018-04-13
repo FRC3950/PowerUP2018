@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 //import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -67,7 +68,7 @@ public class ElevatorSubsystem extends Subsystem {
     	elevatorMotor.setSensorPhase(false);
  
     	//distance per rotation in inches
-    	distancePerRotation = 4.5;
+    	distancePerRotation = .75;
     	
     	}
  
@@ -130,8 +131,10 @@ public class ElevatorSubsystem extends Subsystem {
     public void shiftGear() {
     	if (shiftSolenoid.get() == DoubleSolenoid.Value.kForward) {
     		shiftSolenoid.set(DoubleSolenoid.Value.kReverse);
+    		SmartDashboard.putString("Elevator gear", "High");
     	} else {
     		shiftSolenoid.set(DoubleSolenoid.Value.kForward);
+    		SmartDashboard.putString("Elevator gear", "Low");
     	}
     }
     
