@@ -122,6 +122,7 @@ public class Robot extends TimedRobot {
 		typeChooser.addObject("Scale", new String("Scale"));
 		typeChooser.addObject("Baseline", new String("Baseline"));
 		typeChooser.addObject("No Auto", new String("No Auto"));
+		typeChooser.addObject("Fun Test Center Auto", ("Fun Test Center Auto"));
 		SmartDashboard.putData("Auto Mode", typeChooser);
 		
 		
@@ -288,6 +289,8 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand = new BaselineAutoCommandGroup();
 		} else if(typeChooser.getSelected().compareTo("No Auto") == 0) {
 			m_autonomousCommand = null;
+		} else if(typeChooser.getSelected().compareTo("Fun Test Center Auto") == 0) {
+			m_autonomousCommand = new TestSwitchAutoCommandGroup(Robot.switchClosePosition);
 		}
 		
 		

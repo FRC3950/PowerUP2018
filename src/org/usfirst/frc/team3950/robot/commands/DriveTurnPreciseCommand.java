@@ -47,7 +47,7 @@ public class DriveTurnPreciseCommand extends Command implements PIDOutput  {
 		Logger.log(Logger.LogLevel.debug, "Drive Turn Precise init");
     	yaw = new PIDSourceYaw();
     	RobotMap.ahrs.reset();
-    	yaw.setPIDSourceType(PIDSourceType.kDisplacement);
+    	yaw.setPIDSourceType(PIDSourceType.kDisplacement); 
     	pid = new PIDController(P, I, D, F, yaw, this);
 //    	SmartDashboard.putNumber("Setpoint End", 45);
 //    	SmartDashboard.putNumber("Setpoint Begin", 0);
