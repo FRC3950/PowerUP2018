@@ -100,7 +100,7 @@ public class ElevatorCommand extends Command {
     	if(Robot.elevatorSubsystem.bottomGetter() && getY < 0) {
     		Robot.elevatorSubsystem.resetEncoder();
     		Robot.elevatorSubsystem.elevatorControl(0);
-    	} else if (Robot.elevatorSubsystem.topGetter() && getY > 0 && false) {
+    	} else if (Robot.elevatorSubsystem.topGetter() && getY > 0) {
     		Robot.elevatorSubsystem.elevatorControl(0);
     	} else {
     		Robot.elevatorSubsystem.elevatorControl(getY);

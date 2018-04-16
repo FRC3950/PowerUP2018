@@ -28,7 +28,7 @@ public class EncoderNavX2AutoCommand extends Command {
 	//The next person that tells me to code is coming with me
 	//From Bryce
 	//encoder values
-	double encP = SmartDashboard.getNumber("P (distance)", .27);
+	double encP = SmartDashboard.getNumber("P (distance)", .278);
 	double encI = SmartDashboard.getNumber("I (distance)", 0.0001);
 	double encD = SmartDashboard.getNumber("D (distance)", 0);
 	double encF = SmartDashboard.getNumber("F (distance)", 0);

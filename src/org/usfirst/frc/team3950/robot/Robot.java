@@ -89,6 +89,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
+		
 
 		/*
 		teamScaleAuto = new SendableChooser();
@@ -171,6 +172,7 @@ public class Robot extends TimedRobot {
 		RobotMap.intakeHorizontalRight.set(DoubleSolenoid.Value.kOff);
 		RobotMap.rampSolenoid.set(DoubleSolenoid.Value.kOff);
 		RobotMap.elevatorShiftSolenoid.set(DoubleSolenoid.Value.kOff);
+		RobotMap.elevatorSecondaryBrakeSolenoid.set(DoubleSolenoid.Value.kForward);
 		
 //		SmartDashboard.putNumber("D (drive straight)", 0);
 //		SmartDashboard.putNumber("F (drive straight)", 0);
@@ -262,6 +264,10 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		
+		//Robot.elevatorSubsystem.undoSecondaryBrake();
+		RobotMap.elevatorSecondaryBrakeSolenoid.set(DoubleSolenoid.Value.kForward);
+
 		//fieldPositionAnalysis();
 		switchClosePosition = DriverStation.getInstance().getGameSpecificMessage().substring(0, 1);//DSSimulation.getSide(sides);//str.substring(0,1);
 		System.out.println(switchClosePosition);
@@ -280,7 +286,7 @@ public class Robot extends TimedRobot {
 		}
 		
 		
-		
+		/*
 		if(typeChooser.getSelected().compareTo("Switch") == 0) {
 			m_autonomousCommand = new SwitchPositionAutoCommandGroup(Robot.ourFieldPosition, Robot.switchClosePosition);
 		} else if(typeChooser.getSelected().compareTo("Scale") == 0) {
@@ -292,10 +298,10 @@ public class Robot extends TimedRobot {
 		} else if(typeChooser.getSelected().compareTo("Fun Test Center Auto") == 0) {
 			m_autonomousCommand = new TestSwitchAutoCommandGroup(Robot.switchClosePosition);
 		}
+		*/
 		
-		
-		//m_autonomousCommand = new IntakeOuttakeAutoCommand(-.5);
-	
+		//m_autonomousCommand = new TestSwitchAutoCommandGroup("R");
+		m_autonomousCommand = new DriveTurnPreciseCommand(-90);
 		
 		//m_autonomousCommand = new EncoderNavX2AutoCommand(24.5);
 		//m_autonomousCommand = typeChooser.getSelected();//new ScaleAutoCommand();//m_chooser.getSelected();
@@ -362,6 +368,10 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopInit() {
 		//RobotMap.ahrs.reset();
+		
+		RobotMap.elevatorSecondaryBrakeSolenoid.set(DoubleSolenoid.Value.kForward);
+
+		//Robot.elevatorSubsystem.undoSecondaryBrake();
 		
 		Logger.loggerLogLevel = logChooser.getSelected();
 		if(Logger.loggerLogLevel == null) {

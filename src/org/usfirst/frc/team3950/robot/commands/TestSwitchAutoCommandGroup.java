@@ -25,9 +25,9 @@ public class TestSwitchAutoCommandGroup extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	//addSequential(new BangBangElevatorCommand(20));
-    	if(switc.compareTo("R") == 0) {
-    		addSequential(new EncoderNavX2AutoCommand(8.35));
+     	if(switc.compareTo("R") == 0) {
+     		addSequential(new BangBangElevatorCommand(20));
+    		addSequential(new EncoderNavX2AutoCommand(1));
     		addSequential(new IntakeOuttakeAutoCommand(-1));
     	} else {
     		addSequential(new EncoderNavX2AutoCommand(8.35));
