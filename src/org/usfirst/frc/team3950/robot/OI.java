@@ -68,13 +68,13 @@ public class OI
 	    	
 
 	    	xboxControllerXButton.whenPressed(new ElevatorPIDCommand(Robot.elevatorSubsystem.getSwitchHeight()));
-	    	xboxControllerAButton.whenPressed(new ElevatorPIDCommand(Robot.elevatorSubsystem.getScaleLowHeight()));
+	    	//xboxControllerAButton.whenPressed(new ElevatorPIDCommand(Robot.elevatorSubsystem.getScaleLowHeight()));
 	    	xboxControllerBButton.whenPressed(new ElevatorPIDCommand(Robot.elevatorSubsystem.getScaleMidHeight()));
 	    	xboxControllerYButton.whenPressed(new ElevatorPIDCommand(Robot.elevatorSubsystem.getScaleTopHeight()));
 	        //xboxControllerRBButton.whenPressed(new IntakeVerticalCommand());
 	        xboxControllerRBButton.whenPressed(new IntakeGrabCommand());
 	        //xboxControllerRightStickButton.whenPressed(new RampCommand());	
-	        xboxControllerBackButton.whenPressed(new ElevatorShiftCommand());
+	        xboxControllerAButton.whenPressed(new ElevatorShiftCommand());
 	        
 	        driveStick5Button.whenPressed(new BangBangElevatorCommand(20));
 	        driveStick7Button.whenPressed(new RampCommand());

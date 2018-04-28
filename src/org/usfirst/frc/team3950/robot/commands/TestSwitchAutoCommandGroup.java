@@ -26,11 +26,11 @@ public class TestSwitchAutoCommandGroup extends CommandGroup {
         // arm.
     	
      	if(switc.compareTo("R") == 0) {
-     		addSequential(new BangBangElevatorCommand(20));
-    		addSequential(new EncoderNavX2AutoCommand(1));
-    		addSequential(new IntakeOuttakeAutoCommand(-1));
-    	} else {
-    		addSequential(new EncoderNavX2AutoCommand(8.35));
-    	}
+     		addSequential(new EncoderNavX2AutoCommand(12.7));
+     		addSequential(new BangBangElevatorCommand(24));//10.2 //move up to side of switch approx middle
+    		addSequential(new DriveTurnPreciseCommand(-90)); //turn 90 degrees right toward switch //move elevator up 18 inches
+    		//addSequential(new EncoderNavX2AutoCommand(1)); //.5 //move forward a bit more
+    		addSequential(new IntakeOuttakeAutoCommand(-.5)); //outtake the cube into the switch
     }
+}
 }

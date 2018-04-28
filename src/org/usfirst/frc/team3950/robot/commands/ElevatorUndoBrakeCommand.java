@@ -25,9 +25,12 @@ public class ElevatorUndoBrakeCommand extends Command {
     protected void execute() {
     	if (RobotMap.elevatorBrakeSolenoid.get() == DoubleSolenoid.Value.kForward) {
     		Robot.elevatorSubsystem.undoBrake();
-    	} else {
+    	} else if(RobotMap.elevatorBrakeSolenoid.get() == DoubleSolenoid.Value.kReverse){
     		Robot.elevatorSubsystem.elevatorBrake();
+    	} else {
+    		Robot.elevatorSubsystem.undoBrake();
     	}
+    		
     }
 
     // Make this return true when this Command no longer needs to run execute()

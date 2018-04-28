@@ -6,6 +6,8 @@ import org.usfirst.frc.team3950.robot.Logger.LogLevel;
 import org.usfirst.frc.team3950.robot.Robot;
 import org.usfirst.frc.team3950.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+
 //import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 //import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
@@ -105,6 +107,16 @@ public class ElevatorCommand extends Command {
     	} else {
     		Robot.elevatorSubsystem.elevatorControl(getY);
     	}
+    	
+    	/*
+    	if(test >= 0 && getY < 0) {
+    		RobotMap.elevatorShiftSolenoid.set(DoubleSolenoid.Value.kForward);
+    		SmartDashboard.putString("Elevator gear", "lOw");
+    	} else if (test <= 0 && getY > 0) {
+    		RobotMap.elevatorShiftSolenoid.set(DoubleSolenoid.Value.kReverse);
+    		SmartDashboard.putString("Elevator gear", "hIGh");
+    	}
+    	*/
     	
     	if (test != 0 && getY == 0) {
     		Robot.elevatorSubsystem.elevatorControl(0);

@@ -1,6 +1,8 @@
 package org.usfirst.frc.team3950.robot.commands;
 
 import org.usfirst.frc.team3950.robot.Logger;
+import org.usfirst.frc.team3950.robot.Robot;
+import org.usfirst.frc.team3950.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -36,7 +38,7 @@ public class SwitchPositionAutoCommandGroup extends CommandGroup {
         		
         		//left field left switch
     			System.out.println("left switch");
-        		addSequential(new ScaleAutoCommand(11.79)); //10.2 //move up to side of switch approx middle
+        		addSequential(new EncoderNavX2AutoCommand(11.78)); //10.2 //move up to side of switch approx middle
         		addSequential(new DriveTurnPreciseCommand(90)); //turn 90 degrees right toward switch
         		addSequential(new BangBangElevatorCommand(24)); //move elevator up 18 inches
         		//addSequential(new EncoderNavX2AutoCommand(1)); //.5 //move forward a bit more
@@ -46,17 +48,20 @@ public class SwitchPositionAutoCommandGroup extends CommandGroup {
         	//Command Group for when scale is on right side
         	else if (switchSide.compareTo("R") == 0) {
         		
-        		System.out.println("right switch");
+        		System.out.println("right switch baseline");
         		//write left position to right scale code in here
         		
+        		/*
         		//These values are complete B.S. I made them up. Please change them during calibration.
-        		addSequential(new ScaleAutoCommand(18.6));
+        		addSequential(new EncoderNavX2AutoCommand(17.44));
         		addSequential(new DriveTurnPreciseCommand(90));
-        		addSequential(new ScaleAutoCommand(11.59)); //13.83
+        		addSequential(new EncoderNavX2AutoCommand(11.78)); //13.83
         		addSequential(new DriveTurnPreciseCommand(90));
         		addSequential(new BangBangElevatorCommand(24));
         		addSequential(new IntakeOuttakeAutoCommand(-.5));
         		//addSequential(new IntakeOuttakeAutoCommand(-.5));
+        		 * */
+        		addSequential(new EncoderNavX2AutoCommand(8.6));
 
         	} else {
         		Logger.log(Logger.LogLevel.info, "SwitchPositionLeftAutoCommand BIG ERROR - string passed in is equal to:" + switchSide);
@@ -67,28 +72,58 @@ public class SwitchPositionAutoCommandGroup extends CommandGroup {
     			if (switchSide.compareTo("L") == 0) {
 	    		
     				//write right position to left scale code in here
-	    		
+    				System.out.println("left switch baseline");
+    				/*
     				//These values are complete B.S. I made them up. Please change them during calibration.
-    				addSequential(new ScaleAutoCommand(18.6));
+    				addSequential(new EncoderNavX2AutoCommand(17.44));
             		addSequential(new DriveTurnPreciseCommand(-90));
-            		addSequential(new ScaleAutoCommand(11.59)); //13.83
+            		addSequential(new EncoderNavX2AutoCommand(11.78)); //13.83
             		addSequential(new DriveTurnPreciseCommand(-90));
             		addSequential(new BangBangElevatorCommand(24));
             		addSequential(new IntakeOuttakeAutoCommand(-.5));
+            		*/
+    				addSequential(new EncoderNavX2AutoCommand(8.6));
     			}
 	    	
     			//Command Group for when scale is on right side
     			if (switchSide.compareTo("R") == 0) {
 	    		
     				//write right position to right scale code in here
-	    		
+    				System.out.println("right switch");
     				//These values are complete B.S. I made them up. Please change them during calibration.
-    				addSequential(new ScaleAutoCommand(11.79)); 
+    				addSequential(new EncoderNavX2AutoCommand(11.78)); 
             		addSequential(new DriveTurnPreciseCommand(-90)); 
             		addSequential(new BangBangElevatorCommand(24));
             		//addSequential(new EncoderNavX2AutoCommand(1)); //.5 //move forward a bit more
             		addSequential(new IntakeOuttakeAutoCommand(-.5));  
     			}
-    		} 
+    		} else if(fieldPosition == 2) {
+        		
+        		if(switchSide.compareTo("R") == 0) {
+        			System.out.println("right switch center");
+        			
+        			addParallel(new BangBangElevatorCommand(24));
+        			addSequential(new EncoderNavX2AutoCommand(8.6));
+        			
+        			addSequential(new IntakeOuttakeAutoCommand(-.5));
+        		} 
+        		
+        		else if(switchSide.compareTo("L") == 0) {
+        			System.out.println("left switch center");
+        			
+        			//addSequential(new EncoderNavX2AutoCommand(8.6));
+        			
+        			//RobotMap.ahrs.reset();
+        			
+        			addSequential(new EncoderNavX2AutoCommand(3));
+        			addSequential(new DriveTurnPreciseCommand(-90)); 
+        			addSequential(new EncoderNavX2AutoCommand(8.67));
+        			addSequential(new BangBangElevatorCommand(24));
+        			//addSequential(new DriveTurnPreciseCommand(0)); 
+        			addSequential(new EncoderNavX2AutoCommand(3.58)); 
+        			addSequential(new IntakeOuttakeAutoCommand(-.5));  
+        			
+        		}
+    		}
     	}
 	}

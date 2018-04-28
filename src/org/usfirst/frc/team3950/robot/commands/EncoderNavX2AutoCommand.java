@@ -28,15 +28,15 @@ public class EncoderNavX2AutoCommand extends Command {
 	//The next person that tells me to code is coming with me
 	//From Bryce
 	//encoder values
-	double encP = SmartDashboard.getNumber("P (distance)", .278);
+	double encP = SmartDashboard.getNumber("P (distance)", .35);
 	double encI = SmartDashboard.getNumber("I (distance)", 0.0001);
 	double encD = SmartDashboard.getNumber("D (distance)", 0);
 	double encF = SmartDashboard.getNumber("F (distance)", 0);
 	
 	//straight drive values
-	double navxP = SmartDashboard.getNumber("P (drive straight)", .01);
-	double navxI = SmartDashboard.getNumber("I (drive straight)", 0.0005);
-	double navxD = SmartDashboard.getNumber("D (drive straight)", 0.15);
+	double navxP = SmartDashboard.getNumber("P (drive straight)", .0065);
+	double navxI = SmartDashboard.getNumber("I (drive straight)", 0.0001);
+	double navxD = SmartDashboard.getNumber("D (drive straight)", 0.0);
 	double navxF = SmartDashboard.getNumber("F (drive straight)", 0);
 
   // Set to false once you are done tuning the PID
@@ -59,8 +59,9 @@ public class EncoderNavX2AutoCommand extends Command {
   PIDSourceDistance encSource;
   PIDSourceYaw navxSource;
   
-	double maxSpeed = .75;
+	double maxSpeed = 1;
 	double setpoint = 0;
+	double funSetpoint = 0;
   /**
    * Command to use PID control to drive a fixed distance.
    *
@@ -152,17 +153,19 @@ public class EncoderNavX2AutoCommand extends Command {
 	  
 	  encSumError = 0;
 	  navXSumError = 0;
+	  //the right curve is groovy
+	  funSetpoint = RobotMap.ahrs.getYaw();
     // Save distance at start (I don't like zeroing encoder counts - but this is
     // an option as well)
 	 Logger.log(Logger.LogLevel.info, "I am in EncNavX2 Init");
-	 RobotMap.ahrs.reset();
+	 //RobotMap.ahrs.reset();
 	 Robot.drivetrainSubsystem.resetEncoders();
 	  
 	//from scaleAuto
 	encSource.setPIDSourceType(PIDSourceType.kDisplacement);
 	encPID.setInputRange(0f,  setpoint*1.1);
   	encPID.setOutputRange(0f, maxSpeed);
-  	encPID.setPercentTolerance(5);
+  	encPID.setPercentTolerance(7);
   	encPID.setContinuous(false);
   	encPID.setPID(encP, encI, encD, encF);
   	encPID.setSetpoint(setpoint);
@@ -173,10 +176,10 @@ public class EncoderNavX2AutoCommand extends Command {
 	RobotMap.ahrs.zeroYaw();
   	navXPID.setInputRange(-5.0f, 5.0f);
   	navXPID.setOutputRange(-0.5, 0.5);
-  	navXPID.setPercentTolerance(5);
+  	navXPID.setPercentTolerance(7);
   	navXPID.setContinuous(false);
   	navXPID.setPID(navxP, navxI, navxD, navxF);
-  	navXPID.setSetpoint(0);
+  	navXPID.setSetpoint(funSetpoint); //funSetpoint
   	navXPID.enable();
 	  
 

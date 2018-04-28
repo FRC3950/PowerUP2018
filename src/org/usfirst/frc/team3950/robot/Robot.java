@@ -89,6 +89,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
+		//Robot.elevatorSubsystem.undoBrake();
 		
 
 		/*
@@ -286,7 +287,7 @@ public class Robot extends TimedRobot {
 		}
 		
 		
-		/*
+		
 		if(typeChooser.getSelected().compareTo("Switch") == 0) {
 			m_autonomousCommand = new SwitchPositionAutoCommandGroup(Robot.ourFieldPosition, Robot.switchClosePosition);
 		} else if(typeChooser.getSelected().compareTo("Scale") == 0) {
@@ -298,13 +299,13 @@ public class Robot extends TimedRobot {
 		} else if(typeChooser.getSelected().compareTo("Fun Test Center Auto") == 0) {
 			m_autonomousCommand = new TestSwitchAutoCommandGroup(Robot.switchClosePosition);
 		}
-		*/
+		
 		
 		//m_autonomousCommand = new TestSwitchAutoCommandGroup("R");
-		m_autonomousCommand = new DriveTurnPreciseCommand(-90);
-		
-		//m_autonomousCommand = new EncoderNavX2AutoCommand(24.5);
+		//m_autonomousCommand = new DriveTurnPreciseCommand(-90);
+		//m_autonomousCommand = new BaselineAutoCommandGroup();
 		//m_autonomousCommand = typeChooser.getSelected();//new ScaleAutoCommand();//m_chooser.getSelected();
+		//m_autonomousCommand = new SwitchPositionAutoCommandGroup(3, Robot.switchClosePosition);
 		
 		//System.out.println(teamScale);
 		//System.out.println(teamSwitchRight);

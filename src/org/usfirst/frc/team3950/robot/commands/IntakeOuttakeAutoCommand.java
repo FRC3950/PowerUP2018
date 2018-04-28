@@ -29,7 +29,7 @@ public class IntakeOuttakeAutoCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(timer.get() <= 5) {
+    	if(timer.get() <= 1) {
     		Robot.intakeSubsystem.Intake(speed);
     		System.out.println("I am in intakeauto execute");
     		finished = false;

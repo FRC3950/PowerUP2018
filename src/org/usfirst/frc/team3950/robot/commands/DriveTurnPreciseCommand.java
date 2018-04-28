@@ -90,7 +90,7 @@ public class DriveTurnPreciseCommand extends Command implements PIDOutput  {
 		// TODO Auto-generated method stub
 		SmartDashboard.putNumber("YAW", RobotMap.ahrs.getYaw());
 		System.out.println("yaw " + yaw.pidGet());
-		SmartDashboard.putNumber("Output", pid.get());
+		//SmartDashboard.putNumber("Output", pid.get());
     	Robot.drivetrainSubsystem.Drive(0, output);
 		
 	}

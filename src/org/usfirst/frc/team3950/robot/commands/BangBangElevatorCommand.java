@@ -41,11 +41,11 @@ public class BangBangElevatorCommand extends Command {
     	if(Robot.elevatorSubsystem.getElevatorHeight() < (elHeight - offset)) {
     		System.out.println("it is below");
     		Robot.elevatorSubsystem.undoBrake();
-    		Robot.elevatorSubsystem.elevatorControl(0.5);
+    		Robot.elevatorSubsystem.elevatorControl(0.8);
     	} else if (Robot.elevatorSubsystem.getElevatorHeight() > (elHeight + offset)) {
     		System.out.println("it is above");
     		Robot.elevatorSubsystem.undoBrake();
-    		Robot.elevatorSubsystem.elevatorControl(-.5);
+    		Robot.elevatorSubsystem.elevatorControl(-.8);
     	} else {
     		System.out.println("it is at height");
     		Robot.elevatorSubsystem.elevatorControl(0);
