@@ -44,7 +44,7 @@ public class IntakeVerticalCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	speed = controller.getY(Hand.kRight);
+    	speed = -controller.getY(Hand.kRight);
     	
     	if(speed <= tolerance && speed >= -tolerance)
     		speed = 0;
@@ -71,15 +71,17 @@ public class IntakeVerticalCommand extends Command {
     	}
     	*/
     	
-    	//System.out.println("Intake Vertical Speed is " + speed);
+    	System.out.println("Intake Vertical Speed is " + speed);
+    	
     	
     	if((Robot.intakeVerticalSubsystem.atBottom()) && (speed < 0)) {
     		Robot.intakeVerticalSubsystem.intakeVertical(0);
     	} else if (Robot.intakeVerticalSubsystem.atTop() && speed > 0) {
-    		Robot.intakeVerticalSubsystem.intakeVertical(0);
+    		Robot.intakeVerticalSubsystem.intakeVertical(0.1);
     	} else {
-    		Robot.intakeVerticalSubsystem.intakeVertical(controller.getY(Hand.kRight));
+    		Robot.intakeVerticalSubsystem.intakeVertical(-controller.getY(Hand.kRight));
     	}
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

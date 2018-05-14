@@ -30,7 +30,7 @@ public class IntakeVerticalSubsystem extends Subsystem {
     	topSwitch = RobotMap.intakeTopLimitSwitch;
     	vertical = RobotMap.intakeVerticalMotor;
 
-    	setDefaultCommand(new NoLimitSwIntakeCommand());
+    	setDefaultCommand(new IntakeVerticalCommand());
     }
     
     public boolean atBottom() {
