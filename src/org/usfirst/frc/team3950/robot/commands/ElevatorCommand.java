@@ -28,6 +28,7 @@ public class ElevatorCommand extends Command {
 	double tolerance = 0.12;
 	double getY = 0;
 	double test = 0;
+	double gndHeight = 0;
 	//Timer timer = new Timer();
 	
 	
@@ -49,6 +50,7 @@ public class ElevatorCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     //change code button to go to each specific height //bottom //switch //scale //high scale //or not
     protected void execute() {
+    	gndHeight = Robot.elevatorSubsystem.getElevatorHeight();
     	//System.out.println("I am in execute of el com");
     	getY = -controller.getY(Hand.kLeft);
     	
@@ -108,6 +110,20 @@ public class ElevatorCommand extends Command {
     		Robot.elevatorSubsystem.elevatorControl(getY);
     	}
     	
+    	
+    	if(getY > 0 || (getY < 0 && gndHeight >= 14.38)) {
+    		RobotMap.elevatorShiftSolenoid.set(DoubleSolenoid.Value.kReverse);
+    	} else if(gndHeight <= 14.38) {
+    		RobotMap.elevatorShiftSolenoid.set(DoubleSolenoid.Value.kForward);
+    	} 
+    	
+    	if(getY == 0 && gndHeight <= 5.4) {
+    		Robot.elevatorSubsystem.elevatorControl(0);
+    	} else if (getY == 0) {
+    		Robot.elevatorSubsystem.elevatorControl(0.1);
+    	}
+    	
+    	
     	/*
     	if(test >= 0 && getY < 0) {
     		RobotMap.elevatorShiftSolenoid.set(DoubleSolenoid.Value.kForward);
@@ -117,7 +133,7 @@ public class ElevatorCommand extends Command {
     		SmartDashboard.putString("Elevator gear", "hIGh");
     	}
     	*/
-    	
+    	/*
     	if (test != 0 && getY == 0) {
     		Robot.elevatorSubsystem.elevatorControl(0);
     		Robot.elevatorSubsystem.elevatorBrake();
@@ -139,6 +155,7 @@ public class ElevatorCommand extends Command {
 				e.printStackTrace();
 			}
     	}
+    	*/
     	
     	test = -controller.getY(Hand.kLeft);
     }

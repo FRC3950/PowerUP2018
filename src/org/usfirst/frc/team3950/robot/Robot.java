@@ -410,7 +410,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putBoolean("Is Elevator at Top", Robot.elevatorSubsystem.topGetter());
 		SmartDashboard.putBoolean("Is Elevator at Bottom", Robot.elevatorSubsystem.bottomGetter());
 		
-		//System.out.println("yaw " + RobotMap.ahrs.getYaw());
+		//System.out.println("height " + Robot.elevatorSubsystem.getElevatorHeight());
 		
 		
 //		System.out.println("limit switch bottom elevator " + RobotMap.elevatorBottomLimitSwitch.get());

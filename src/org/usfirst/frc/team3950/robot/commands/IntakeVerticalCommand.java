@@ -27,7 +27,7 @@ public class IntakeVerticalCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	
-    	System.out.print("In intake vertical init");
+    	//System.out.print("In intake vertical init");
     	/*
     	if (Robot.intakeSubsystem.atTop()) {
     		Robot.intakeSubsystem.intakeVertical(speed);
@@ -71,7 +71,7 @@ public class IntakeVerticalCommand extends Command {
     	}
     	*/
     	
-    	System.out.println("Intake Vertical Speed is " + speed);
+    	//System.out.println("Intake Vertical Speed is " + speed);
     	
     	
     	if((Robot.intakeVerticalSubsystem.atBottom()) && (speed < 0)) {
